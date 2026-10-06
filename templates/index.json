@@ -1,0 +1,840 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "a_hero_banner_cafqKz": {
+      "type": "A-hero-banner",
+      "blocks": {
+        "slide_pXrbGr": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/hero-banner_1_1_a27bcca2-5019-4676-bd5e-1938c2ae704e.png",
+            "image_overlay_opacity": 0,
+            "image_height": "large",
+            "desktop_content_position": "bottom-left",
+            "show_text_box": false,
+            "desktop_content_alignment": "left",
+            "color_scheme": "scheme-da922fb2-b4ee-450f-b65a-2c07f3636ac5",
+            "image_behavior": "none",
+            "mobile_content_alignment": "center",
+            "stack_images_on_mobile": false,
+            "show_text_below": false,
+            "content_max_width": 390,
+            "heading": "",
+            "heading_size": "h1",
+            "text": "Valyrian Designs offer unique products that create a tranquil outdoor resort lifestyle experience.",
+            "text_two": "Call 858-842-7100",
+            "button_text": "START CHAT",
+            "text_style": "body",
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false,
+            "button_url": "/collections/all",
+            "product": "rain-curtain-fountain-circle",
+            "product_button_label": "Build Your Own",
+            "banner_video_btn": true,
+            "open_popup_desktop": "Watch Product Video",
+            "open_popup_mobile": "Watch Video",
+            "product_video_desktop": "shopify://files/videos/WhatsApp Video 2025-01-26 at 9.11.00 PM_3fe4b501-83d9-4f1e-918b-150b0ef93fc3.mp4"
+          }
+        },
+        "slide_fq6r6Q": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/VIEW_3_2_917ed5a0-61c6-44f6-a6a6-fded89a7202a.jpg",
+            "image_overlay_opacity": 20,
+            "image_height": "large",
+            "desktop_content_position": "bottom-left",
+            "show_text_box": false,
+            "desktop_content_alignment": "left",
+            "color_scheme": "scheme-da922fb2-b4ee-450f-b65a-2c07f3636ac5",
+            "image_behavior": "none",
+            "mobile_content_alignment": "center",
+            "stack_images_on_mobile": false,
+            "show_text_below": false,
+            "content_max_width": 390,
+            "heading": "",
+            "heading_size": "h1",
+            "text": "Valyrian Designs offer unique products that create a tranquil outdoor resort lifestyle experience.",
+            "text_two": "Call 858-842-7100",
+            "button_text": "START CHAT",
+            "text_style": "body",
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false,
+            "button_url": "/collections/all",
+            "product": "rain-curtain-fountain-door",
+            "product_button_label": "Build Your Own",
+            "banner_video_btn": false,
+            "open_popup_desktop": "Watch Product Video",
+            "open_popup_mobile": "Watch Video"
+          }
+        },
+        "slide_ANkM8t": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/RoundFountain_Corten_ParkScene_PNG_86a44dd8-4212-4469-a0b5-173c03487752.png",
+            "image_overlay_opacity": 20,
+            "image_height": "large",
+            "desktop_content_position": "bottom-left",
+            "show_text_box": false,
+            "desktop_content_alignment": "left",
+            "color_scheme": "scheme-da922fb2-b4ee-450f-b65a-2c07f3636ac5",
+            "image_behavior": "none",
+            "mobile_content_alignment": "center",
+            "stack_images_on_mobile": false,
+            "show_text_below": false,
+            "content_max_width": 390,
+            "heading": "",
+            "heading_size": "h1",
+            "text": "Valyrian Designs offer unique products that create a tranquil outdoor resort lifestyle experience.",
+            "text_two": "Call 858-842-7100",
+            "button_text": "START CHAT",
+            "text_style": "body",
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false,
+            "button_url": "/collections/all",
+            "product": "rain-curtain-fountain-l",
+            "product_button_label": "Build Your Own",
+            "banner_video_btn": false,
+            "open_popup_desktop": "Watch Product Video",
+            "open_popup_mobile": "Watch Video"
+          }
+        },
+        "slide_3766WJ": {
+          "type": "slide",
+          "settings": {
+            "image_overlay_opacity": 0,
+            "image_height": "large",
+            "desktop_content_position": "bottom-left",
+            "show_text_box": false,
+            "desktop_content_alignment": "left",
+            "color_scheme": "scheme-da922fb2-b4ee-450f-b65a-2c07f3636ac5",
+            "image_behavior": "none",
+            "mobile_content_alignment": "center",
+            "stack_images_on_mobile": false,
+            "show_text_below": false,
+            "content_max_width": 390,
+            "heading": "Best Rain Curtain Fountain",
+            "heading_size": "h1",
+            "text": "Valyrian Designs offer unique products that create a tranquil outdoor resort lifestyle experience",
+            "text_two": "Call 858-842-7100",
+            "button_text": "LIVE CHAT",
+            "text_style": "body",
+            "button_label_1": "",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false,
+            "button_url": "/collections/all",
+            "product": "rain-curtain-fountain-door",
+            "product_button_label": "Build Your Own",
+            "banner_video_btn": false,
+            "open_popup_desktop": "Watch Product Video",
+            "open_popup_mobile": "Watch Video",
+            "slide_video": "shopify://files/videos/Banner Final 2 (1).mp4"
+          }
+        }
+      },
+      "block_order": [
+        "slide_pXrbGr",
+        "slide_fq6r6Q",
+        "slide_ANkM8t",
+        "slide_3766WJ"
+      ],
+      "custom_css": [
+        ".media > img {object-fit: cover;}"
+      ],
+      "settings": {}
+    },
+    "video_testimonial_8BJwgm": {
+      "type": "video-testimonial",
+      "blocks": {
+        "testimonial_Xx4Aar": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-25 at 11.07.10 PM.mp4",
+            "name": "Twin Fountains , Oklahoma , we are jumping for joy with excitement on the product , Michael",
+            "star": 4
+          }
+        },
+        "testimonial_N74pcR": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-25 at 11.07.10 PM (1).mp4",
+            "name": "Poway California , Order to install great company and product . Rohan",
+            "star": 5
+          }
+        },
+        "testimonial_pARENx": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-25 at 11.07.10 PM (2).mp4",
+            "name": "Carmel Valley California , Love the stainless quality and product. Amit",
+            "star": 5
+          }
+        },
+        "testimonial_xHEqQY": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-20 at 20.09.11_1e486ad8.mp4",
+            "name": "Vista California Freddie’s Pet Hospital, best quality and product so happy. Tony",
+            "star": 5
+          }
+        },
+        "testimonial_GYrzzt": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-27 at 01.56.34_10373dc3.mp4",
+            "name": "Kelseyville California . This is art , it’s amazing , over the moon . Wayne",
+            "star": 5
+          }
+        },
+        "testimonial_PGiXjk": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-20 at 20.12.29_47ce5021.mp4",
+            "name": "Costa Mesa California , Well done Jaden and team amazing . Mike",
+            "star": 5
+          }
+        },
+        "testimonial_cYyV6d": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-20 at 20.10.31_733304f6.mp4",
+            "name": "Gold River California , Better then I ever expected . Love my rain curtain . Marta",
+            "star": 5
+          }
+        },
+        "testimonial_eDRhLd": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-20 at 20.15.29_217a849f.mp4",
+            "name": "Toronto Canada , Could not be more pleased. Great Product and Company. Rita",
+            "star": 5
+          }
+        },
+        "testimonial_GKaEtp": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-27 at 01.26.14_b0c49623.mp4",
+            "name": "Corona Del Mar California , This is best company to work with. Harrold",
+            "star": 5
+          }
+        },
+        "testimonial_RjmVHi": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-20 at 20.16.48_5e6db00c.mp4",
+            "name": "Midlothian Virgina, Amazing this made my backyard renovation spectacular . Charlie",
+            "star": 5
+          }
+        },
+        "testimonial_RTiiHY": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-27 at 12.19.03 AM.mp4",
+            "name": "Carmel Valley California Talia enjoying some zen time playing her guitar. Dad",
+            "star": 5
+          }
+        },
+        "testimonial_KfFhGY": {
+          "type": "testimonial",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2025-10-27 at 12.19.03 AM (1).mp4",
+            "name": "Laguna Beach California , Love Valyrian Designs & our Rain Curtain . David",
+            "star": 5
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_Xx4Aar",
+        "testimonial_N74pcR",
+        "testimonial_pARENx",
+        "testimonial_xHEqQY",
+        "testimonial_GYrzzt",
+        "testimonial_PGiXjk",
+        "testimonial_cYyV6d",
+        "testimonial_eDRhLd",
+        "testimonial_GKaEtp",
+        "testimonial_RjmVHi",
+        "testimonial_RTiiHY",
+        "testimonial_KfFhGY"
+      ],
+      "name": "Testimonial Swiper",
+      "settings": {
+        "color_scheme": "",
+        "arrow_color": "#000000",
+        "star_color": "#e4c66d",
+        "text_color": "#ffffff",
+        "checkmark_color": "#e4c66d"
+      }
+    },
+    "a_icon_with_text_pC7nCw": {
+      "type": "A-icon-with-text",
+      "blocks": {
+        "icon_with_text_BVPei8": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/yin-yang.png",
+            "max_width": 88,
+            "icon_box": false,
+            "icon_box_radius": 100,
+            "content_max_width": 350,
+            "title": "",
+            "subtitle": "<p>Feng Shui inspires your outdoor lifestyle.</p>",
+            "link_label": "",
+            "link": "",
+            "button_radius": 10,
+            "icon_box_bg": "#f8f8f8",
+            "title_color": "#000000",
+            "subtitle_color": "#000000",
+            "button_text": "#ffffff",
+            "button_bg": "#000000"
+          }
+        },
+        "icon_with_text_Cd9cDz": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/golden-laurel-wreath.jpg",
+            "max_width": 112,
+            "icon_box": false,
+            "icon_box_radius": 100,
+            "content_max_width": 350,
+            "title": "",
+            "subtitle": "<p>Award-winning products used in leading landscape architect's designs.</p>",
+            "link_label": "",
+            "link": "",
+            "button_radius": 10,
+            "icon_box_bg": "#f8f8f8",
+            "title_color": "#000000",
+            "subtitle_color": "#000000",
+            "button_text": "#ffffff",
+            "button_bg": "#000000"
+          }
+        },
+        "icon_with_text_et6NNr": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/Step-3_573800c5-156f-41f0-8600-6a3dbd5821c2.png",
+            "max_width": 96,
+            "icon_box": false,
+            "icon_box_radius": 100,
+            "content_max_width": 350,
+            "title": "",
+            "subtitle": "<p>All designs are authenticated assuring Valyrian Designs quality.</p>",
+            "link_label": "",
+            "link": "",
+            "button_radius": 10,
+            "icon_box_bg": "#f8f8f8",
+            "title_color": "#000000",
+            "subtitle_color": "#000000",
+            "button_text": "#ffffff",
+            "button_bg": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_BVPei8",
+        "icon_with_text_Cd9cDz",
+        "icon_with_text_et6NNr"
+      ],
+      "disabled": true,
+      "settings": {
+        "background_color": "#ffffff",
+        "page_width": 1100,
+        "show_full_width": false,
+        "spacing_grid_horizontal": 16,
+        "spacing_grid_vertical": 40,
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "card_heading_size": "h3",
+        "card_subtitle_size": "sm",
+        "content_type_desktop": "column",
+        "content_type_mobile": "column",
+        "card_content_alignment_desk": "center",
+        "card_content_alignment_mob": "center",
+        "card_spacing": 10,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_VNq7YC": {
+      "type": "featured-collection",
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.collection__title {text-align: center; }}"
+      ],
+      "settings": {
+        "title": "RAIN CURTAIN FOUNTAINS",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "rain-curtain-fountain-door",
+          "rain-curtain-fountain-l",
+          "rain-curtain-fountain-circle"
+        ],
+        "products_to_show": 9,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_RrkbPQ": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Reflection Pool Fountains",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "reflection-pool-fountain",
+          "floor-circle-fountain",
+          "floor-square-fountain"
+        ],
+        "products_to_show": 9,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 4,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_A8BdUK": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Modern Fire Features",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "modern-fire-feature-copy",
+          "moderna-chiminea",
+          "outdoor-fire-feature"
+        ],
+        "products_to_show": 9,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_HNxcGM": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Modern Wall Fountains",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "modern-horizontal-wall-fountain",
+          "modern-vertical-wall-fountain",
+          "modern-wall-fountain"
+        ],
+        "products_to_show": 9,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_Ymg6mb": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Custom Products",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "custom-outdoor-doors",
+          "custom-outdoor-doors-copy",
+          "barbecue-island"
+        ],
+        "products_to_show": 9,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_featured_blog_i6HtF8": {
+      "type": "A-featured-blog",
+      "blocks": {
+        "article_pw4xdc": {
+          "type": "article",
+          "settings": {
+            "article": "projects/modern-fire-frame",
+            "view_label": "View Project",
+            "blog_card_desc": "<p>Backyard Designer - Natasa I. <br/> <br/>Project - Residential Complex</p>"
+          }
+        },
+        "article_HRbTn6": {
+          "type": "article",
+          "settings": {
+            "article": "projects/zen-l-rain-curtain",
+            "view_label": "View Project",
+            "blog_card_desc": "<p>Landscape Architect - Stephen Davis. <br/>Project - Hotel Outdoors</p>"
+          }
+        },
+        "article_TE6jwi": {
+          "type": "article",
+          "settings": {
+            "article": "projects/zen-door-rain-curtain",
+            "view_label": "View Project",
+            "blog_card_desc": "<p>Backyard Designer - Natasa I.  <br/><br/>Project - Residential Home</p>"
+          }
+        },
+        "article_jfWqzR": {
+          "type": "article",
+          "settings": {
+            "article": "projects/feng-shui-square-fountain",
+            "view_label": "View Project",
+            "blog_card_desc": "<p>Backyard Designer - Natasa I.  <br/><br/>Project - Residential Home</p>"
+          }
+        },
+        "article_RdBBJG": {
+          "type": "article",
+          "settings": {
+            "article": "projects/this-industrial-park-outdoors-was-transformed-by-valyrian-design",
+            "view_label": "View Gallery",
+            "blog_card_desc": "<p>Back Yard Designer - Sherly Zang. <br/><br/>Project - Office Park</p>"
+          }
+        }
+      },
+      "block_order": [
+        "article_pw4xdc",
+        "article_HRbTn6",
+        "article_TE6jwi",
+        "article_jfWqzR",
+        "article_RdBBJG"
+      ],
+      "settings": {
+        "heading": "FEATURE PROJECTS",
+        "heading_size": "h1",
+        "blog": "projects",
+        "post_limit": 12,
+        "button_label": "View project",
+        "color_scheme": "",
+        "show_image": true,
+        "image_height": "small",
+        "show_date": false,
+        "show_author": false,
+        "view_label": "View Gallery",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_founder_LrQtEh": {
+      "type": "A-founder",
+      "blocks": {
+        "text_FtKBDM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Leading Landscape Architects, Designers, Pool Builders, Feng Shui practitioners, and homeowners have incorporated Valyrian designs in their outdoor living. Our products are authenticated art made with the highest-grade materials, emphasizing a modern day Zen style. Every order is hand made and incorporates Feng Shui infused elements that harmonize and bring a tranquil outdoor experience.</p>",
+            "text_style": "body",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 32
+          }
+        },
+        "text_GX8Vdm": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>20 Year Valyrian Designs Founder Jaden Mel Rones crafts modern</strong> <strong>outdoor water and fire features and offers them in bespoke way.</strong></p>",
+            "text_style": "body",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 20
+          }
+        },
+        "buttons_JcRQcP": {
+          "type": "buttons",
+          "settings": {
+            "first_button_label": "Learn more",
+            "first_button_link": "shopify://pages/about-us",
+            "first_font_weight": "400",
+            "first_icon_position": "text_with_icon",
+            "first_icon": "shopify://shop_images/arrow-right.svg",
+            "first_icon_width": 24,
+            "first_button_border_radius": 8,
+            "first_button_border_width": 1,
+            "first_button_bg": "#d8eff9",
+            "first_button_text": "#121212",
+            "first_button_border": "#121212",
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_font_weight": "600",
+            "second_icon_position": "icon_with_text",
+            "second_icon_width": 24,
+            "second_button_border_radius": 0,
+            "second_button_border_width": 1,
+            "second_button_bg": "#c40f0f",
+            "second_button_text": "#ffffff",
+            "second_button_border": "#c40f0f",
+            "buttons_gap": 0,
+            "padding_top": 0,
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "text_FtKBDM",
+        "text_GX8Vdm",
+        "buttons_JcRQcP"
+      ],
+      "settings": {
+        "page_width": 1300,
+        "show_full_width": false,
+        "spacing_grid_horizontal": 32,
+        "spacing_grid_vertical": 32,
+        "image": "shopify://shop_images/our-founder.webp",
+        "enable_video_looping": false,
+        "video_autoplay": "none",
+        "video_url": "",
+        "description": "",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "background_color": "#ffffff",
+        "content_container_bg": "#d8eff9",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_customer_reviews_tLAfPm": {
+      "type": "A-customer-reviews",
+      "blocks": {
+        "review_6zxNYf": {
+          "type": "review",
+          "settings": {
+            "name": "Michael Peterson",
+            "position_role": "Landscape Architect",
+            "content": "<p>The L Curtain is a fantastic addition to my projects. It's easy to install, high quality, and my clients love the aesthetic and calming effect it brings to their outdoor spaces.</p>"
+          }
+        },
+        "review_iCtPwB": {
+          "type": "review",
+          "settings": {
+            "name": "David Thompson",
+            "position_role": "Landscape Architect",
+            "content": "<p>The Door Curtain is a perfect addition to any space needing a touch of sophistication. It creates a serene, spa-like atmosphere and fits beautifully with modern interiors.</p>"
+          }
+        },
+        "review_HPWbJT": {
+          "type": "review",
+          "settings": {
+            "name": "Sarah Lawrence",
+            "position_role": "Landscape Architect",
+            "content": "<p>The L Curtain transformed my living room into a peaceful sanctuary. The soothing water sound and sleek design are perfect. It's a beautiful addition to my home.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "review_6zxNYf",
+        "review_iCtPwB",
+        "review_HPWbJT"
+      ],
+      "settings": {
+        "loop": 20,
+        "heading": "OUR REVIEWS",
+        "heading_size": "h1",
+        "enable_carousel": true,
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "background_color": "#d9eff9",
+        "review_card": "#f8f8f8",
+        "verify_color": "#72bf71",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "a_custom_content_9gycWR": {
+      "type": "A-custom-content",
+      "blocks": {
+        "heading_fYJqNF": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "liquid": "VALYRIAN DESIGNS<sup>®</sup>",
+            "heading_size": "h1",
+            "tag": "h2",
+            "text_color": "#000000",
+            "text_alignment_desktop": "center",
+            "text_alignment_mobile": "center",
+            "page_width": 1200,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "text_Cw8zdf": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our Products have been incorporated in backyards throughout the world. Watch video on how our Zen Door Fountain complemented this outdoor project.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "text_color": "#3e3e59",
+            "link_color": "#3e3e59",
+            "text_alignment_desktop": "center",
+            "text_alignment_mobile": "center",
+            "page_width": 800,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        }
+      },
+      "block_order": [
+        "heading_fYJqNF",
+        "text_Cw8zdf"
+      ],
+      "custom_css": [
+        ".l-custom-content__heading {font-weight: 700;}",
+        "@media screen and (max-width: 767px) {.l-custom-content__heading {font-size: 30px; }}",
+        "@media screen and (min-width: 768px) {sup {font-size: 25px; }}"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "background": "#ffffff",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "video_XTgzEE": {
+      "type": "video",
+      "custom_css": [
+        ".video-section__media {border-radius: 12px; overflow: hidden !important;}"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "enable_video_looping": true,
+        "video": "shopify://files/videos/WhatsApp Video 2024-06-25 at 11.46.51 AM.mp4",
+        "video_url": "",
+        "cover_image": "shopify://shop_images/Valyrant_design_video.png",
+        "description": "",
+        "full_width": false,
+        "color_scheme": "",
+        "padding_top": 32,
+        "padding_bottom": 84
+      }
+    }
+  },
+  "order": [
+    "a_hero_banner_cafqKz",
+    "video_testimonial_8BJwgm",
+    "a_icon_with_text_pC7nCw",
+    "featured_collection_VNq7YC",
+    "featured_collection_RrkbPQ",
+    "featured_collection_A8BdUK",
+    "featured_collection_HNxcGM",
+    "featured_collection_Ymg6mb",
+    "a_featured_blog_i6HtF8",
+    "a_founder_LrQtEh",
+    "a_customer_reviews_tLAfPm",
+    "a_custom_content_9gycWR",
+    "video_XTgzEE"
+  ]
+}

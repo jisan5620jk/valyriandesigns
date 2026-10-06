@@ -1,0 +1,658 @@
+{% comment %}
+  Renders a product media gallery. Should be used with 'media-gallery.js'
+  Also see 'product-media-modal'
+
+  Accepts:
+  - product: {Object} Product liquid object
+  - variant_images: {Array} Product images associated with a variant
+  - limit: {Number} (optional) When passed, limits the number of media items to render
+
+  Usage:
+  {% render 'product-media-gallery' %}
+
+  Metaobject system:
+  - Metaobject definition fields: variant_value (text), image_position (text), video_url (text)
+  - image_position supports comma-separated values: "1, 2, 3" or "1,2,3"
+  - variant_value must match ALL option values in the active variant
+    e.g. "6ft, Corten Steel" matches variant with options ["6ft", "Corten Steel"]
+  - video_url: leave blank for variants with no popup video.
+    If non-blank, a popup button appears automatically for that variant.
+
+  Variant media system:
+  - All variant combination images are rendered in the DOM on page load
+  - Non-active variants are hidden with .vms-hidden (display:none !important)
+  - Active variant's images all have data-media-group so Dawn's gallery
+    initialises them correctly (sizing, slider, modal, etc.)
+  - Our JS (l-variant-media) ONLY handles variant switching:
+      • removes .vms-hidden from new variant's items
+      • adds .vms-hidden to old variant's items
+      • resets is-active on gallery items and thumbnail highlight
+  - Dawn's own l-product-media handles everything else:
+    thumbnail clicks, active image display, modal, etc.
+{% endcomment %}
+
+{%- liquid
+  assign current_variant       = product.selected_or_first_available_variant
+  assign variant_key           = current_variant.options | join: ', '
+  assign variant_key_no_space  = current_variant.options | join: ','
+
+  assign media_mappings_2        = product.metafields.custom.media_mappings_2.value
+  assign has_metafield_media   = false
+  if media_mappings_2 and media_mappings_2.size > 0
+    assign has_metafield_media = true
+  endif
+
+  # Count how many images the active variant has (for thumbnail sizing math)
+  # image_position can be comma-separated: "1, 2, 3" → 3 images per mapping
+  assign active_variant_count = 0
+  if has_metafield_media
+    for mapping in media_mappings_2
+      assign mkey = mapping.variant_value.value
+      if mkey == variant_key or mkey == variant_key_no_space
+        assign pos_raw   = mapping.image_position.value
+        assign pos_parts = pos_raw | split: ','
+        assign active_variant_count = active_variant_count | plus: pos_parts.size
+      endif
+    endfor
+  endif
+  if active_variant_count == 0
+    assign active_variant_count = product.media.size
+  endif
+
+  # ── Build variant → video_url map ────────────────────────────────────────
+  # Loops through all metaobject entries and collects those with a video_url.
+  # Output: window.variantVideoMap = { "6ft, Corten Steel": "https://..." }
+  # Also detects if the current page-load variant has a video (for server-side
+  # button state — avoids showing button before JS runs).
+  assign variant_video_map_json = '{'
+  assign video_map_first        = true
+  assign current_variant_video  = blank
+
+  if has_metafield_media
+    for mapping in media_mappings_2
+      assign vurl = mapping.video_url.value
+      if vurl != blank
+        assign mkey = mapping.variant_value.value
+        unless video_map_first
+          assign variant_video_map_json = variant_video_map_json | append: ','
+        endunless
+        assign variant_video_map_json = variant_video_map_json | append: '"' | append: mkey | append: '":"' | append: vurl | append: '"'
+        assign video_map_first = false
+        if mkey == variant_key or mkey == variant_key_no_space
+          assign current_variant_video = vurl
+        endif
+      endif
+    endfor
+  endif
+  assign variant_video_map_json = variant_video_map_json | append: '}'
+
+  assign has_video_popup = false
+  if variant_video_map_json != '{}'
+    assign has_video_popup = true
+  endif
+
+  # Standard Dawn layout variables
+  assign media_count = product.media.size
+  if section.settings.hide_variants and variant_images.size == product.media.size
+    assign single_media_visible = true
+  endif
+  if limit == 1
+    assign single_media_visible = true
+  endif
+  if section.settings.hide_variants and media_count > 1 and variant_images.size > 0
+    assign media_count = media_count | minus: variant_images.size | plus: 1
+  endif
+  if media_count == 1 or single_media_visible
+    assign single_media_visible_mobile = true
+  endif
+  if media_count == 0 or single_media_visible_mobile or section.settings.mobile_thumbnails == 'show' or section.settings.mobile_thumbnails == 'columns' and media_count < 3
+    assign hide_mobile_slider = true
+  endif
+  if section.settings.media_size == 'large'
+    assign media_width = 0.65
+  elsif section.settings.media_size == 'medium'
+    assign media_width = 0.55
+  elsif section.settings.media_size == 'small'
+    assign media_width = 0.45
+  endif
+-%}
+
+<script type="application/json" id="MediaJson-{{ section.id }}">
+  {{ product.media | json }}
+</script>
+
+{%- if has_video_popup -%}
+  <script>
+    window.variantVideoMap = {{ variant_video_map_json }};
+  </script>
+{%- endif -%}
+
+<style>
+  /*
+   * .vms-hidden hides items belonging to non-active variant combinations.
+   * !important overrides any Dawn is-active or display rules.
+   * Our JS toggles this class on variant change.
+   * Dawn's own JS handles everything else (active image, slider, modal).
+   */
+   .product__media-list {
+    position: relative;
+}
+  .vms-hidden {
+    display: none !important;
+  }
+
+  /* ── Video popup button ─────────────────────────────────────────────────── */
+  #openPopupBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: black;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    display: none !important;
+    z-index: 999;
+  }
+  #openPopupBtn.show { display: flex !important; }
+  #openPopupBtn:hover { color: #000; background-color: #fff; }
+  .open-popup-mobile { display: none; }
+  @media screen and (max-width: 991px) {
+    .open-popup-desktop { display: none; }
+    .open-popup-mobile  { display: block; }
+    #openPopupBtn { padding: 5px 10px; font-size: 14px; }
+  }
+
+  /* ── Overlay ────────────────────────────────────────────────────────────── */
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 9999999;
+  }
+  .overlay.show { display: block; }
+
+  /* ── Popup modal ────────────────────────────────────────────────────────── */
+  .popup {
+    display: none;
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(.7);
+    width: 80%;
+    height: 100%;
+    max-width: 800px;
+    padding: 80px 40px;
+    border-radius: 10px;
+    z-index: 99999999;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+  }
+  .popup.show { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  .popup-video {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .popup-video video { border-radius: 10px; width: 100%; height: 100%; display: block; }
+
+  /* ── Close button ───────────────────────────────────────────────────────── */
+  .close-btn {
+    position: absolute;
+    top: 30px; right: 0;
+    font-size: 36px;
+    color: #000;
+    cursor: pointer;
+    width: 50px; height: 50px;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 50px;
+  }
+  .close-btn:hover { color: #fff; background: black; }
+
+  /* ── Play/pause icon ────────────────────────────────────────────────────── */
+  .popup-play-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    width: 70px; height: 70px;
+    background: black;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 48px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .popup-video.paused .popup-play-icon { opacity: 1; }
+
+  /* ── Responsive ─────────────────────────────────────────────────────────── */
+  @media screen and (max-width: 991px) {
+    .close-btn { top: 30px; right: 30px; font-size: 30px; width: 30px; height: 30px; }
+    .popup-video { padding: 20px; }
+  }
+  @media screen and (max-width: 768px) {
+    .popup-video { padding: 20px; width: 90%; margin: auto; }
+  }
+  @media screen and (max-width: 575px) {
+    .popup { padding: 30px 0; height: auto; width: 93%; }
+    .close-btn { top: 0; right: 30px; }
+    .popup-video { padding: 10px; width: 80%; margin: auto; }
+  }
+</style>
+
+<l-product-media
+  id="GalleryViewer-{{ section.id }}"
+  data-section="{{ section.id }}"
+  role="region"
+  aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
+>
+  <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
+
+  {% comment %}─────────────────────────────────────────────────────────────────
+    MAIN GALLERY
+    Each image is a standard Dawn product__media-item WITH data-media-group
+    so Dawn's l-product-media initialises each item correctly (sizing, slider).
+
+    Non-active variant items get class="vms-hidden" (display:none !important).
+    Active variant items are fully visible; the first one gets is-active so
+    Dawn shows it as the hero image on page load.
+
+    data-variant-combo lets our JS identify which items belong to which variant.
+  ─────────────────────────────────────────────────────────────────{% endcomment %}
+  <div>
+    <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
+      {{ 'accessibility.skip_to_product_info' | t }}
+    </a>
+
+    <div class="product__media-list list-unstyled" role="list">
+
+      {%- if has_metafield_media -%}
+
+        <l-variant-media
+          id="LVariantMedia-{{ section.id }}"
+          data-section="{{ section.id }}"
+          data-variant-key="{{ variant_key }}"
+          style="display:contents"
+        >
+          {%- assign vms_first_active_done = false -%}
+
+          {%- for mapping in media_mappings_2 -%}
+            {%- assign combo     = mapping.variant_value.value -%}
+            {%- assign pos_raw   = mapping.image_position.value -%}
+            {%- assign pos_parts = pos_raw | split: ',' -%}
+
+            {%- assign is_current_variant = false -%}
+            {%- if combo == variant_key or combo == variant_key_no_space -%}
+              {%- assign is_current_variant = true -%}
+            {%- endif -%}
+
+            {%- for pos_item in pos_parts -%}
+              {%- assign pos_int = pos_item | strip | plus: 0 -%}
+
+              {%- for media in product.media -%}
+                {%- if media.position == pos_int -%}
+
+                  {%- assign is_hero = false -%}
+                  {%- if is_current_variant and vms_first_active_done == false -%}
+                    {%- assign is_hero = true -%}
+                    {%- assign vms_first_active_done = true -%}
+                  {%- endif -%}
+
+                  <div
+                    class="product__media-item{% if is_hero %} is-active{% endif %}{% unless is_current_variant %} vms-hidden{% endunless %}"
+                    data-media-group
+                    data-section="{{ section.id }}"
+                    data-variant-combo="{{ combo }}"
+                    data-media-id="{{ media.id }}"
+                  >
+                    {% render 'product-thumbnail',
+                      media: media,
+                      media_count: active_variant_count,
+                      position: forloop.index,
+                      desktop_layout: section.settings.gallery_layout,
+                      mobile_layout: section.settings.mobile_thumbnails,
+                      loop: section.settings.enable_video_looping,
+                      modal_id: section.id,
+                      xr_button: true,
+                      media_width: media_width,
+                      media_fit: section.settings.media_fit,
+                      constrain_to_viewport: section.settings.constrain_to_viewport,
+                      lazy_load: false,
+                      fetchpriority: 'high'
+                    %}
+                  </div>
+
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endfor -%}
+
+          {%- endfor -%}
+
+        </l-variant-media>
+
+      {%- else -%}
+
+        {%- comment -%}── FALLBACK: product has no media_mappings_2 metafield ──{%- endcomment -%}
+        {%- for media in product.media -%}
+          <div
+            class="product__media-item{% if forloop.first %} is-active{% endif %}"
+            data-media-group
+            data-section="{{ section.id }}"
+          >
+            {% render 'product-thumbnail',
+              media: media,
+              media_count: media_count,
+              position: forloop.index,
+              desktop_layout: section.settings.gallery_layout,
+              mobile_layout: section.settings.mobile_thumbnails,
+              loop: section.settings.enable_video_looping,
+              modal_id: section.id,
+              xr_button: true,
+              media_width: media_width,
+              media_fit: section.settings.media_fit,
+              constrain_to_viewport: section.settings.constrain_to_viewport,
+              lazy_load: false,
+              fetchpriority: 'high'
+            %}
+          </div>
+        {%- endfor -%}
+
+      {%- endif -%}
+
+      {% comment %}─────────────────────────────────────────────────────────────────
+    VIDEO POPUP SECTION
+    Driven entirely by metaobject video_url field.
+    No product_video block needed. No customizer checkboxes needed.
+
+    How it works:
+    - window.variantVideoMap = { "6ft, Corten Steel": "https://...mp4", ... }
+      built in the Liquid header above from metaobject entries with video_url.
+    - Button renders only if at least one entry has a video_url.
+    - Server-side: current_variant_video != blank → button gets 'show' class.
+    - Client-side: l-variant-media calls switchVariant → JS updates button.
+    - On click: JS reads current data-variant-key, looks up URL, sets video src.
+    - Button text from section settings: open_popup_desktop / open_popup_mobile.
+  ─────────────────────────────────────────────────────────────────{% endcomment %}
+
+  {%- if has_video_popup -%}
+
+    <button
+      id="openPopupBtn"
+      type="button"
+      class="{% if current_variant_video != blank %}show{% endif %}"
+    >
+      <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"></path>
+        <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445"></path>
+      </svg>
+      <span class="open-popup-desktop">{{ section.settings.open_popup_desktop | default: 'Watch Video' }}</span>
+      <span class="open-popup-mobile">{{ section.settings.open_popup_mobile | default: 'Watch' }}</span>
+    </button>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div id="popup" class="popup">
+      <span id="closePopupBtn" class="close-btn">&times;</span>
+      <div class="popup-video" id="popupVideoWrapper">
+        <video
+          id="popupVideo"
+          width="100%"
+          height="100%"
+          playsinline
+          controls
+          preload="none"
+        ></video>
+        <div class="popup-play-icon">
+          <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 104.3v303.4c0 6.4 6.5 10.4 11.7 7.2l240.5-151.7c5.1-3.2 5.1-11.1 0-14.3L139.7 97.2c-5.2-3.3-11.7.7-11.7 7.1z"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var openBtn  = document.getElementById('openPopupBtn');
+        var closeBtn = document.getElementById('closePopupBtn');
+        var popup    = document.getElementById('popup');
+        var overlay  = document.getElementById('overlay');
+        var video    = document.getElementById('popupVideo');
+        var wrapper  = document.getElementById('popupVideoWrapper');
+        var videoMap = window.variantVideoMap || {};
+
+        function getVideoUrl() {
+          // Read the current variant key that l-variant-media keeps up to date
+          var lvm = document.getElementById('LVariantMedia-{{ section.id }}');
+          var key = lvm ? lvm.dataset.variantKey : '{{ variant_key | escape }}';
+          return videoMap[key] || videoMap[key.replace(/,\s*/g, ',')] || null;
+        }
+
+        function openPopup() {
+          var url = getVideoUrl();
+          if (!url) return;
+          video.src = url;
+          video.currentTime = 0;
+          video.load();
+          video.play();
+          wrapper.classList.remove('paused');
+          popup.style.display = 'block';
+          overlay.style.display = 'block';
+          setTimeout(function () {
+            popup.classList.add('show');
+            overlay.classList.add('show');
+          }, 10);
+        }
+
+        function closePopup() {
+          popup.classList.remove('show');
+          overlay.classList.remove('show');
+          setTimeout(function () {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+          }, 300);
+          video.pause();
+          video.src = '';
+          wrapper.classList.remove('paused');
+        }
+
+        // Click inside popup to pause/play
+        wrapper.addEventListener('click', function (e) {
+          if (e.target === video) return; // let native controls handle it
+          if (video.paused) {
+            video.play();
+            wrapper.classList.remove('paused');
+          } else {
+            video.pause();
+            wrapper.classList.add('paused');
+          }
+        });
+
+        if (openBtn)  openBtn.addEventListener('click', openPopup);
+        if (closeBtn) closeBtn.addEventListener('click', closePopup);
+        if (overlay)  overlay.addEventListener('click', closePopup);
+
+        // Initialize button visibility on page load
+        if (openBtn) {
+          var initialUrl = getVideoUrl();
+          if (initialUrl) {
+            openBtn.classList.add('show');
+          } else {
+            openBtn.classList.remove('show');
+          }
+        }
+      });
+    </script>
+
+  {%- endif -%}
+
+    </div>
+  </div>
+
+  {% comment %}─────────────────────────────────────────────────────────────────
+    THUMBNAILS
+    Each thumbnail gets its own thumbnail-list__item div (Dawn requirement —
+    it treats each wrapper as one gallery slot; multiple buttons in one
+    wrapper = only the first is ever shown).
+
+    Non-active variant thumbnails get vms-hidden.
+    Active variant thumbnails are all visible; first one is highlighted
+    with is-active (the selected border/state).
+
+    data-variant-combo lets our JS identify which thumbnails to show/hide.
+    data-media-id on the button is what Dawn uses to wire thumbnail → gallery item.
+  ─────────────────────────────────────────────────────────────────{% endcomment %}
+  {%- if first_3d_model -%}
+    <button
+      class="button button--full-width product__xr-button"
+      type="button"
+      aria-label="{{ 'products.product.xr_button_label' | t }}"
+      data-shopify-xr
+      data-shopify-model3d-id="{{ first_3d_model.id }}"
+      data-shopify-title="{{ product.title | escape }}"
+      data-shopify-xr-hidden
+    >
+      {% render 'icon-3d-model' %}
+      {{ 'products.product.xr_button' | t }}
+    </button>
+  {%- endif -%}
+
+  {%- liquid
+    assign is_not_limited_to_single_item = false
+    if limit == null or limit > 1
+      assign is_not_limited_to_single_item = true
+    endif
+  -%}
+
+  {%- if is_not_limited_to_single_item
+    and active_variant_count > 1
+    and section.settings.gallery_layout contains 'thumbnail'
+    or section.settings.mobile_thumbnails == 'show'
+  -%}
+    <div class="thumbnail-list" id="ThumbnailList-{{ section.id }}">
+      {%- capture sizes -%}
+        (min-width: {{ settings.page_width }}px) calc(({{ settings.page_width | minus: 100 | times: media_width | round }} - 4rem) / 4),
+        (min-width: 990px) calc(({{ media_width | times: 100 }}vw - 4rem) / 4),
+        (min-width: 750px) calc((100vw - 15rem) / 8),
+        calc((100vw - 8rem) / 3)
+      {%- endcapture -%}
+
+      {%- if has_metafield_media -%}
+
+        {%- assign vms_first_thumb_done = false -%}
+
+        {%- for mapping in media_mappings_2 -%}
+          {%- assign combo     = mapping.variant_value.value -%}
+          {%- assign pos_raw   = mapping.image_position.value -%}
+          {%- assign pos_parts = pos_raw | split: ',' -%}
+
+          {%- assign thumb_is_current = false -%}
+          {%- if combo == variant_key or combo == variant_key_no_space -%}
+            {%- assign thumb_is_current = true -%}
+          {%- endif -%}
+
+          {%- for pos_item in pos_parts -%}
+            {%- assign pos_int = pos_item | strip | plus: 0 -%}
+
+            {%- for media in product.media -%}
+              {%- if media.position == pos_int -%}
+
+                {%- assign thumb_is_selected = false -%}
+                {%- if thumb_is_current and vms_first_thumb_done == false -%}
+                  {%- assign thumb_is_selected = true -%}
+                  {%- assign vms_first_thumb_done = true -%}
+                {%- endif -%}
+
+                {%- assign media_index  = forloop.index -%}
+                {%- assign thumbnail_id = 'Thumbnail-' | append: section.id | append: '-' | append: media.id -%}
+
+                <div
+                  class="thumbnail-list__item{% unless thumb_is_current %} vms-hidden{% endunless %}"
+                  data-variant-combo="{{ combo }}"
+                  data-media-id="{{ media.id }}"
+                >
+                  <button
+                    class="thumbnail global-media-settings global-media-settings--no-shadow{% if thumb_is_selected %} is-active{% endif %}"
+                    aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
+                    aria-controls="GalleryViewer-{{ section.id }}"
+                    aria-describedby="{{ thumbnail_id }}"
+                    data-media-id="{{ media.id }}"
+                  >
+                    {{
+                      media.preview_image
+                      | image_url: width: 416
+                      | image_tag:
+                        loading: 'lazy',
+                        sizes: sizes,
+                        widths: '54, 74, 104, 162, 208, 324, 416',
+                        id: thumbnail_id,
+                        alt: media.preview_image.alt | default: product.title
+                      | escape
+                    }}
+                  </button>
+                </div>
+
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+
+        {%- endfor -%}
+
+      {%- else -%}
+
+        {%- comment -%}── FALLBACK thumbnails ──{%- endcomment -%}
+        {%- for media in product.media -%}
+          {%- assign media_index  = forloop.index -%}
+          {%- assign thumbnail_id = 'Thumbnail-' | append: section.id | append: '-' | append: media.id -%}
+          <div
+            class="thumbnail-list__item{% if forloop.first %} is-active{% endif %}"
+            id="{{ section.id }}-thumbnail-{{ forloop.index }}"
+            data-thumbnail-group
+          >
+            <button
+              class="thumbnail global-media-settings global-media-settings--no-shadow{% if forloop.first %} is-active{% endif %}"
+              aria-label="{%- if media.media_type == 'image' -%}{{ 'products.product.media.load_image' | t: index: media_index }}{%- elsif media.media_type == 'model' -%}{{ 'products.product.media.load_model' | t: index: media_index }}{%- elsif media.media_type == 'video' or media.media_type == 'external_video' -%}{{ 'products.product.media.load_video' | t: index: media_index }}{%- endif -%}"
+              aria-controls="GalleryViewer-{{ section.id }}"
+              aria-describedby="{{ thumbnail_id }}"
+              data-media-id="{{ media.id }}"
+            >
+              {{
+                media.preview_image
+                | image_url: width: 416
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: sizes,
+                  widths: '54, 74, 104, 162, 208, 324, 416',
+                  id: thumbnail_id,
+                  alt: media.preview_image.alt | default: product.title
+                | escape
+              }}
+            </button>
+          </div>
+        {%- endfor -%}
+
+      {%- endif -%}
+
+    </div>
+  {%- endif -%}
+
+</l-product-media>

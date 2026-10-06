@@ -1,0 +1,453 @@
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+
+<style>
+    .page-width-custom{
+      max-width: var(--page-width);
+      margin: 0 auto;
+
+        padding: 0 20px;
+        position: relative;
+
+    }
+
+  .testimonial-swiper-section {
+      padding: 30px 0;
+      margin-bottom: -40px;
+  }
+    .ts-media {
+        height: 100%;
+    }
+    .ts-media video{
+        width: 100%;
+        max-width: 100%;
+        border-radius: inherit;
+        display: block;
+        height: 100%;
+        cursor: pointer;
+    }
+    .ts-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .ts-header h2 {
+        font-size: 36px;
+        margin: 0;
+    }
+    .ts-summary {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+    .swiper-{{ section.id }} .swiper-slide{
+        height: auto;
+
+    }
+    .swiper-{{ section.id }} .swiper-slide{
+        transform: scale(0.9);
+
+    }
+    .swiper-{{ section.id }} .swiper-slide-active{
+        height: auto;
+        transform: scale(1);
+    }
+
+    .ts-card {
+          position: relative;
+          height: 100%;
+          overflow: hidden;
+          border-radius: 18px;
+      }
+
+    .ts-body {
+      position: absolute;
+      bottom: 30px;
+      left: 5%;
+      width: 90%;
+      text-align: center;
+      margin: auto;
+      pointer-events: none;
+    }
+    h3.ts-name {
+        margin: 0;
+       color: {{ section.settings.text_color }};
+        font-weight: 700;
+        font-size: 16px;
+    }
+    .ts-media-button {
+        width: 40px;
+        height: 40px;
+        background: #ffffff78;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .ts-media-button svg {
+        width: 30px;
+        height: 30px;
+        color: #fff;
+    }
+    .ts-rating {
+      color: {{ section.settings.star_color }};
+      margin: 0;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 7px;
+    }
+    .ts-rating svg{
+      width: 20px;
+      height: 20px;
+
+    }
+    .ts-media-button { cursor: pointer; }
+    .ts-card.playing .ts-media-button { display: none; }
+    h3.ts-name svg {
+      width: 15px;
+      height: 15px;
+      position: relative;
+      top: 2px;
+      color: {{ section.settings.checkmark_color }};
+    }
+    .video-nav-btn div{
+      display: flex;
+      position: static;
+    }
+    #testimonial-swiper-{{ section.id }} .video-nav-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 40px;
+    }
+    #testimonial-swiper-{{ section.id }} .video-nav-btn div:after{
+      color: {{ section.settings.arrow_color }};
+      font-size: 22px;
+      font-weight: 700;
+    }
+    @media(max-width: 475px){
+      h3.ts-name {
+        font-size: 14px;
+      }
+      .ts-rating svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+    @media(max-width: 375px){
+      h3.ts-name {
+        font-size: 12px;
+      }
+    }
+</style>
+
+<section
+  id="testimonial-swiper-{{ section.id }}"
+  class="testimonial-swiper-section color-{{ section.settings.color_scheme }}"
+>
+  <div class="page-width-custom">
+    {% comment %}
+      <div class="ts-header">
+        <h2>{{ section.settings.heading }}</h2>
+        {% if section.settings.show_rating_summary %}
+          <div class="ts-summary">
+            <div class="ts-stars">
+              {% assign star = section.settings.star %}
+              {% assign empty_stars = 5 | minus: star %}
+              {% for i in (1..star) -%}
+                ★
+              {%- endfor %}
+              {% for i in (1..empty_stars) -%}
+                ☆
+              {%- endfor %}
+            </div>
+            <div class="ts-count">{{ section.settings.summary_count_text }}</div>
+          </div>
+        {% endif %}
+      </div>
+    {% endcomment %}
+
+    <!-- Swiper -->
+    <div class="swiper swiper-{{ section.id }}">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide" {{ block.shopify_attributes }}>
+            <div class="ts-card">
+              {% assign video_index = forloop.index0 %}
+
+              <div class="ts-media">
+                {% if block.settings.video != blank %}
+                  {% if forloop.index <= 4 %}
+                    {{
+                      block.settings.video
+                      | video_tag:
+                        autoplay: false,
+                        loop: true,
+                        muted: false,
+                        controls: false,
+                        image_size: '2000x',
+                        preload: 'auto'
+                    }}
+                  {% else %}
+                    {{
+                      block.settings.video
+                      | video_tag:
+                        autoplay: false,
+                        loop: true,
+                        muted: false,
+                        controls: false,
+                        image_size: '2000x',
+                        preload: 'none',
+                        loading: 'lazy'
+                    }}
+                  {% endif %}
+                {% endif %}
+              </div>
+
+              <div class="ts-media-button">
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 512 512"
+                  height="200px"
+                  width="200px"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M128 104.3v303.4c0 6.4 6.5 10.4 11.7 7.2l240.5-151.7c5.1-3.2 5.1-11.1 0-14.3L139.7 97.2c-5.2-3.3-11.7.7-11.7 7.1z"></path>
+                </svg>
+              </div>
+              {% if block.settings.name != blank %}
+                <div class="ts-body">
+                  <div class="ts-rating">
+                    {% assign star = block.settings.star %}
+                    {% for i in (1..star) -%}
+                      <svg
+                        stroke="currentColor"
+                        fill="currentColor"
+                        stroke-width="0"
+                        viewBox="0 0 576 512"
+                        height="200px"
+                        width="200px"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"></path>
+                      </svg>
+                    {%- endfor %}
+                  </div>
+
+                  <h3 class="ts-name">
+                    {{ block.settings.name }}
+                    <svg
+                      stroke="currentColor"
+                      fill="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 512 512"
+                      height="200px"
+                      width="200px"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path>
+                    </svg>
+                  </h3>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- navigation -->
+    <div class="video-nav-btn">
+      <div class="swiper-button-prev swiper-button-prev-{{ section.id }}" aria-label="Previous"></div>
+      <div class="swiper-button-next swiper-button-next-{{ section.id }}" aria-label="Next"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Swiper JS -->
+<script src="{{ 'swiper-bundle.min.js'| asset_url }}"></script>
+
+<script>
+  (function () {
+    var swiperEl = document.querySelector('.swiper-{{ section.id }}');
+    if (!swiperEl) return;
+
+    var swiper = new Swiper('.swiper-{{ section.id }}', {
+      loop: true,
+      centeredSlides: true,
+      slidesPerView: 5,
+      pagination: { el: '.swiper-pagination-{{ section.id }}', clickable: true },
+      navigation: { nextEl: '.swiper-button-next-{{ section.id }}', prevEl: '.swiper-button-prev-{{ section.id }}' },
+      // autoplay: { delay: 4500, disableOnInteraction: false },
+      breakpoints: {
+        0: {
+          slidesPerView: 1.6,
+        },
+        575: {
+          slidesPerView: 3,
+        },
+        1024: {
+          slidesPerView: 5,
+        },
+      },
+    });
+
+    // make sure videos have playsinline for mobile, and add attributes that help playback
+    function enablePlaysInline() {
+      var videos = document.querySelectorAll('#testimonial-swiper-{{ section.id }} video');
+      videos.forEach(function (v) {
+        try {
+          v.setAttribute('playsinline', '');
+          v.setAttribute('webkit-playsinline', '');
+          v.playsInline = true;
+          // ensure not autoplaying; click-to-play will handle play
+        } catch (e) {
+          /* ignore */
+        }
+      });
+    }
+
+    enablePlaysInline();
+
+    // Pause all videos (used when slide changes or when starting a new one)
+    function pauseAllVideos() {
+      var videos = document.querySelectorAll('#testimonial-swiper-{{ section.id }} video');
+      videos.forEach(function (v) {
+        try {
+          v.pause();
+        } catch (e) {}
+        var card = v.closest('.ts-card');
+        if (card) card.classList.remove('playing');
+      });
+    }
+
+    // Pause when slide changes (keeps your existing behavior)
+    swiper.on('slideChangeTransitionStart', function () {
+      pauseAllVideos();
+    });
+
+    // Play/pause helper that returns a promise (and handles play() rejection gracefully)
+    function togglePlayVideo(video) {
+      if (!video) return;
+      var card = video.closest('.ts-card');
+      if (video.paused) {
+        // Play (user interaction required — this is triggered by click so browsers should allow it)
+        var playPromise = video.play();
+        if (playPromise && playPromise.then) {
+          playPromise
+            .then(function () {
+              if (card) card.classList.add('playing');
+            })
+            .catch(function (err) {
+              // If play fails (rare), unmute and try to play again (some browsers block autoplay of unmuted media)
+              try {
+                video.muted = true;
+                video.play();
+                if (card) card.classList.add('playing');
+              } catch (e) {}
+              console.warn('Video play failed:', err);
+            });
+        } else {
+          if (card) card.classList.add('playing');
+        }
+      } else {
+        video.pause();
+        if (card) card.classList.remove('playing');
+      }
+    }
+
+    // Click handler: if the play button or video is clicked, toggle play for that slide's video
+    document.addEventListener('click', function (e) {
+      // play button clicked
+      var btn = e.target.closest('.ts-media-button');
+      if (btn) {
+        var slide = btn.closest('.swiper-slide');
+        if (!slide) return;
+        var video = slide.querySelector('video');
+        if (video) {
+          togglePlayVideo(video);
+        } else {
+          // If the slide has a video_tag that wraps in <div>, try to find nested <video>
+          var nestedVideo = slide.querySelector('video');
+          if (nestedVideo) togglePlayVideo(nestedVideo);
+        }
+        return;
+      }
+
+      // direct click on the video element should toggle too
+      var clickedVideo = e.target.closest('#testimonial-swiper-{{ section.id }} video');
+      if (clickedVideo) {
+        togglePlayVideo(clickedVideo);
+      }
+    });
+
+    // Optional: if video ends, show overlay again
+    var videos = document.querySelectorAll('#testimonial-swiper-{{ section.id }} video');
+    videos.forEach(function (v) {
+      v.addEventListener('ended', function () {
+        var card = v.closest('.ts-card');
+        if (card) card.classList.remove('playing');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Testimonial Swiper",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.has_cards_info",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color",
+      "id": "arrow_color",
+      "label": "Arrow Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star Color",
+      "default": "#118373"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "checkmark_color",
+      "label": "Checkmark Color",
+      "default": "#fff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Barbara S." },
+        { "type": "range", "id": "star", "label": "Ratings", "min": 0, "max": 5, "default": 5 }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [{ "name": "Testimonial Swiper", "category": "Testimonials" }]
+}
+{% endschema %}

@@ -1,0 +1,88 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "a_announment_bar_KCWAb4": {
+      "type": "A-announment-bar",
+      "blocks": {
+        "text_yKUCTN": {
+          "type": "text",
+          "settings": {
+            "title": "<p><a href=\"/pages/contact\" title=\"Contact Us\">Contact us</a> and ask about free shipping and 10% discount.</p>",
+            "font_size_mobile": 12,
+            "font_size_desktop": 14,
+            "body_color": "#ffffff",
+            "link_color": "#ffffff"
+          }
+        },
+        "count_down_MXGggD": {
+          "type": "count_down",
+          "disabled": true,
+          "settings": {
+            "count_down": "2025-02-18T18:59-0500",
+            "days": "DAYS",
+            "hours": "HRS",
+            "minutes": "MINS",
+            "seconds": "SECS",
+            "title": "<p>Welcome to our store <a href='/collection/all'>Learn more</a></p>",
+            "title_after_countdown": "",
+            "font_size": "h6",
+            "body_color": "#fbfbfb",
+            "link_color": "#1a66d2",
+            "count_down_number_bg": "#ffffff",
+            "count_down_number_color": "#850808",
+            "count_down_label_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "text_yKUCTN",
+        "count_down_MXGggD"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "a {text-decoration: none;}"
+      ],
+      "settings": {
+        "show_close": true,
+        "show_navigation": true,
+        "read_time": 8,
+        "background_color": "#000000",
+        "close_color": "#ffffff",
+        "padding_top": 4,
+        "padding_bottom": 4
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "none",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "mobile_logo_position": "center",
+        "margin_bottom": 0,
+        "padding_top": 8,
+        "padding_bottom": 8
+      }
+    }
+  },
+  "order": [
+    "a_announment_bar_KCWAb4",
+    "header"
+  ]
+}

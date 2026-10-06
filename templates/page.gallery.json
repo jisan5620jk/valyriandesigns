@@ -1,0 +1,243 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "a_breadcrumbs_qdGb3C": {
+      "type": "A-breadcrumbs",
+      "settings": {
+        "page_width": 1400,
+        "show_full_width": false,
+        "text_color": "#a8a8a8",
+        "padding_top": 32,
+        "padding_bottom": 4
+      }
+    },
+    "a_custom_content_PqqHjg": {
+      "type": "A-custom-content",
+      "blocks": {
+        "heading_8U6bnB": {
+          "type": "heading",
+          "settings": {
+            "heading": "GALLERY",
+            "liquid": "",
+            "heading_size": "h1",
+            "tag": "h1",
+            "text_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "text_XLm4eF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>See Valyrian Designs being incorporated in award winning designs<br/>and outdoor lifestyles</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        }
+      },
+      "block_order": [
+        "heading_8U6bnB",
+        "text_XLm4eF"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "background": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 0
+      }
+    },
+    "a_project_with_text_6iT4zh": {
+      "type": "A-project-with-text",
+      "blocks": {
+        "image_JTtV6X": {
+          "type": "image",
+          "settings": {
+            "width": "1-2",
+            "image": "shopify://shop_images/FireFrame_Corten_Restaurant_PNG_1.png",
+            "richtext": "",
+            "url": ""
+          }
+        },
+        "content_WBEX9w": {
+          "type": "content",
+          "settings": {
+            "background_color": "rgba(0,0,0,0)",
+            "width": "1-2",
+            "max_width": 400,
+            "title": "RESTAURANT AND HOTELS",
+            "richtext": "<p>Create a relaxing experience that your patrons will enjoy!</p>",
+            "button_label": "View Projects",
+            "button_link": "shopify://blogs/projects/modern-fire-frame"
+          }
+        }
+      },
+      "block_order": [
+        "image_JTtV6X",
+        "content_WBEX9w"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "",
+        "row_gap": 30,
+        "column_gap": 30,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_project_with_text_CADead": {
+      "type": "A-project-with-text",
+      "blocks": {
+        "content_9Y7aMk": {
+          "type": "content",
+          "settings": {
+            "background_color": "#ffffff",
+            "width": "1-2",
+            "max_width": 1200,
+            "title": "RESIDENTIAL AND COMMUNITY",
+            "richtext": "<p>Enhance relaxation with a serene, water-inspired ambiance.</p>",
+            "button_label": "View Project",
+            "button_link": "shopify://blogs/blogs/why-valyrian-designs-are-voted-the-top-modern-zen-fountain-manufacturer"
+          }
+        },
+        "image_TDYNLV": {
+          "type": "image",
+          "settings": {
+            "width": "1-2",
+            "image": "shopify://shop_images/Banner-1_1_1.png",
+            "richtext": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "content_9Y7aMk",
+        "image_TDYNLV"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.l-pwt-block-2 {order: -1; }}"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "row_gap": 30,
+        "column_gap": 30,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_project_with_text_rtrHkV": {
+      "type": "A-project-with-text",
+      "blocks": {
+        "image_CYfiE4": {
+          "type": "image",
+          "settings": {
+            "width": "1-2",
+            "image": "shopify://shop_images/RoundFountain_Stainless_ParkScene_PNG.png",
+            "richtext": "",
+            "url": ""
+          }
+        },
+        "content_CmafPJ": {
+          "type": "content",
+          "settings": {
+            "background_color": "#ffffff",
+            "width": "1-2",
+            "max_width": 400,
+            "title": "INDUSTRY AND OFFICE",
+            "richtext": "<p>Create a calming, professional atmosphere for clients and employees.</p>",
+            "button_label": "View Project",
+            "button_link": "shopify://blogs/projects/feng-shui-square-fountain"
+          }
+        }
+      },
+      "block_order": [
+        "image_CYfiE4",
+        "content_CmafPJ"
+      ],
+      "custom_css": [],
+      "settings": {
+        "color_scheme": "",
+        "row_gap": 30,
+        "column_gap": 30,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_project_with_text_8Yaahy": {
+      "type": "A-project-with-text",
+      "blocks": {
+        "content_Hck4dn": {
+          "type": "content",
+          "settings": {
+            "background_color": "#ffffff",
+            "width": "1-2",
+            "max_width": 400,
+            "title": "SPAS AND WELLNESS CENTERS",
+            "richtext": "<p>Complement your pampering with a serene, water-inspired ambiance.</p>",
+            "button_label": "View Project",
+            "button_link": "shopify://blogs/projects/zen-door-rain-curtain"
+          }
+        },
+        "image_68J8NJ": {
+          "type": "image",
+          "settings": {
+            "width": "1-2",
+            "image": "shopify://shop_images/Rectangle_7.png",
+            "richtext": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "content_Hck4dn",
+        "image_68J8NJ"
+      ],
+      "custom_css": [
+        "@media screen and (max-width: 750px) {.l-pwt-block-2 {order: -1; }}",
+        ".l-pwt-block-2 {margin-left: auto;}"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "row_gap": 30,
+        "column_gap": 30,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "a_breadcrumbs_qdGb3C",
+    "a_custom_content_PqqHjg",
+    "a_project_with_text_6iT4zh",
+    "a_project_with_text_CADead",
+    "a_project_with_text_rtrHkV",
+    "a_project_with_text_8Yaahy"
+  ]
+}

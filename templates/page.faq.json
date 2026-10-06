@@ -1,0 +1,321 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "a_breadcrumbs_qdGb3C": {
+      "type": "A-breadcrumbs",
+      "settings": {
+        "page_width": 1300,
+        "show_full_width": false,
+        "text_color": "#a8a8a8",
+        "padding_top": 32,
+        "padding_bottom": 4
+      }
+    },
+    "a_custom_content_PqqHjg": {
+      "type": "A-custom-content",
+      "blocks": {
+        "heading_8U6bnB": {
+          "type": "heading",
+          "settings": {
+            "heading": "FAQs",
+            "liquid": "",
+            "heading_size": "h1",
+            "tag": "h1",
+            "text_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1300,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "text_XLm4eF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Here are the most common questions and our answers. Feel free to contact us at:</p><p>Email: <a href=\"mailto:jaden@valyriandesigns.com\" title=\"mailto:jaden@valyriandesigns.com\">jaden@valyriandesigns.com</a> or Call: <a href=\"tel:858-842-7100\" title=\"tel:858-842-7100\">858-842-7100</a></p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1300,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        }
+      },
+      "block_order": [
+        "heading_8U6bnB",
+        "text_XLm4eF"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "background": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 0
+      }
+    },
+    "chat_button_GP9Uzt": {
+      "type": "chat-button",
+      "name": "Chat Button",
+      "settings": {
+        "button_text": "LIVE CHAT",
+        "enable_Sticky": false,
+        "page_width": 1300,
+        "show_full_width": false,
+        "padding_top": 12,
+        "padding_bottom": 0
+      }
+    },
+    "a_faqs_4Lc9kb": {
+      "type": "A-faqs",
+      "blocks": {
+        "collapsible_row_tKNPwD": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "How does delivery work?",
+            "icon_width": 24,
+            "row_content": "<p>Once you place your order, you are assigned a Valyrian Designs team member that you can communicate with and get progress updates. We will send you a video showing our team QC / QA testing your product. This ensures your product is shipped with no cosmetic flaws. Plus, our robust packaging protects your product, so it arrives without damage in transit. When you receive your product, you have 7 days to inspect the item. Any claim of a product issue must be communicated in writing to Valyrian Designs. See our video that highlights our policy which you will agree to in our terms of delivery.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_V9fg6P": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "What is the quality of steel you use?",
+            "icon_width": 24,
+            "row_content": "<p>We use 100 % Valyrian Corten Steel, and 304 Grade Stainless Steel. Our commitment to incorporate the best quality steel separates us from others. Click here to see the quality material we use and commitment of transparency. We are happy to speak with you to offer answers to any questions and assure you that you are buying  authentic Valyrian Design product.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": "View our certification",
+            "certification_image": "shopify://shop_images/certification.png"
+          }
+        },
+        "collapsible_row_JBGYKy": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "How does the authentication process work?",
+            "icon_width": 24,
+            "row_content": "<p>All our products are authenticated with the Valyrian Designs Authentication number correlating to your product. We do this so you are confident you are getting an authentic Valyrian Designs product vs other knock offs.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_E3CTfr": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "Where is the product made?",
+            "icon_width": 24,
+            "row_content": "<p>Product is designed in California and fabricated in PRC or Mexico by local artisans.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_WrHKnb": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "What is the difference between Stainless, Powder Coated Black and Corten Steel?",
+            "icon_width": 24,
+            "row_content": "<p>Corten Steel is the most durable and outdoor resistant compared to our other finishes. Powder Coated and Stainless are durable but require delicate handling and must be set in a scratch free environment. Ask a Valyrian Designs team member regarding what works best for your outdoor needs.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_WNzPrt": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "What is your refund policy?",
+            "icon_width": 24,
+            "row_content": "<p>Valyrian Design products are bespoke manufactured to order. Each order has authentication and registered to person ordering. Our designs are classified as Art and we do not offer order cancellations or refunds once you pay for your order. We are happy to address any products that get delivered in faulty condition please see FAQ’s. Once you receive your product you have 5 business days to inspect the items for any imperfections, see Corten Steel imperfections standards. All orders you will assigned a designer that will white glove your order from start to installation. Our products do not include pumps nor do we take any responsibilities of any pumps that you use for our products. You adhere to Valyrian Design delivery window 35-60 business Monday - Friday. On checkout by placing the order you agree to these terms. All products are custom made and no cancellations or refunds.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_NnFxht": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "When my order arrives what do I need to do when it is delivered?",
+            "icon_width": 24,
+            "row_content": "<p>Once you place your order, a dedicated Valyrian Designs team member will be assigned to you, providing direct communication and progress updates. Before shipping, we conduct a thorough quality control (QC) and quality assurance (QA) inspection of your product Any concerns or claims regarding product issues must be submitted in writing or by email to Valyrian Designs within this period. Responses that explain any concerns will be provided. Please see normal delivery attributes for your respected product. Corten Steel arrives with standard imperfections and see FAQ for more details.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_NREERK": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "How can I order this for a client or get client my industry discount?",
+            "icon_width": 24,
+            "row_content": "<p>Valyrian Designs offers a seamless process to obtain industry codes that you can pass on or use to buy our products. These must first be discussed with your Valyrian Design team partner and subject to our trade discount policies.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_Q99wWT": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "How long does it take for me to receive my order?",
+            "icon_width": 24,
+            "row_content": "<p>Orders take between 35 - 60 business Days (Monday -Friday) depending on what model your order as the product is hand-made and we make each product to the specific order. You are welcome to call or text our team of designers for a better understanding of the delivery time.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_F7JRJU": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "What type of warranty do you offer?",
+            "icon_width": 24,
+            "row_content": "<p>We have no warranty as prior to the product being shipped, it has gone through extensive testing and quality control. We do not provide water pumps and any issues with water should be directed to the parties contracted for installation should be contacted. Each Valyrian Design is art and arrives in working condition.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_ygTUGK": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "What pump should I get?",
+            "icon_width": 24,
+            "row_content": "<p>We do not have any relationship with any pump manufacturers or retailers. Your Valy up rian Designs team member can offer you several companies and models as suggestions. We take no liability regarding pumps.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_PMUUjf": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "What if I want to change my order after it is placed?",
+            "icon_width": 24,
+            "row_content": "<p>You have 5 days to change your order, simply reach out to Valyrian Designs via email with your change information. Change that can be made are size and finishes, changing your product model must be done within 3 days. We offer no refunds on orders, each order is hand made, materials are ordered and our artisan's are busy seeing your art is made with the highest standards.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_iJUrMF": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "Do you offer discounts going through Landscapes Architect, Designers, Contractors, Pool Builders, and trade.",
+            "icon_width": 24,
+            "row_content": "<p>Valyrian Designs works with the trade, discounts are based on factors that the team welcome having discussions. Valyrian Designs collaborates with the design centric; our commitment is to bring outdoor lifestyle experiences to the next level. </p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_h4Hipc": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "What should I do once my product is delivered?",
+            "icon_width": 24,
+            "row_content": "<p>Upon delivery, you must open the crate and inspect your product immediately. If you do not report any transit-related non standard blemishes within seven (7) days, Valyrian Designs cannot honor claims for damage. To ensure a smooth process, our design team personally contacts each customer-whether an individual or company-reminding them to inspect their order. You will also receive text message reminders.Once your product is received, a designer will authenticate it in our registry and assist with any questions related to installation.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        },
+        "collapsible_row_6WbCN6": {
+          "type": "collapsible_row",
+          "settings": {
+            "title": "Facts about corten steel ?",
+            "icon_width": 24,
+            "row_content": "<p>What sometimes happens during packaging, shipping, or unpacking is that, light oxidation residue essentially corten dust can transfer onto packaging materials and come off when unwrapped.This is normal and does not indicate damage or a defectivefinish. Over time, the corten steel surface stabilizes as the protective patina fully develops.Smudge marks, exposed steel, band marks that will blend inSince corten steel’s surface finish forms naturally, minor residue, smudges, and early-stage color changesare expected.These traits are not considered defects and standard blemishes.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "modal_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_tKNPwD",
+        "collapsible_row_V9fg6P",
+        "collapsible_row_JBGYKy",
+        "collapsible_row_E3CTfr",
+        "collapsible_row_WrHKnb",
+        "collapsible_row_WNzPrt",
+        "collapsible_row_NnFxht",
+        "collapsible_row_NREERK",
+        "collapsible_row_Q99wWT",
+        "collapsible_row_F7JRJU",
+        "collapsible_row_ygTUGK",
+        "collapsible_row_PMUUjf",
+        "collapsible_row_iJUrMF",
+        "collapsible_row_h4Hipc",
+        "collapsible_row_6WbCN6"
+      ],
+      "settings": {
+        "page_width": 1300,
+        "show_full_width": false,
+        "show_only_one_tab": true,
+        "open_first_tab": true,
+        "show_border_bottom": true,
+        "collapsible_heading_padding": 20,
+        "collapsible_gap": 20,
+        "collapsible_heading_size_mobile": 16,
+        "collapsible_heading_size_desktop": 18,
+        "collapsible_content_size_mobile": 16,
+        "collapsible_content_size_desktop": 18,
+        "toggle_icon": "triangle",
+        "background_color": "#ffffff",
+        "collapsible_background": "#d8eff9",
+        "collapsible_heading": "#000000",
+        "border_bottom_color": "#e0e0e0",
+        "collapsible_content": "#000000",
+        "collapsible_content_link": "#032c8c",
+        "padding_top": 28,
+        "padding_bottom": 60
+      }
+    }
+  },
+  "order": [
+    "main",
+    "a_breadcrumbs_qdGb3C",
+    "a_custom_content_PqqHjg",
+    "chat_button_GP9Uzt",
+    "a_faqs_4Lc9kb"
+  ]
+}

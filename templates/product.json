@@ -1,0 +1,440 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "a_breadcrumbs_q3kpJC": {
+      "type": "A-breadcrumbs",
+      "settings": {
+        "page_width": 1400,
+        "show_full_width": false,
+        "text_color": "#a8a8a8",
+        "padding_top": 28,
+        "padding_bottom": 24
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "description": {
+          "type": "description",
+          "settings": {
+            "title": ""
+          }
+        },
+        "shipping_information_46VPTy": {
+          "type": "shipping_information",
+          "settings": {
+            "deliveried_text": "Your product will be custom made and deliver between: [date_min] - [date_max]",
+            "delivery_day_min": 30,
+            "delivery_day_max": 65
+          }
+        },
+        "chat_btn_xyA6Ni": {
+          "type": "Chat_btn",
+          "settings": {
+            "button_text": "LIVE CHAT"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "weight_Gp9wEj": {
+          "type": "weight",
+          "settings": {
+            "text": "Product Weight: [weight]"
+          }
+        },
+        "popup_videos_azJyXb": {
+          "type": "popup_videos",
+          "settings": {
+            "text_1": "<span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-truck-delivery\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"></path><path d=\"M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0\"></path><path d=\"M5 17h-2v-4m-1 -8h11v12m-4 0h6m4 0h2v-6h-8m0 -5h5l3 5\"></path><path d=\"M3 9l4 0\"></path></svg>Delivery video</span>",
+            "video_1": "shopify://files/videos/delivery.mp4",
+            "video_url_1": "",
+            "description_1": "",
+            "text_2": "<span><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"icon icon-tabler icons-tabler-outline icon-tabler-assembly\"><path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\"></path><path d=\"M19.875 6.27a2.225 2.225 0 0 1 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033z\"></path><path d=\"M15.5 9.422c.312 .18 .503 .515 .5 .876v3.277c0 .364 -.197 .7 -.515 .877l-3 1.922a1 1 0 0 1 -.97 0l-3 -1.922a1 1 0 0 1 -.515 -.876v-3.278c0 -.364 .197 -.7 .514 -.877l3 -1.79c.311 -.174 .69 -.174 1 0l3 1.79h-.014z\"></path></svg>Assembly video</span>",
+            "video_2": "shopify://files/videos/how-to-delivery.mp4",
+            "video_url_2": "",
+            "description_2": "",
+            "text_3": "Pop-up link text",
+            "video_url_3": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "description_3": ""
+          }
+        }
+      },
+      "block_order": [
+        "description",
+        "shipping_information_46VPTy",
+        "chat_btn_xyA6Ni",
+        "variant_picker",
+        "price",
+        "buy_buttons",
+        "weight_Gp9wEj",
+        "popup_videos_azJyXb"
+      ],
+      "settings": {
+        "open_popup_desktop": "Watch Rain Fountain Door",
+        "open_popup_mobile": "Watch Fountain",
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-e93e199f-d00e-4b1c-8206-8541f7e45bc8",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "cover",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "image_zoom": "none",
+        "mobile_thumbnails": "hide",
+        "video_url": "",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 0,
+        "padding_bottom": 60
+      }
+    },
+    "a_custom_content_EidqkE": {
+      "type": "A-custom-content",
+      "blocks": {
+        "heading_CJnHEt": {
+          "type": "heading",
+          "settings": {
+            "heading": "SPECIFICATIONS",
+            "liquid": "",
+            "heading_size": "h1",
+            "tag": "h3",
+            "text_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "heading_CJnHEt"
+      ],
+      "custom_css": [
+        "@media screen and (min-width: 750px) {.l-custom-content__heading {font-size: 36px; }}"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "background": "#d9eff9",
+        "padding_top": 20,
+        "padding_bottom": 0
+      }
+    },
+    "icon_with_text_qYVyep": {
+      "type": "icon-with-text",
+      "blocks": {
+        "icon_with_text_GPwcC6": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/Vector.png",
+            "max_width": 60,
+            "icon_box": false,
+            "icon_box_radius": 100,
+            "content_max_width": 400,
+            "title": "<strong>SLEEK DESIGN</strong>",
+            "subtitle": "<p>MINIMALIST LINES AND A POLISHED FINISH COMPLEMENT ANY DECOR.</p>",
+            "link_label": "",
+            "link": "",
+            "button_radius": 10,
+            "icon_box_bg": "#f8f8f8",
+            "title_color": "#000000",
+            "subtitle_color": "#000000",
+            "button_text": "#ffffff",
+            "button_bg": "#000000"
+          }
+        },
+        "icon_with_text_8K74X8": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/Group.png",
+            "max_width": 60,
+            "icon_box": false,
+            "icon_box_radius": 100,
+            "content_max_width": 400,
+            "title": "<strong>DURABLE BUILD</strong>",
+            "subtitle": "<p>2CM THICK AND INDUSTRIAL STRENGTH MODELS WEIGHTING UP TO 570 LBS.</p>",
+            "link_label": "",
+            "link": "",
+            "button_radius": 10,
+            "icon_box_bg": "#f8f8f8",
+            "title_color": "#000000",
+            "subtitle_color": "#000000",
+            "button_text": "#ffffff",
+            "button_bg": "#000000"
+          }
+        },
+        "icon_with_text_7jGhXq": {
+          "type": "icon_with_text",
+          "settings": {
+            "icon": "shopify://shop_images/Group_1.png",
+            "max_width": 60,
+            "icon_box": false,
+            "icon_box_radius": 100,
+            "content_max_width": 400,
+            "title": "<strong>EASY SETUP & MAINTENANCE</strong>",
+            "subtitle": "<p>QUICK INSTALLATION AND SIMPLE CLEANING.</p>",
+            "link_label": "",
+            "link": "",
+            "button_radius": 10,
+            "icon_box_bg": "#f8f8f8",
+            "title_color": "#000000",
+            "subtitle_color": "#000000",
+            "button_text": "#ffffff",
+            "button_bg": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_GPwcC6",
+        "icon_with_text_8K74X8",
+        "icon_with_text_7jGhXq"
+      ],
+      "settings": {
+        "background_color": "#d9eff9",
+        "page_width": 1400,
+        "show_full_width": false,
+        "spacing_grid_horizontal": 8,
+        "spacing_grid_vertical": 8,
+        "columns_desktop": 4,
+        "columns_mobile": "1",
+        "card_heading_size": "h3",
+        "card_subtitle_size": "sm",
+        "content_type_desktop": "row",
+        "content_type_mobile": "column",
+        "card_content_alignment_desk": "left",
+        "card_content_alignment_mob": "left",
+        "card_spacing": 20,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "YOU MAY ALSO LIKE",
+        "heading_size": "h1",
+        "products_to_show": 3,
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "a_customer_reviews_th4btD": {
+      "type": "A-customer-reviews",
+      "blocks": {
+        "review_RaWa4f": {
+          "type": "review",
+          "settings": {
+            "name": "Michael Peterson",
+            "position_role": "Landscape Architect",
+            "content": "<p>The L Curtain is a fantastic addition to my projects. It's easy to install, high quality, and my clients love the aesthetic and calming effect it brings to their outdoor spaces.</p>"
+          }
+        },
+        "review_YT8DQy": {
+          "type": "review",
+          "settings": {
+            "name": "David Thompson",
+            "position_role": "Landscape Architect",
+            "content": "<p>The Door Curtain is a perfect addition to any space needing a touch of sophistication. It creates a serene, spa-like atmosphere and fits beautifully with modern interiors.</p>"
+          }
+        },
+        "review_CVAtRx": {
+          "type": "review",
+          "settings": {
+            "name": "Sarah Lawrence",
+            "position_role": "Landscape Architect",
+            "content": "<p>The L Curtain transformed my living room into a peaceful sanctuary. The soothing water sound and sleek design are perfect. It's a beautiful addition to my home.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "review_RaWa4f",
+        "review_YT8DQy",
+        "review_CVAtRx"
+      ],
+      "settings": {
+        "loop": 20,
+        "heading": "OUR REVIEWS",
+        "heading_size": "h1",
+        "enable_carousel": true,
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "background_color": "#d9eff9",
+        "review_card": "#f8f8f8",
+        "verify_color": "#72bf71",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "a_custom_content_hAQFk4": {
+      "type": "A-custom-content",
+      "blocks": {
+        "heading_TVBgGV": {
+          "type": "heading",
+          "settings": {
+            "heading": "PERFECT FOR",
+            "liquid": "",
+            "heading_size": "h1",
+            "tag": "h2",
+            "text_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "center",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "text_xnzJtH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our bespoke designs bring calming elegance of flowing water <br/>or fire transforming any outdoor space into modern feng shui living.  </p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        }
+      },
+      "block_order": [
+        "heading_TVBgGV",
+        "text_xnzJtH"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "background": "#ffffff",
+        "padding_top": 60,
+        "padding_bottom": 0
+      }
+    },
+    "a_project_with_text_zBzUFW": {
+      "type": "A-project-with-text",
+      "blocks": {
+        "image_VRLmLq": {
+          "type": "image",
+          "settings": {
+            "width": "2-3",
+            "image": "shopify://shop_images/FireFrame_Corten_Restaurant_PNG_1_c0e82621-2b06-417b-a955-d9a8e0259d9a.png",
+            "richtext": "<p>Outdoor Designer:  Debra Lewis.<br/>Project Location: Byron Bay Australia</p>",
+            "url": ""
+          }
+        },
+        "content_MjwYMR": {
+          "type": "content",
+          "settings": {
+            "background_color": "#ffffff",
+            "width": "1-3",
+            "max_width": 1200,
+            "title": "RESTAURANTS AND HOTELS",
+            "richtext": "<p>Our designs are seen in design centric hospitality establishments throughout the world.</p>",
+            "button_label": "View Project",
+            "button_link": "shopify://blogs/projects/modern-fire-frame"
+          }
+        },
+        "content_aaMbFE": {
+          "type": "content",
+          "settings": {
+            "background_color": "#ffffff",
+            "width": "1-3",
+            "max_width": 1200,
+            "title": "HOMES AND CONDO'S",
+            "richtext": "<p>Modern feng shui elegance to your outdoor living space lifestyle.</p>",
+            "button_label": "View Project",
+            "button_link": "shopify://blogs/projects/zen-door-rain-curtain"
+          }
+        },
+        "image_NbrVdk": {
+          "type": "image",
+          "settings": {
+            "width": "2-3",
+            "image": "shopify://shop_images/FullSizeRender.heic",
+            "richtext": "<p>Landscape Architect : Jim Bedidetti.<br/>Project Location: Carmel Valley, San Diego<br/>Project: Residential Outdoor Zen Den</p>",
+            "url": ""
+          }
+        },
+        "image_FUXpi3": {
+          "type": "image",
+          "settings": {
+            "width": "2-3",
+            "image": "shopify://shop_images/Rectangle_7.png",
+            "richtext": "<p>Landscape Architect Jim Homer.<br/>Project Location : Palm Springs, California<br/>Project: Day Spa and Wellness</p>",
+            "url": ""
+          }
+        },
+        "content_NDkiPG": {
+          "type": "content",
+          "settings": {
+            "background_color": "#ffffff",
+            "width": "1-3",
+            "max_width": 1200,
+            "title": "SPAS AND WELLNESS CENTERS",
+            "richtext": "<p>Water - inspired ambiance and modern Zen infusion.</p>",
+            "button_label": "View Project",
+            "button_link": "shopify://blogs/blogs/cultivate-tranquility-design-your-dream-backyard-oasis-with-feng-shui"
+          }
+        }
+      },
+      "block_order": [
+        "image_VRLmLq",
+        "content_MjwYMR",
+        "content_aaMbFE",
+        "image_NbrVdk",
+        "image_FUXpi3",
+        "content_NDkiPG"
+      ],
+      "settings": {
+        "color_scheme": "scheme-645a1c89-a516-4f58-8574-14bfa069928d",
+        "row_gap": 30,
+        "column_gap": 30,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "a_breadcrumbs_q3kpJC",
+    "main",
+    "a_custom_content_EidqkE",
+    "icon_with_text_qYVyep",
+    "related-products",
+    "a_customer_reviews_th4btD",
+    "a_custom_content_hAQFk4",
+    "a_project_with_text_zBzUFW"
+  ]
+}

@@ -1,0 +1,56 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "cart-items": {
+      "type": "main-cart-items",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "cart-footer": {
+      "type": "main-cart-footer",
+      "blocks": {
+        "subtotal": {
+          "type": "subtotal",
+          "settings": {}
+        },
+        "terms_and_conditions_3Eptaw": {
+          "type": "terms_and_conditions",
+          "settings": {
+            "text": "I read and agreed to Valyrian Designs <a href=\"/policies/terms-of-service\" target=\"_blank\" title=\"Terms of Service\"><strong>terms of service</strong></a>, <a href=\"/policies/refund-policy\" target=\"_blank\" title=\"Refund Policy\"><strong>refund & cancellation</strong></a> ,<strong> </strong><a href=\"/policies/shipping-policy\" target=\"_blank\" title=\"Shipping Policy\"><strong>shipping policy</strong></a><strong> </strong> and <a href=\"/policies/privacy-policy\" target=\"_blank\" title=\"Privacy Policy\"><strong>privacy policy</strong></a>."
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+            "show_tax": false
+          }
+        }
+      },
+      "block_order": [
+        "subtotal",
+        "terms_and_conditions_3Eptaw",
+        "buttons"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "cart-items",
+    "cart-footer"
+  ]
+}

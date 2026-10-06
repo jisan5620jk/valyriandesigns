@@ -1,0 +1,350 @@
+{{ 'lta-sections-project-with-text.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	#shopify-section-{{ section.id }} {
+	  --l-row-gap: {{ section.settings.row_gap }}px;
+	  --l-column-gap: {{ section.settings.column_gap }}px;
+	  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  #shopify-section-{{ section.id }} {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+a.button.l-pwt__content-button {
+  overflow: hidden;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
+}
+a.button.l-pwt__content-button:hover {
+  color: white;
+  outline: none;
+}
+a.button.l-pwt__content-button img {
+  transition: all 0.3s;
+}
+a.button.l-pwt__content-button:hover img {
+  filter: brightness(0) invert(1);
+}
+a.button.l-pwt__content-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background: black;
+  z-index: -1;
+  transition: all 0.3s;
+}
+a.button.l-pwt__content-button:hover:before {
+  width: 100%;
+  left: 0;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1280px) {
+  a.button.l-pwt__content-button {
+    gap: 6px !important;
+    padding: 10px 10px !important;
+    font-size: 11px !important;
+  }
+}
+
+@media screen and (max-width: 380px) {
+a.button.l-pwt__content-button {
+    gap: 4px !important;
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+}
+}
+{%- endstyle -%}
+
+{%- liquid
+	assign fetch_priority = 'auto'
+	assign loading = 'lazy'
+
+	if section.index == 1
+		assign fetch_priority = 'high'
+		assign loading = 'eager'
+	endif
+-%}
+
+<div class="l-pwt gradient color-{{ section.settings.color_scheme }}">
+	<div class="page-width">
+		<div class="l-pwt__grid flex items-center flex-wrap">
+			{%- for block in section.blocks -%}
+				{%- case block.type -%}
+					{%- when 'image' -%}
+						<div
+							class="l-pwt__grid-item l-pwt__grid-item--{{ block.settings.width }} l-pwt-block-{{ forloop.index }}"
+							{{ block.shopify_attributes }}
+						>
+							{%- if block.settings.image != blank -%}
+								<div
+									class="l-pwt__image relative{% if block.settings.richtext != blank %} l-pwt__image--has-text{% endif %}"
+									style="padding-bottom: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;"
+								>
+									{%- assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840' -%}
+									{%- assign image_height = block.settings.image.width
+										| divided_by: block.settings.image.aspect_ratio
+									-%}
+									{%- case block.settings.width -%}
+										{%- when '2-3' -%}
+											{%- capture sizes -%}
+                        (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: 2 | divided_by: 3 }}px,
+                        (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2),
+                        100vw
+                      {%- endcapture -%}
+										{%- when '1-2' -%}
+											{%- capture sizes -%}
+                          (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                          (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2),
+                          100vw
+                        {%- endcapture -%}
+										{%- when '1-3' -%}
+											{%- capture sizes -%}
+                        (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 3 }}px,
+                        (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2),
+                        100vw
+                      {%- endcapture -%}
+									{%- endcase -%}
+
+									{{
+										block.settings.image
+										| image_url: width: 1500
+										| image_tag:
+											width: block.settings.image.width,
+											height: image_height,
+											sizes: sizes,
+											widths: widths,
+											fetchpriority: fetch_priority,
+											loading: loading
+									}}
+
+									{%- if block.settings.richtext != blank -%}
+										<span class="l-pwt__image-richtext">{{ block.settings.richtext }}</span>
+									{%- endif -%}
+									{%- if block.settings.url -%}
+										<a class="l-pwt__image-url" href="{{ block.settings.url }}">.</a>
+									{%- endif -%}
+								</div>
+							{%- else -%}
+								{{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg w-full' }}
+							{%- endif -%}
+						</div>
+					{%- when 'content' -%}
+						<div
+							class="l-pwt__grid-item l-pwt__grid-item--{{ block.settings.width }} l-pwt-block-{{ forloop.index }}"
+							style="--l-background-color: {{ block.settings.background_color }};--l-max-width: {{ block.settings.max_width }}px;"
+							{{ block.shopify_attributes }}
+						>
+							<div class="l-pwt__content">
+								{%- if block.settings.title != blank -%}
+									<h3 class="l-pwt__content-title">{{ block.settings.title }}</h3>
+								{%- endif -%}
+								{%- if block.settings.richtext != blank -%}
+									<div class="l-pwt__content-richtext rte">{{ block.settings.richtext }}</div>
+								{%- endif -%}
+								{%- if block.settings.button_label != blank -%}
+									<a
+										{% if block.settings.button_link == blank %}
+											role="link" aria-disabled="true"
+										{% else %}
+											href="{{ block.settings.button_link }}"
+										{% endif %}
+										class="button l-pwt__content-button"
+									>
+										{{ block.settings.button_label | escape }}
+										{% render 'icon-arrow-right' %}
+									</a>
+								{%- endif -%}
+							</div>
+						</div>
+				{%- endcase -%}
+			{%- endfor -%}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+{
+	"name": "LTA - Project with text",
+	"class": "section",
+	"disabled_on": {
+		"groups": ["header", "footer"]
+	},
+	"settings": [
+		{
+			"type": "color_scheme",
+			"id": "color_scheme",
+			"label": "t:sections.all.colors.label",
+			"default": "scheme-1"
+		},
+		{
+			"type": "header",
+			"content": "Gap"
+		},
+		{
+			"type": "range",
+			"id": "row_gap",
+			"min": 0,
+			"max": 32,
+			"step": 2,
+			"unit": "px",
+			"label": "Row gap",
+			"default": 30
+		},
+		{
+			"type": "range",
+			"id": "column_gap",
+			"min": 0,
+			"max": 32,
+			"step": 2,
+			"unit": "px",
+			"label": "Column gap",
+			"default": 30
+		},
+		{
+			"type": "header",
+			"content": "t:sections.all.padding.section_padding_heading"
+		},
+		{
+			"type": "range",
+			"id": "padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_top",
+			"default": 36
+		},
+		{
+			"type": "range",
+			"id": "padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_bottom",
+			"default": 36
+		}
+	],
+	"blocks": [
+		{
+			"name": "Image",
+			"type": "image",
+			"settings": [
+				{
+					"type": "select",
+					"id": "width",
+					"label": "Width",
+					"default": "1-2",
+					"options": [
+						{
+							"value": "1-3",
+							"label": "1 / 3"
+						},
+						{
+							"value": "2-3",
+							"label": "2 / 3"
+						},
+						{
+							"value": "1-2",
+							"label": "1 - 2"
+						}
+					]
+				},
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "Image"
+				},
+				{
+					"type": "richtext",
+					"id": "richtext",
+					"label": "Richtext"
+				},
+				{
+					"type": "url",
+					"id": "url",
+					"label": "URL"
+				}
+			]
+		},
+		{
+			"name": "Content",
+			"type": "content",
+			"settings": [
+				{
+					"type": "color",
+					"id": "background_color",
+					"label": "Background color",
+					"default": "#fff"
+				},
+				{
+					"type": "select",
+					"id": "width",
+					"label": "Width",
+					"default": "1-2",
+					"options": [
+						{
+							"value": "1-3",
+							"label": "1 / 3"
+						},
+						{
+							"value": "2-3",
+							"label": "2 / 3"
+						},
+						{
+							"value": "1-2",
+							"label": "1 - 2"
+						}
+					]
+				},
+				{
+					"type": "range",
+					"id": "max_width",
+					"label": "Max Width",
+					"min": 350,
+					"max": 1200,
+					"step": 50,
+					"unit": "px",
+					"default": 1200
+				},
+				{
+					"type": "text",
+					"id": "title",
+					"label": "Title",
+					"default": "Restaurants and hotels"
+				},
+				{
+					"type": "richtext",
+					"id": "richtext",
+					"label": "Richtext"
+				},
+				{
+					"type": "text",
+					"id": "button_label",
+					"label": "Button label",
+					"default": "View Project"
+				},
+				{
+					"type": "url",
+					"id": "button_link",
+					"label": "Button URL"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "LTA - Project with text",
+			"blocks": []
+		}
+	]
+}
+{% endschema %}

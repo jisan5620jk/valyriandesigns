@@ -1,0 +1,294 @@
+{{ 'jb-product-gallery.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<div class="product_swiper_wrapper">
+  <div class="swiper main_swiper">
+    <div class="swiper-wrapper">
+      {% for image in product.images %}
+        {% if image %}
+           {% if image.alt contains "finish" or image.alt contains "wood" or image.alt contains "size" or image.alt contains "landscape" or image.alt contains "gas" %} 
+            <div class="swiper-slide" media-id="{{ image.id }}">
+              <div class="imgbox_full">
+                   <img src="{{ image | img_url: "master" }}" alt="{{ image.alt }}" loading="lazy">
+              </div>
+            </div>
+          {% endif %} 
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <ul class="thumbnails">
+        {% for image in product.images %}
+      {% if image %}
+
+
+        {% if image.alt contains "wood-" %}
+          
+          <li class="thumb wood" media-id="{{ image.id }}" data="{{ image.alt  }}">
+            <div class="imgbox_full">
+                 <img src="{{ image | img_url: "master" }}" alt="{{ image.alt }}" loading="lazy">
+            </div>
+          </li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% for image in product.images %}
+      {% if image %}
+        {% if image.alt contains "gas-" %}
+          <li class="thumb gas {% if forloop.first %} active {% endif %}" media-id="{{ image.id }}" data="{{ image.alt }}"> 
+            <div class="imgbox_full">
+                 <img src="{{ image | img_url: "master" }}" alt="{{ image.alt }}" loading="lazy">
+            </div>
+          </li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    
+    {% for image in product.images %}
+      {% if image %}
+        {% if image.alt contains "finish-" %}
+          <li class="thumb finish {% if forloop.first %} active {% endif %}" media-id="{{ image.id }}" data="{{ image.alt }}"> 
+            <div class="imgbox_full">
+                 <img src="{{ image | img_url: "master" }}" alt="{{ image.alt }}" loading="lazy">
+            </div>
+          </li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% for image in product.images %}
+      {% if image %}
+        {% if image.alt contains "landscape-"  %}
+          <li class="thumb landscape" media-id="{{ image.id }}" data="{{ image.alt }}">
+            <div class="imgbox_full">
+                 <img src="{{ image | img_url: "master" }}" alt="{{ image.alt }}" loading="lazy">
+            </div>
+          </li>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% for image in product.images %}
+      {% if image %}
+  
+          {% if image.alt contains "size-" %}
+            <li class="thumb size" media-id="{{ image.id }}" data="{{ image.alt }}">
+              <div class="imgbox_full">
+                   <img src="{{ image | img_url: "master" }}" alt="{{ image.alt }}" loading="lazy">
+              </div>
+            </li>
+          {% endif %}
+      
+      {% endif %}
+    {% endfor %}
+
+    {% comment %} {% for image in product.images %}
+      {% if image %}
+        {% if image.alt contains "size-" %}
+          <li class="thumb size" media-id="{{ image.id }}" data="{{ image.alt }}">
+            <div class="imgbox_full">
+                 <img src="{{ image | img_url: "master" }}" alt="{{ image.alt }}" loading="lazy">
+            </div>
+          </li>
+        {% endif %}
+      {% endif %}
+    {% endfor %} {% endcomment %}
+
+
+  </ul>
+</div>
+<style>
+  .imgbox_full img {
+
+    -o-object-fit: contain !important;
+    object-fit: contain !important;
+}
+@media only screen and (max-width: 800px) {
+
+.product_swiper_wrapper .thumbnails .thumb {
+    width: calc(33.3333333333% - 15px);
+    aspect-ratio: 180/120;
+    display: none;
+}
+
+.l-product-block-shipping {
+   
+    margin-top: 13px;
+}
+}
+</style>
+<script>
+window.addEventListener('load', ()=>{
+  productSwiperInit();
+});
+
+document.addEventListener('shopify:section:load', ()=>{
+  productSwiperInit();
+});
+
+function productSwiperInit() {
+    const prductSlider = new Swiper('.main_swiper', {
+        slidesPerView: 1,
+        effect: "fade"
+    });
+
+    var active_index = 1;
+
+    const variants = JSON.parse(`{{ product.variants | json }}`);
+    const productOptions = JSON.parse(`{{ product.options | json }}`);
+    const thumbs = document.querySelectorAll('.product_swiper_wrapper .thumbnails .thumb');
+
+    thumbs.forEach((thumb, index)=>{
+        thumb.addEventListener('click', () => {
+
+
+
+            thumbs.forEach((thumb) => {
+                thumb.classList.remove('active');
+            });
+
+
+            
+            thumb.classList.add('active');
+
+            let currentId = thumb.getAttribute("media-id");
+
+            prductSlider.slides.forEach((slide, index)=>{
+              let mediaId = slide.getAttribute("media-id");
+
+              if(currentId === mediaId){
+                {% comment %} prductSlider.slideTo(index); {% endcomment %}
+              }
+            });
+
+            let thumbAlt = thumb.querySelector("img").getAttribute("alt");
+            // if(thumbAlt.includes("landscape")){
+            //   active_index = 2;
+            // } else if(thumbAlt.includes("size")){
+            //   active_index = 3;
+            // }
+        });
+    });
+
+    const variantLables = document.querySelectorAll("product-info variant-selects fieldset label");
+
+    variantLables.forEach((label)=>{
+      label.addEventListener("click", ()=>{
+        console.log(variants);
+        setTimeout(()=>{
+          let variantID = window.location.href.split("?variant=")[1];
+          let activeVariant = variants.find(variant => variant.id == variantID);
+
+          activeThumbs(activeVariant, thumbs, active_index);
+                  console.log("this is variant label" + activeVariant + thumbs + active_index);
+
+        }, 1000);
+      });
+    });
+
+    let intialVariant = `{{ product.selected_or_first_available_variant | json}}`;
+    activeThumbs(intialVariant, thumbs, active_index);
+}
+
+function activeThumbs(activeVariant, thumbs, active_index){
+  {% if product.options contains "Gas" %}
+      var option_set = 2;
+  {% else %}
+      var option_set = 1;
+  {% endif %}
+
+
+  let variantObj = typeof activeVariant === "string" ? JSON.parse(activeVariant) : activeVariant;
+  let handles = optionChecker(variantObj, option_set);
+  let current_index = 1;
+  let isFirst = true;
+  
+  thumbs.forEach((thumb)=>{
+    let thumbAlt = thumb.querySelector("img").getAttribute("alt");
+    thumb.style.display = "none";
+    if(handles.some((option) => option === thumbAlt)){
+      thumb.style.display = "block";
+      // if(current_index == active_index){
+      //   current_index = 1;
+      //   thumb.click();
+      // } else {
+      //   current_index += 1;
+      // }
+      if(isFirst){
+        thumb.click();
+        thumb.classList.add('active');
+        isFirst = false;
+      }
+    }
+  });
+}
+
+function optionChecker( options, option_set){
+
+  if(option_set == 1){
+    let sizeOption = options.option1.toLowerCase().split(" ").join("-");
+    let finishOption = options.option2.toLowerCase().split(" ").join("-");
+    
+    let finishOpt = "finish-" + finishOption;
+    let landscapeOpt = "landscape-" + finishOption;
+    let sizeOpt = "size-" + sizeOption + "-" + finishOption;
+    
+    let handles = [finishOpt, landscapeOpt, sizeOpt];
+    return handles; 
+  } else if (option_set == 2){
+    let gasOption = options.option1.toLowerCase().split(" ").join("-");
+    let sizeOption = options.option2.toLowerCase().split(" ").join("-");
+    let colorOption = options.option3.toLowerCase().split(" ").join("-");
+    
+    let gasOpt = "gas-" + gasOption;
+    let landscapeOpt = "landscape-" + gasOption;
+    let sizeOpt = "size-" + sizeOption + "-" + colorOption + "-" + gasOption;
+    let colorOpt = "wood-" + colorOption + "-" + gasOption;
+    
+    // let sizeOpt = "cutout-size-" + sizeOption + "-" + gasOption;
+    // let colorOpt = "cutout-color-" + colorOption + "-" + gasOption;
+    
+    let handles = [gasOpt, landscapeOpt, sizeOpt, colorOpt];
+
+    console.log(handles);
+    
+    return handles;
+  }
+}
+
+
+
+
+/**
+ * Returns an array of objects containing the .thumb elements
+ * with display: block inline style and their indexes.
+
+
+
+ */
+ document.addEventListener('DOMContentLoaded', function() {
+
+// Only run this code when the site is live (not on Shopify preview or localhost)
+
+
+{% comment %} const variantLabels = document.querySelectorAll(".product-form__input--pill");
+
+
+
+variantLabels.forEach((label) => {
+
+  label.addEventListener("click", (activeIndex) => {
+    console.log("Variant label clicked, updating active thumb index..."+ activeIndex);
+   
+   
+  });
+
+
+}); {% endcomment %}
+ 
+});
+</script>
+

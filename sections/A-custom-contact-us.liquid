@@ -1,0 +1,532 @@
+{{ 'lta-sections-custom-contact-form.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lta-sections-custom-contact-us.js' | asset_url }}" defer></script>
+
+{% style %}
+	#shopify-section-{{ section.id }} {
+	  --page-width: {% if section.settings.show_full_width %}100%{% else %}{{ section.settings.page_width }}px{% endif %};
+	  --l-text-color: {{ section.settings.text_color }};
+	  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  #shopify-section-{{ section.id }} {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+.l-ccf__buttons > .button {
+  overflow: hidden;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
+}
+.l-ccf__buttons > .button:hover {
+  color: white;
+  outline: none;
+}
+.l-ccf__buttons > .button img {
+  transition: all 0.3s;
+}
+.l-ccf__buttons > .button:hover img {
+  filter: brightness(0) invert(1);
+}
+.l-ccf__buttons > .button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background: black;
+  z-index: -1;
+  transition: all 0.3s;
+}
+.l-ccf__buttons > .button:hover:before {
+  width: 100%;
+  left: 0;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1280px) {
+  .l-ccf__buttons > .button {
+    gap: 6px !important;
+    padding: 10px 10px !important;
+    font-size: 11px !important;
+  }
+}
+{% endstyle %}
+
+<div class="page-width">
+	<lta-custom-contact-us class="l-ccf">
+		{%- form 'contact', id: 'ContactForm', class: 'l-ccf__form' -%}
+			{%- if section.settings.heading != blank -%}
+				<h2 class="l-ccf__heading">{{ section.settings.heading }}</h2>
+			{%- endif -%}
+
+			{%- if form.posted_successfully? -%}
+				<span class="form-status form-status-list form__message l-ccf__status" tabindex="-1" autofocus>
+					{% render 'icon-success' %}
+					{{ 'templates.contact.form.post_success' | t }}
+				</span>
+			{%- elsif form.errors -%}
+				<div class="form__message l-ccf__status">
+					<span class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+						{% render 'icon-error' %}
+						{{ 'templates.contact.form.error_heading' | t }}
+					</span>
+				</div>
+			{%- endif -%}
+
+			<div class="l-ccf__fields">
+				{% comment %}
+					------------------------------------------------------------
+					FIRST NAME - LAST NAME - POSITION - ROLE
+					------------------------------------------------------------
+				{% endcomment %}
+				<div class="l-ccf__field-row{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+					<div class="l-ccf__field l-ccf__field--1-3">
+						<label class="l-ccf__field-label" for="ContactFormFirstName">{{ 'templates.contact.form.name' | t }}</label>
+						<input
+							class="l-ccf__field-input field__input"
+							type="text"
+							id="ContactFormFirstName"
+							name="contact[{{ 'templates.contact.fields.first_name' | t }}]"
+							value="{% if form.first_name %}{{ form.first_name }}{% elsif customer %}{{ customer.first_name }}{% endif %}"
+							placeholder="{{ 'templates.contact.fields.first_name' | t }}"
+							required
+						>
+					</div>
+					<div class="l-ccf__field l-ccf__field--1-3">
+						<label class="l-ccf__field-label medium-hide large-up-hide" for="ContactFormLastName">
+							{{- 'templates.contact.fields.last_name' | t -}}
+						</label>
+						<input
+							class="l-ccf__field-input field__input"
+							type="text"
+							id="ContactFormLastName"
+							name="contact[{{ 'templates.contact.fields.last_name' | t }}]"
+							value="{% if form.name %}{{ form.last_name }}{% elsif customer %}{{ customer.last_name }}{% endif %}"
+							placeholder="{{ 'templates.contact.fields.last_name' | t }}"
+							required
+						>
+					</div>
+					<div class="l-ccf__field l-ccf__field--1-3">
+						<label class="l-ccf__field-label" for="ContactForPositionRole">
+							{{- 'templates.contact.fields.position_role' | t -}}
+						</label>
+						<div class="l-ccf__field-select">
+							<select
+								class="select__select"
+								type="text"
+								id="ContactForPositionRole"
+								name="contact[{{ 'templates.contact.fields.inquire_for' | t }}]"
+							>
+								{%- assign positions = section.settings.positions | newline_to_br | strip_newlines | split: '<br />' -%}
+								{%- for option in positions -%}
+									<option
+										value="{{ option | escape }}"
+										{% if forloop.first %}
+											disabled
+											selected
+										{% endif %}
+									>
+										{{ option }}
+									</option>
+								{%- endfor -%}
+							</select>
+							{% render 'icon-chevron-down' %}
+						</div>
+					</div>
+				</div>
+
+				{% comment %}
+					------------------------------------------------------------
+					INQUIRING FOR - INSTALLATION TIMELINE
+					------------------------------------------------------------
+				{% endcomment %}
+				<div class="l-ccf__field-row{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+					<div class="l-ccf__field l-ccf__field--1-2">
+						<label class="l-ccf__field-label" for="ContactFormInquiringFor">
+							{{- 'templates.contact.fields.inquire_for' | t -}}
+						</label>
+						<div class="l-ccf__field-select">
+							<select
+								data-inquire-for
+								class="select__select"
+								type="text"
+								id="ContactFormInquiringFor"
+								name="contact[{{ 'templates.contact.fields.inquire_for' | t }}]"
+							>
+								{%- assign inquire_for_options = section.settings.inquiring_for
+									| newline_to_br
+									| strip_newlines
+									| split: '<br />'
+								-%}
+								{%- for option in inquire_for_options -%}
+									<option
+										value="{{ option | escape }}"
+										{% if forloop.first %}
+											disabled
+											selected
+										{% endif %}
+									>
+										{{ option }}
+									</option>
+								{%- endfor -%}
+							</select>
+							{% render 'icon-chevron-down' %}
+						</div>
+					</div>
+					<div class="l-ccf__field l-ccf__field--1-2">
+						<label class="l-ccf__field-label" for="ContactFormTimeline">
+							{{- 'templates.contact.fields.installation_timeline' | t -}}
+						</label>
+						{% comment %}
+							<select
+								class="l-ccf__field-select select__select"
+								type="text"
+								id="ContactFormTimeline"
+								name="contact[{{ 'templates.contact.fields.installation_timeline' | t }}]"
+							>
+								<option value="volvo">1 month</option>
+								<option value="saab">2 month</option>
+								<option value="mercedes">3 month</option>
+								<option value="audi">4 month</option>
+							</select>
+						{% endcomment %}
+						<input
+							class="l-ccf__field-input field__input"
+							type="date"
+							id="ContactFormTimeline"
+							name="contact[{{ 'templates.contact.fields.installation_timeline' | t }}]"
+							required
+						>
+					</div>
+				</div>
+
+				{% comment %}
+					------------------------------------------------------------
+					SOCIALS - COMPANY - COUNTRY
+					------------------------------------------------------------
+				{% endcomment %}
+				<div class="l-ccf__field-row{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+					<div class="l-ccf__field l-ccf__field--1-3">
+						<label class="l-ccf__field-label" for="ContactFormSocialAboutUs">
+							{{- 'templates.contact.fields.socials' | t -}}
+						</label>
+						<div class="l-ccf__field-select">
+							<select
+								class="l-ccf__field-select select__select"
+								type="text"
+								id="ContactFormSocialAboutUs"
+								name="contact[{{ 'templates.contact.fields.socials' | t }}]"
+							>
+								{%- assign socials_options = section.settings.about_us
+									| newline_to_br
+									| strip_newlines
+									| split: '<br />'
+								-%}
+								{%- for option in socials_options -%}
+									<option
+										value="{{ option | escape }}"
+										{% if forloop.first %}
+											disabled
+											selected
+										{% endif %}
+									>
+										{{ option }}
+									</option>
+								{%- endfor -%}
+							</select>
+							{% render 'icon-chevron-down' %}
+						</div>
+					</div>
+					<div class="l-ccf__field l-ccf__field--1-3">
+						<label class="l-ccf__field-label" for="ContactFormCompany">
+							{{- 'templates.contact.fields.company' | t -}}
+						</label>
+						<input
+							data-company
+							class="l-ccf__field-input field__input"
+							type="text"
+							id="ContactFormCompany"
+							name="contact[{{ 'templates.contact.fields.company' | t }}]"
+							placeholder="{{ 'templates.contact.fields.company' | t }}"
+							{% if form.company %}
+								value="{{ form.company }}"
+							{% endif %}
+						>
+					</div>
+					<div class="l-ccf__field l-ccf__field--1-3">
+						<label class="l-ccf__field-label" for="ContactFormCountry_{{ section.id }}">
+							{{- 'templates.contact.fields.country' | t -}}
+						</label>
+						<div class="l-ccf__field-select">
+							<select
+								class="l-ccf__field-select select__select"
+								type="text"
+								id="ContactFormCountry_{{ section.id }}"
+								name="contact[{{ 'templates.contact.fields.country' | t }}]"
+								data-country-select
+								data-default="{{ form.country }}"
+								data-form-id="{{ section.id }}"
+							>
+								{% comment %} {{ all_country_option_tags }} {% endcomment %}
+								{{ country_option_tags | replace: '---', 'Select' }}
+							</select>
+							{% render 'icon-chevron-down' %}
+						</div>
+					</div>
+				</div>
+
+				{% comment %}
+					------------------------------------------------------------
+					ADDRESSES
+					------------------------------------------------------------
+				{% endcomment %}
+				<div class="l-ccf__field-row{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+					<div class="l-ccf__field l-ccf__field--1-2">
+						<label class="l-ccf__field-label" for="ContactFormAddress">
+							{{- 'templates.contact.fields.address' | t -}}
+						</label>
+						<input
+							class="l-ccf__field-input field__input"
+							type="text"
+							id="ContactFormAddress"
+							name="contact[{{ 'templates.contact.fields.address' | t }}]"
+							value="{% if form.address1 %}{{ form.address1 }}{% elsif customer %}{{ customer.default_address.address1 }}{% endif %}"
+							placeholder="{{ 'templates.contact.fields.address' | t }}"
+							required
+						>
+					</div>
+					<div
+						class="l-ccf__field l-ccf__field--1-6 l-ccf__field--state-select"
+						id="ContactFormProvinceContainer_{{ section.id }}"
+						style="display:none;"
+					>
+						<div class="l-ccf__field-select">
+							<select
+								class="l-ccf__field-select select__select"
+								id="ContactFormProvince_{{ section.id }}"
+								name="contact[{{ 'templates.contact.fields.state' | t }}]"
+								data-default="{{ form.province }}"
+								autocomplete="address-level1"
+							></select>
+							{% render 'icon-chevron-down' %}
+						</div>
+					</div>
+					<div class="l-ccf__field l-ccf__field--1-6  l-ccf__field--state-input">
+						<input
+							class="l-ccf__field-input field__input"
+							type="text"
+							id="ContactFormState"
+							name="contact[{{ 'templates.contact.fields.state' | t }}]"
+							placeholder="{{ 'templates.contact.fields.state' | t }}"
+						>
+					</div>
+					<div class="l-ccf__field l-ccf__field--1-6">
+						<input
+							class="l-ccf__field-input field__input"
+							type="text"
+							id="ContactFormCity"
+							name="contact[{{ 'templates.contact.fields.city' | t }}]"
+							placeholder="{{ 'templates.contact.fields.city' | t }}"
+							required
+						>
+					</div>
+					<div class="l-ccf__field l-ccf__field--1-6">
+						<input
+							class="l-ccf__field-input field__input"
+							type="text"
+							id="ContactFormZip"
+							name="contact[{{ 'templates.contact.fields.zip' | t }}]"
+							placeholder="{{ 'templates.contact.fields.zip' | t }}"
+							required
+						>
+					</div>
+				</div>
+
+				{% comment %}
+					------------------------------------------------------------
+					EMAIL - PHONE - BODY
+					------------------------------------------------------------
+				{% endcomment %}
+				<div class="l-ccf__field-row l-ccf__field-row--start{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+					<div class="l-ccf__field l-ccf__field--1-2">
+						<label class="l-ccf__field-label" for="ContactForm-email">
+							{{- 'templates.contact.fields.email' | t }}
+						</label>
+						<input
+							autocomplete="email"
+							type="email"
+							id="ContactForm-email"
+							class="l-ccf__field-input field__input"
+							name="contact[email]"
+							spellcheck="false"
+							autocapitalize="off"
+							value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+							aria-required="true"
+							{% if form.errors contains 'email' %}
+								aria-invalid="true"
+								aria-describedby="ContactForm-email-error"
+							{% endif %}
+							placeholder="{{ 'templates.contact.fields.email' | t }}"
+							required
+						>
+						<label class="l-ccf__checkbox" for="ContactFormChatViaEmail">
+							<span class="l-ccf__checkbox-toggle">
+								<input type="checkbox" class="hidden" id="ContactFormChatViaEmail">
+							</span>
+							{{- 'templates.contact.fields.contact_via_email' | t }}
+						</label>
+					</div>
+					<div class="l-ccf__field l-ccf__field--1-2">
+						<label class="l-ccf__field-label" for="ContactForm-phone">
+							{{ 'templates.contact.fields.phone' | t }}
+						</label>
+						<input
+							type="tel"
+							id="ContactForm-phone"
+							class="l-ccf__field-input field__input"
+							autocomplete="tel"
+							name="contact[{{ 'templates.contact.fields.phone' | t }}]"
+							pattern="[0-9\-]*"
+							value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+							placeholder="{{ 'templates.contact.fields.phone' | t }}"
+						>
+						<label class="l-ccf__checkbox" for="ContactFormChatViaText">
+							<span class="l-ccf__checkbox-toggle">
+								<input type="checkbox" class="hidden" id="ContactFormChatViaText">
+							</span>
+							{{- 'templates.contact.fields.contact_via_phone' | t }}
+						</label>
+					</div>
+				</div>
+
+				<div class="l-ccf__field-row{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+					<label class="l-ccf__field-label" for="ContactForm-body">
+						{{- 'templates.contact.fields.message' | t -}}
+					</label>
+					<textarea
+						rows="10"
+						id="ContactForm-body"
+						class="l-ccf__field-textarea field__input text-area"
+						name="contact[{{ 'templates.contact.fields.message' | t }}]"
+						placeholder="{{ 'templates.contact.fields.message_placeholder' | t }}"
+						rows="4"
+						cols="50"
+					>
+        {{- form.body -}}
+        </textarea>
+				</div>
+			</div>
+
+			<div class="l-ccf__buttons">
+				<button type="submit" class="button">
+					{{ 'templates.contact.fields.submit_label' | t }}
+				</button>
+			</div>
+		{%- endform -%}
+	</lta-custom-contact-us>
+</div>
+
+{% schema %}
+{
+	"name": "LTA - Custom contact us",
+	"tag": "section",
+	"class": "section",
+	"disabled_on": {
+		"groups": ["header", "footer"]
+	},
+	"settings": [
+		{
+			"type": "header",
+			"content": "Layout"
+		},
+		{
+			"type": "range",
+			"id": "page_width",
+			"min": 600,
+			"max": 1600,
+			"step": 100,
+			"default": 1200,
+			"unit": "px",
+			"label": "t:settings_schema.layout.settings.page_width.label"
+		},
+		{
+			"type": "checkbox",
+			"id": "show_full_width",
+			"label": "Show full width",
+			"default": false
+		},
+		{
+			"type": "header",
+			"content": "Header"
+		},
+		{
+			"type": "inline_richtext",
+			"id": "heading",
+			"default": "Contact form",
+			"label": "Heading"
+		},
+		{
+			"type": "header",
+			"content": "Form options"
+		},
+		{
+			"type": "textarea",
+			"id": "positions",
+			"label": "Positions"
+		},
+		{
+			"type": "textarea",
+			"id": "inquiring_for",
+			"label": "Inquiring for"
+		},
+		{
+			"type": "textarea",
+			"id": "about_us",
+			"label": "About us"
+		},
+		{
+			"type": "header",
+			"content": "Colors"
+		},
+		{
+			"type": "color",
+			"id": "text_color",
+			"label": "Color",
+			"default": "#A8A8A8"
+		},
+		{
+			"type": "header",
+			"content": "t:sections.all.padding.section_padding_heading"
+		},
+		{
+			"type": "range",
+			"id": "padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_top",
+			"default": 36
+		},
+		{
+			"type": "range",
+			"id": "padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_bottom",
+			"default": 36
+		}
+	],
+	"presets": [
+		{
+			"name": "LTA - Custom contact us"
+		}
+	]
+}
+{% endschema %}

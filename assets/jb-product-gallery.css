@@ -1,0 +1,128 @@
+.imgbox_full,
+.imgbox {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.imgbox_full img,
+.imgbox img {
+  width: 100%;
+  height: auto;
+}
+
+.imgbox_full {
+  height: 100%;
+}
+.imgbox_full img {
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+* {
+  cursor: default;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #fff;
+  color: #000;
+  position: static;
+  scroll-behavior: smooth;
+}
+
+select,
+input,
+button:focus {
+  outline: none;
+}
+
+ul:not(.rte ul, .rte ol),
+ol:not(.rte ul, .rte ol) {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  cursor: pointer;
+}
+a:not(.rte a),
+a[href=""],
+a[href="#"] {
+  text-decoration: none;
+  color: #000;
+}
+a[href=""],
+a[href="#"] {
+  cursor: default;
+}
+
+a:hover:not(.rte a:hover),
+a:hover[href=""],
+a:hover[href="#"] {
+  text-decoration: none;
+  color: #000;
+}
+
+/* custom css start */
+.product_swiper_wrapper .main_swiper {
+  margin-bottom: 30px;
+}
+.product_swiper_wrapper .thumbnails {
+  width: 100%;
+  max-width: 572px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  row-gap: 16px;
+  margin: 0 auto;
+}
+
+.product_swiper_wrapper .main_swiper .swiper-slide .imgbox_full {
+  aspect-ratio: 4/3;
+  background-color: #ffffff;
+}
+.product_swiper_wrapper .thumbnails .thumb {
+  width: calc(33.3333333333% - 10.66px);
+  aspect-ratio: 180/120;
+  display: none;
+}
+.product_swiper_wrapper .thumbnails .thumb .imgbox_full {
+  border: 2px solid transparent;
+  border-radius: 10px;
+}
+.product_swiper_wrapper .thumbnails .thumb.active .imgbox_full {
+  border: 2px solid #000;
+}
+
+
+.product {
+    margin: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+@media screen and (min-width: 990px) {
+    .product--medium:not(.product--no-media) .product__info-wrapper, .product--small:not(.product--no-media) .product__media-wrapper {
+        max-width: 35%;
+        width: calc(45% - var(--grid-desktop-horizontal-spacing) / 2);
+    }
+}
+@media screen and (min-width: 990px) {
+    .product--medium:not(.product--no-media) .product__media-wrapper, .product--small:not(.product--no-media) .product__info-wrapper {
+        max-width: 65%;
+        width: calc(65% - var(--grid-desktop-horizontal-spacing) / 2);
+    }
+}
+/* custom css end */
+@media screen and (max-width: 990px) {
+
+
+.product_swiper_wrapper .thumbnails .thumb {
+  width: calc(32.3333333333% - 10.66px);
+  aspect-ratio: 180/120;
+  display: none;
+}
+}

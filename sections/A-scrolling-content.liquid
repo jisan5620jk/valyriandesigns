@@ -1,0 +1,322 @@
+{{ 'lta-sections-scrolling-content.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	.section-{{ section.id }}-padding {
+	  --l-duration: {{- section.settings.duration -}}s;
+	  --l-scrolling-banner-gap: {{ section.settings.gap }}px;
+	  --l-scrolling-radius: {{ section.settings.radius }}rem;
+	  {%- if section.settings.direction == 'rtl' -%}
+	  --l-direction: normal;
+	  {%- else -%}
+	  --l-direction: reverse;
+	  {%- endif -%}
+	  background-color: {{ section.settings.background_color }};
+	  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+<div
+	class="l-scrolling l-scrolling--pausable section-{{ section.id }}-padding {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+	role="marquee"
+	{% if settings.animations_reveal_on_scroll %}
+		data-cascade
+	{% endif %}
+>
+	<div class="l-scrolling__container">
+		{%- for index in (1..section.settings.loop) -%}
+			<div class="l-scrolling__list">
+				{%- for block in section.blocks -%}
+					{% liquid
+						assign image = block.settings.image
+						assign icon_width = block.settings.icon_width
+						assign heading = block.settings.heading
+						assign button_label = block.settings.button_label
+						assign button_link = block.settings.button_link
+
+						assign sizes = icon_width | append: 'px'
+						assign icon_height = icon_width | divided_by: image.aspect_ratio
+					%}
+					{% capture block_styles %}
+            --l-heading-color: {{ block.settings.heading_color }};
+            --color-button: {{ block.settings.button_bg.red }}, {{ block.settings.button_bg.green }}, {{ block.settings.button_bg.blue }};
+            --color-button-text: {{ block.settings.button_text.red }}, {{ block.settings.button_text.green }}, {{ block.settings.button_text.blue }};
+          {% endcapture %}
+					<div
+						class="l-scrolling__item color-{{ section.settings.scheme }}"
+						style="{{ block_styles }}"
+					>
+						{%- if image != blank -%}
+							<div class="l-scrolling__item-image" style="--l-max-width: {{ icon_width }}px;">
+								{{-
+									image
+									| image_url: width: icon_width
+									| image_tag: loading: 'lazy', alt: image.alt, sizes: sizes, width: icon_width, height: icon_height
+								-}}
+							</div>
+						{%- endif -%}
+
+						{%- if heading != blank -%}
+							<span class="l-scrolling__item-heading inline-richtext {{ block.settings.heading_size }}">
+								{{- heading -}}
+							</span>
+						{%- endif -%}
+
+						{%- if button_label != blank -%}
+							<a
+								class="l-scrolling__item-button button button--primary"
+								{% if button_link == blank %}
+									role="link" aria-disabled="true"
+								{% else %}
+									href="{{ button_link }}"
+								{% endif %}
+							>
+								{{ button_label | escape }}
+							</a>
+						{%- endif -%}
+					</div>
+				{%- endfor -%}
+			</div>
+		{%- endfor -%}
+	</div>
+</div>
+
+{% schema %}
+{
+	"name": "LTA - Scrolling content",
+	"class": "section",
+	"disabled_on": {
+		"groups": ["header", "footer"]
+	},
+	"settings": [
+		{
+			"type": "range",
+			"id": "gap",
+			"label": "Maximum space between blocks",
+			"min": 20,
+			"max": 80,
+			"step": 2,
+			"unit": "px",
+			"default": 30
+		},
+		{
+			"type": "range",
+			"id": "radius",
+			"label": "Button corners radius",
+			"min": 0,
+			"max": 10,
+			"step": 1,
+			"unit": "px",
+			"default": 2
+		},
+		{
+			"type": "range",
+			"id": "loop",
+			"label": "Loop",
+			"min": 1,
+			"max": 20,
+			"step": 1,
+			"unit": "x",
+			"default": 4
+		},
+		{
+			"type": "range",
+			"id": "duration",
+			"label": "Duration",
+			"min": 10,
+			"max": 40,
+			"step": 1,
+			"unit": "s",
+			"default": 24
+		},
+		{
+			"type": "select",
+			"id": "direction",
+			"label": "Direction",
+			"default": "rtl",
+			"options": [
+				{
+					"value": "rtl",
+					"label": "Right to left"
+				},
+				{
+					"value": "ltr",
+					"label": "Left to right"
+				}
+			]
+		},
+		{
+			"type": "header",
+			"content": "Colors"
+		},
+		{
+			"type": "color",
+			"id": "background_color",
+			"label": "Background Color",
+			"default": "#fff"
+		},
+		{
+			"type": "header",
+			"content": "t:sections.all.padding.section_padding_heading"
+		},
+		{
+			"type": "range",
+			"id": "padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_top",
+			"default": 36
+		},
+		{
+			"type": "range",
+			"id": "padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_bottom",
+			"default": 36
+		}
+	],
+	"blocks": [
+		{
+			"type": "scrolling",
+			"name": "Scrolling item",
+			"settings": [
+				{
+					"type": "header",
+					"content": "Icon"
+				},
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "Icon"
+				},
+				{
+					"type": "range",
+					"id": "icon_width",
+					"label": "Icon Width",
+					"min": 40,
+					"max": 200,
+					"step": 4,
+					"unit": "px",
+					"default": 60
+				},
+				{
+					"type": "header",
+					"content": "Heading"
+				},
+				{
+					"type": "inline_richtext",
+					"id": "heading",
+					"default": "Scrolling content",
+					"label": "Text"
+				},
+				{
+					"type": "select",
+					"id": "heading_size",
+					"options": [
+						{
+							"value": "h6",
+							"label": "H6"
+						},
+						{
+							"value": "h5",
+							"label": "H5"
+						},
+						{
+							"value": "h4",
+							"label": "H4"
+						},
+						{
+							"value": "h3",
+							"label": "H3"
+						}
+					],
+					"default": "h5",
+					"label": "t:sections.all.heading_size.label"
+				},
+				{
+					"type": "color",
+					"id": "heading_color",
+					"label": "Heading",
+					"default": "#000"
+				},
+				{
+					"type": "header",
+					"content": "Button"
+				},
+				{
+					"type": "text",
+					"id": "button_label",
+					"default": "Button label",
+					"label": "Button label"
+				},
+				{
+					"type": "url",
+					"id": "button_link",
+					"label": "Button link"
+				},
+				{
+					"type": "color",
+					"id": "button_bg",
+					"label": "Button background",
+					"default": "#000"
+				},
+				{
+					"type": "color",
+					"id": "button_text",
+					"label": "Button text",
+					"default": "#fff"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "LTA - Scrolling content",
+			"blocks": [
+				{
+					"type": "scrolling"
+				},
+				{
+					"type": "scrolling"
+				},
+				{
+					"type": "scrolling"
+				},
+				{
+					"type": "scrolling"
+				},
+				{
+					"type": "scrolling"
+				},
+				{
+					"type": "scrolling"
+				},
+				{
+					"type": "scrolling"
+				},
+				{
+					"type": "scrolling"
+				},
+				{
+					"type": "scrolling"
+				},
+				{
+					"type": "scrolling"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

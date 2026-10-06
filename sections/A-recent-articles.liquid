@@ -1,0 +1,228 @@
+{{ 'lta-sections-recent-articles.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lta-sections-recent-articles.js' |  asset_url }}" defer="defer"></script>
+
+{% style %}
+	#shopify-section-{{ section.id }} {
+	  background-color: {{ section.settings.background_color }};
+	  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  #shopify-section-{{ section.id }} {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+	
+.l-recent-articles__content .button {
+  overflow: hidden;
+  transition: all 0.3s;
+  position: relative;
+  z-index: 1;
+}
+.l-recent-articles__content .button:hover {
+  color: white;
+}
+.l-recent-articles__content .button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background: black;
+  z-index: -1;
+  transition: all 0.3s;
+}
+.l-recent-articles__content .button:hover:before {
+  width: 100%;
+  left: 0;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1279px) {
+	.l-product-card__button {
+		gap: 6px !important;
+		padding: 10px 10px !important;
+		font-size: 11px !important;
+	}
+	.l-recent-articles__content .button svg.icon.icon-arrow-right {
+		width: 18px !important;
+	}
+}
+
+@media screen and (max-width: 575px) {
+	.l-recent-articles__content .button {
+		gap: 5px;
+		padding: 10px 10px;
+		font-size: 11px;
+	}
+	.l-recent-articles__content .button svg {
+		width: 14px;
+	}
+}
+
+{% endstyle %}
+
+{%- if section.settings.blog.articles_count > 0 -%}
+	<l-recent-articles
+		class="l-recent-articles"
+		id="{{ section.id }}"
+		data-section-id="{{ section.id }}"
+	>
+		<div class="section-{{ section.id }}-padding page-width">
+			{%- if section.settings.title != blank -%}
+				<div class="l-recent-articles__header">
+					{%- if section.settings.title != blank -%}
+						<h2
+							class="l-recent-articles__heading rich-text__heading rte inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+							{% if settings.animations_reveal_on_scroll %}
+								data-cascade
+								style="--animation-order: 1;"
+							{% endif %}
+						>
+							{{ section.settings.title }}
+						</h2>
+						<div class="l-recent-articles__nav flex items-center">
+							<button
+								class="l-recent-articles__nav-btn l-recent-articles__nav-btn--prev l-button--reset flex items-center justify-center small-hide"
+								id="NavigationPrev-{{ section.id }}"
+								disabled
+							>
+								<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M41.1665 26H10.8332" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M23.8335 39L10.8335 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M23.8335 13L10.8335 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</button>
+							<button
+								class="l-recent-articles__nav-btn l-recent-articles__nav-btn--next l-button--reset flex items-center justify-center small-hide"
+								id="NavigationNext-{{ section.id }}"
+								disabled
+							>
+								<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M10.8333 26H41.1666" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M28.1667 39L41.1667 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M28.1667 13L41.1667 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</button>
+						</div>
+					{%- endif -%}
+				</div>
+			{%- endif -%}
+
+			{%- assign global_article = article -%}
+
+			<div class="l-recent-articles__list l-flickity-reset js-carousel">
+				{%- for article in section.settings.blog.articles reversed limit: section.settings.limit_blog -%}
+					{%- if global_article.id != article.id -%}
+						<div
+							class="l-recent-articles__item"
+						>
+							{% assign article_image = article.metafields.custom.card_image.value | default: article.image %}
+							{%- if article_image != blank -%}
+								<div
+									class="l-recent-articles__media media media--hover-effect"
+									style="padding-bottom: 27.25%;"
+								>
+									{% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
+									<img
+										srcset="
+											{%- if article_image.src.width >= 165 -%}{{ article_image.src | image_url: width: 165 }} 165w,{%- endif -%}
+											{%- if article_image.src.width >= 360 -%}{{ article_image.src | image_url: width: 360 }} 360w,{%- endif -%}
+											{%- if article_image.src.width >= 533 -%}{{ article_image.src | image_url: width: 533 }} 533w,{%- endif -%}
+											{%- if article_image.src.width >= 720 -%}{{ article_image.src | image_url: width: 720 }} 720w,{%- endif -%}
+											{%- if article_image.src.width >= 1000 -%}{{ article_image.src | image_url: width: 1000 }} 1000w,{%- endif -%}
+											{%- if article_image.src.width >= 1500 -%}{{ article_image.src | image_url: width: 1500 }} 1500w,{%- endif -%}
+											{{ article_image.src | image_url }} {{ article_image.src.width }}w
+										"
+										src="{{ article_image.src | image_url: width: 533 }}"
+										sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)"
+										alt="{{ article_image.src.alt | escape }}"
+										class="motion-reduce"
+										loading="lazy"
+										width="{{ article_image.width }}"
+										height="{{ article_image.height }}"
+									>
+									{% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
+								</div>
+							{%- endif -%}
+							<div class="l-recent-articles__content">
+								<span>{{ article.title }}</span>
+								<a href="{{ article.url }}" class="button l-button">
+									{{ section.settings.button_label }}
+									{% render 'icon-arrow-right' %}
+								</a>
+							</div>
+						</div>
+					{%- endif -%}
+				{%- endfor -%}
+			</div>
+		</div>
+	</l-recent-articles>
+{%- endif -%}
+
+{% schema %}
+{
+	"name": "LTA - Recent blog posts",
+	"settings": [
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title",
+			"default": "Our Recent Projects"
+		},
+		{
+			"type": "blog",
+			"id": "blog",
+			"label": "Blog"
+		},
+		{
+			"type": "range",
+			"id": "limit_blog",
+			"label": "Limit Blog",
+			"min": 4,
+			"max": 20,
+			"step": 1,
+			"unit": "p",
+			"default": 8
+		},
+		{
+			"type": "text",
+			"id": "button_label",
+			"label": "button_label",
+			"default": "View Project"
+		},
+		{
+			"type": "header",
+			"content": "t:sections.all.padding.section_padding_heading"
+		},
+		{
+			"type": "range",
+			"id": "padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_top",
+			"default": 36
+		},
+		{
+			"type": "range",
+			"id": "padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_bottom",
+			"default": 36
+		}
+	],
+	"blocks": [],
+	"presets": [
+		{
+			"name": "LTA - Recent blog posts"
+		}
+	]
+}
+{% endschema %}

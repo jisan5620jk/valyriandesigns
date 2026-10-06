@@ -1,0 +1,403 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "disabled": true,
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_breadcrumbs_qdGb3C": {
+      "type": "A-breadcrumbs",
+      "settings": {
+        "page_width": 1400,
+        "show_full_width": false,
+        "text_color": "#a8a8a8",
+        "padding_top": 32,
+        "padding_bottom": 4
+      }
+    },
+    "a_custom_content_PqqHjg": {
+      "type": "A-custom-content",
+      "blocks": {
+        "heading_8U6bnB": {
+          "type": "heading",
+          "settings": {
+            "heading": "OUR COLLECTION",
+            "liquid": "",
+            "heading_size": "h1",
+            "tag": "h1",
+            "text_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "text_XLm4eF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Experience the pinnacle of modern outdoor luxury with Valyrian Designs’ bespoke collection of Rain Curtain Fountains, Fire Features, and Privacy Screens. Each piece is a registered work of art, blending Feng Shui principles with innovative design and meticulous attention to detail.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 20
+          }
+        }
+      },
+      "block_order": [
+        "heading_8U6bnB",
+        "text_XLm4eF"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "background": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection_VNq7YC": {
+      "type": "featured-collection",
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.collection__title {text-align: center; }}"
+      ],
+      "settings": {
+        "title": "RAIN CURTAIN FOUNTAINS",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "rain-curtain-fountain-door",
+          "rain-curtain-fountain-l",
+          "rain-curtain-fountain-circle",
+          "barbecue-island"
+        ],
+        "products_to_show": 3,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 8
+      }
+    },
+    "featured_collection_86YCgC": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Reflection Pool  Fountains",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "reflection-pool-fountain",
+          "floor-circle-fountain",
+          "floor-square-fountain"
+        ],
+        "products_to_show": 6,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 24,
+        "padding_bottom": 36
+      }
+    },
+    "a_steps_RqXQAq": {
+      "type": "A-steps",
+      "blocks": {
+        "step_QVak4x": {
+          "type": "step",
+          "settings": {
+            "title": "STEP 1",
+            "description": "<p>Choose your model and specifications for yourself or client.</p>",
+            "image": "shopify://shop_images/Step-1.png"
+          }
+        },
+        "step_HnkyMj": {
+          "type": "step",
+          "settings": {
+            "title": "STEP 2",
+            "description": "<p>Your product arrives at your designated location to install.</p>",
+            "image": "shopify://shop_images/Step-2.png"
+          }
+        },
+        "step_afWybh": {
+          "type": "step",
+          "settings": {
+            "title": "STEP 3",
+            "description": "<p>Authenticate your product with us and tell us how you love it.</p>",
+            "image": "shopify://shop_images/AVD_1_933220d6-fe95-4a7b-99f6-cbeca4d8bbb0.png"
+          }
+        }
+      },
+      "block_order": [
+        "step_QVak4x",
+        "step_HnkyMj",
+        "step_afWybh"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "3 Easy Steps to Build Your Own",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_A8BdUK": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Modern Fire Feature",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "modern-fire-feature-copy",
+          "moderna-chiminea",
+          "outdoor-fire-feature"
+        ],
+        "products_to_show": 9,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_8EUwcC": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Modern Wall Fountains",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "modern-horizontal-wall-fountain",
+          "modern-vertical-wall-fountain",
+          "modern-wall-fountain"
+        ],
+        "products_to_show": 9,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_Ymg6mb": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Custom Products",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "custom-outdoor-doors",
+          "custom-outdoor-doors-copy",
+          "barbecue-island"
+        ],
+        "products_to_show": 9,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_VNq7Yg": {
+      "type": "featured-collection",
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.collection__title {text-align: center; }}",
+        ".l-product-card {--l-product-color: #fff;}"
+      ],
+      "settings": {
+        "title": "MODERN  PRIVACY SCREENS",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "palm-springs-outdoor-privacy-screen",
+          "mykonos-modern-outdoor-privacy-screen",
+          "capri-outdoor-privacy-screen"
+        ],
+        "products_to_show": 3,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "featured_collection_VNq7Y9": {
+      "type": "featured-collection",
+      "custom_css": [
+        "@media screen and (max-width: 749px) {.collection__title {text-align: center; }}",
+        ".l-product-card {--l-product-color: #fff;}"
+      ],
+      "settings": {
+        "title": "TRENDING PRODUCTS",
+        "heading_size": "h1",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "",
+        "products": [
+          "floor-circle-fountain",
+          "floor-square-fountain",
+          "outdoor-fire-feature"
+        ],
+        "products_to_show": 3,
+        "custom_tag": "",
+        "columns_desktop": 3,
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "product-grid",
+    "a_breadcrumbs_qdGb3C",
+    "a_custom_content_PqqHjg",
+    "featured_collection_VNq7YC",
+    "featured_collection_86YCgC",
+    "a_steps_RqXQAq",
+    "featured_collection_A8BdUK",
+    "featured_collection_8EUwcC",
+    "featured_collection_Ymg6mb",
+    "featured_collection_VNq7Yg",
+    "featured_collection_VNq7Y9"
+  ]
+}

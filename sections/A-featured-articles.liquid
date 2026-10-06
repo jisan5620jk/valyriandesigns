@@ -1,0 +1,232 @@
+{{ 'lta-sections-featured-articles.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+	#shopify-section-{{ section.id }} {
+	  --l-row-gap: {{ section.settings.row_gap }}px;
+	  --l-column-gap: {{ section.settings.column_gap }}px;
+	  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  #shopify-section-{{ section.id }} {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{%- liquid
+	assign fetch_priority = 'auto'
+	assign loading = 'lazy'
+
+	if section.index == 1
+		assign fetch_priority = 'high'
+		assign loading = 'eager'
+	endif
+-%}
+
+<div class="l-featured-articles gradient color-{{ section.settings.color_scheme }}">
+	<div class="page-width">
+		<div class="l-featured-articles__grid flex items-center flex-wrap">
+			{%- assign article_count = 0 -%}
+			{%- for current_article in section.settings.blog.articles -%}
+				{%- if current_article.id != article.id and article_count < 2 -%}
+					{%- assign article_count = article_count | plus: 1 -%}
+
+					<div
+						class="l-featured-articles__grid-item l-featured-articles__grid-item--{% if article_count == 1 %}2-3{% else %}1-3{% endif %} l-featured-articles-block-{{ forloop.index }}"
+					>
+						{%- assign article_image = current_article.metafields.custom.card_image.value
+							| default: current_article.image
+						-%}
+
+						{%- if article_image != blank -%}
+							<div
+								class="l-featured-articles__image relative"
+								{% if section.settings.image_height > 0 %}
+									style="padding-bottom: {{ section.settings.image_height }}px;"
+								{% else %}
+									style="padding-bottom: {{ 1 | divided_by: article_image.aspect_ratio | times: 100 }}%;"
+								{% endif %}
+							>
+								{%- assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840' -%}
+								{%- assign image_height = article_image.width | divided_by: article_image.aspect_ratio -%}
+								{% if article_count == 1 %}
+									{%- capture sizes -%}
+                    (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | times: 2 | divided_by: 3 }}px,
+                    (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2),
+                    100vw
+                  {%- endcapture -%}
+								{% else -%}
+									{%- capture sizes -%}
+                  (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 3 }}px,
+                  (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2),
+                  100vw
+                {%- endcapture -%}
+								{%- endif %}
+								{{
+									article_image
+									| image_url: width: 1500
+									| image_tag:
+										width: article_image.width,
+										height: image_height,
+										sizes: sizes,
+										widths: widths,
+										fetchpriority: fetch_priority,
+										loading: loading
+								}}
+								<div class="l-featured-articles__image-content">
+									<span class="l-featured-articles__image-title">{{ current_article.title }}</span>
+									{%- if current_article.excerpt != blank -%}
+										<span class="l-featured-articles__image-richtext">{{ current_article.excerpt }}</span>
+									{%- endif -%}
+									{%- if section.settings.button_label != blank -%}
+										<a
+											role="link"
+											href="{{ current_article.url }}"
+											class="button l-featured-articles__image-button"
+										>
+											{{ section.settings.button_label | escape }}
+											{% render 'icon-arrow-right' %}
+										</a>
+									{%- endif -%}
+								</div>
+							</div>
+						{%- else -%}
+							{{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg w-full' }}
+						{%- endif -%}
+					</div>
+				{%- endif -%}
+			{%- endfor -%}
+		</div>
+	</div>
+</div>
+
+{% schema %}
+{
+	"name": "LTA - Featured articles",
+	"class": "section",
+	"disabled_on": {
+		"groups": ["header", "footer"]
+	},
+	"settings": [
+		{
+			"type": "blog",
+			"id": "blog",
+			"label": "Blog"
+		},
+		{
+			"type": "number",
+			"id": "image_height",
+			"label": "Image Height",
+			"default": 345
+		},
+		{
+			"type": "text",
+			"id": "button_label",
+			"label": "Button Label",
+			"default": "View project"
+		},
+		{
+			"type": "color_scheme",
+			"id": "color_scheme",
+			"label": "t:sections.all.colors.label",
+			"default": "scheme-1"
+		},
+		{
+			"type": "header",
+			"content": "Gap"
+		},
+		{
+			"type": "range",
+			"id": "row_gap",
+			"min": 0,
+			"max": 32,
+			"step": 2,
+			"unit": "px",
+			"label": "Row gap",
+			"default": 30
+		},
+		{
+			"type": "range",
+			"id": "column_gap",
+			"min": 0,
+			"max": 32,
+			"step": 2,
+			"unit": "px",
+			"label": "Column gap",
+			"default": 30
+		},
+		{
+			"type": "header",
+			"content": "t:sections.all.padding.section_padding_heading"
+		},
+		{
+			"type": "range",
+			"id": "padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_top",
+			"default": 36
+		},
+		{
+			"type": "range",
+			"id": "padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_bottom",
+			"default": 36
+		}
+	],
+	"blocks": [
+		{
+			"name": "Blog",
+			"type": "blog",
+			"settings": [
+				{
+					"type": "select",
+					"id": "width",
+					"label": "Width",
+					"default": "1-2",
+					"options": [
+						{
+							"value": "1-3",
+							"label": "1 / 3"
+						},
+						{
+							"value": "2-3",
+							"label": "2 / 3"
+						},
+						{
+							"value": "1-2",
+							"label": "1 - 2"
+						}
+					]
+				},
+				{
+					"type": "image_picker",
+					"id": "image",
+					"label": "Image"
+				},
+
+				{
+					"type": "article",
+					"id": "article",
+					"label": "Article"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "LTA - Featured articles",
+			"blocks": []
+		}
+	]
+}
+{% endschema %}

@@ -1,0 +1,470 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "a_breadcrumbs_qdGb3C": {
+      "type": "A-breadcrumbs",
+      "settings": {
+        "page_width": 1400,
+        "show_full_width": false,
+        "text_color": "#a8a8a8",
+        "padding_top": 32,
+        "padding_bottom": 4
+      }
+    },
+    "a_custom_content_PqqHjg": {
+      "type": "A-custom-content",
+      "blocks": {
+        "heading_8U6bnB": {
+          "type": "heading",
+          "settings": {
+            "heading": "ABOUT US",
+            "liquid": "",
+            "heading_size": "h1",
+            "tag": "h1",
+            "text_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "text_XLm4eF": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Experience outdoor luxury with Valyrian Designs’ bespoke Rain Curtain Fountains, fire features, and privacy screens. Combining modern style, Feng Shui, innovative design, and premium craftsmanship, these registered works of art bring balance, tranquility, and sophistication to any outdoor space.</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 20
+          }
+        },
+        "buttons_xRMXV8": {
+          "type": "buttons",
+          "settings": {
+            "first_button_label": "Explore Our Collection",
+            "first_button_link": "shopify://collections/all",
+            "first_font_weight": "600",
+            "first_icon_position": "text_with_icon",
+            "first_icon": "shopify://shop_images/arrow-right.svg",
+            "first_icon_width": 24,
+            "first_button_border_radius": 12,
+            "first_button_border_width": 1,
+            "first_button_bg": "#ffffff",
+            "first_button_text": "#000000",
+            "first_button_border": "#000000",
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_font_weight": "600",
+            "second_icon_position": "icon_with_text",
+            "second_icon_width": 24,
+            "second_button_border_radius": 0,
+            "second_button_border_width": 1,
+            "second_button_bg": "#c40f0f",
+            "second_button_text": "#ffffff",
+            "second_button_border": "#c40f0f",
+            "full_width_mobile": false,
+            "buttons_gap": 12,
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "center",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        }
+      },
+      "block_order": [
+        "heading_8U6bnB",
+        "text_XLm4eF",
+        "buttons_xRMXV8"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "background": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
+    },
+    "a_image_banner_jrKjzd": {
+      "type": "A-image-banner",
+      "settings": {
+        "full_width": false,
+        "image": "shopify://shop_images/VIEW_1_1.webp",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "a_founder_LrQtEh": {
+      "type": "A-founder",
+      "blocks": {
+        "heading_Qpc38g": {
+          "type": "heading",
+          "settings": {
+            "heading": "From Inspiration To Relaxation",
+            "heading_size": "h2",
+            "text_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 20
+          }
+        },
+        "text_FtKBDM": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Over the years we’ve come to realize that exceptional products aren’t just created in a moment of inspiration - they’re meticulously crafted over time with patience, attention-to-detail and perseverance; bringing together the right mix of designs, craftspeople and quality materials to ensure that a refined design aesthetic is equally matched with durability and tranquility. </p><p>Our team of designers, craftspeople and artisans are extremely passionate and proud of what they do. We believe this passion and attention-to-detail shines through in each Valyrian Designs product we produce.</p>",
+            "text_style": "body",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 32
+          }
+        },
+        "text_BpWzef": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p><strong>We are dedicated to zen infused modern outdoor products being offered in a democratize way</strong></p>",
+            "text_style": "body",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 52
+          }
+        },
+        "buttons_JcRQcP": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "first_button_label": "Contact Us",
+            "first_button_link": "shopify://pages/contact",
+            "first_font_weight": "600",
+            "first_icon_position": "text_with_icon",
+            "first_icon": "shopify://shop_images/arrow-right.svg",
+            "first_icon_width": 24,
+            "first_button_border_radius": 8,
+            "first_button_border_width": 1,
+            "first_button_bg": "#d8eff9",
+            "first_button_text": "#121212",
+            "first_button_border": "#121212",
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_font_weight": "600",
+            "second_icon_position": "icon_with_text",
+            "second_icon_width": 24,
+            "second_button_border_radius": 0,
+            "second_button_border_width": 1,
+            "second_button_bg": "#c40f0f",
+            "second_button_text": "#ffffff",
+            "second_button_border": "#c40f0f",
+            "buttons_gap": 0,
+            "padding_top": 0,
+            "padding_bottom": 0
+          }
+        },
+        "chat_button_ftUQwb": {
+          "type": "chat_button",
+          "settings": {
+            "button_text": "LIVE CHAT"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Qpc38g",
+        "text_FtKBDM",
+        "text_BpWzef",
+        "buttons_JcRQcP",
+        "chat_button_ftUQwb"
+      ],
+      "settings": {
+        "page_width": 1400,
+        "show_full_width": false,
+        "spacing_grid_horizontal": 32,
+        "spacing_grid_vertical": 32,
+        "image": "shopify://shop_images/our-founder.png",
+        "enable_video_looping": false,
+        "video_autoplay": "none",
+        "video_url": "",
+        "description": "",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "background_color": "#ffffff",
+        "content_container_bg": "#d8eff9",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_founder_awgkKB": {
+      "type": "A-founder",
+      "blocks": {
+        "heading_TcYKVq": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talia Rones Co-founder ",
+            "heading_size": "h2",
+            "text_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 20
+          }
+        },
+        "text_Lc7Vet": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Over the years we’ve come to realize that exceptional products aren’t just created in a moment of inspiration - they’re meticulously crafted over time with patience, attention-to-detail and perseverance; bringing together the right mix of designs, craftspeople and quality materials to ensure that a refined design aesthetic is equally matched with durability and tranquility. </p><p>Our team of designers, craftspeople and artisans are extremely passionate and proud of what they do. We believe this passion and attention-to-detail shines through in each Valyrian Designs product we produce.</p>",
+            "text_style": "body",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 32
+          }
+        },
+        "text_8F7TPW": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p><strong>We are dedicated to zen infused modern outdoor products being offered in a democratize way</strong></p>",
+            "text_style": "body",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 52
+          }
+        },
+        "buttons_Qkqhdq": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "first_button_label": "Contact Us",
+            "first_button_link": "shopify://pages/contact",
+            "first_font_weight": "600",
+            "first_icon_position": "text_with_icon",
+            "first_icon": "shopify://shop_images/arrow-right.svg",
+            "first_icon_width": 24,
+            "first_button_border_radius": 8,
+            "first_button_border_width": 1,
+            "first_button_bg": "#d8eff9",
+            "first_button_text": "#121212",
+            "first_button_border": "#121212",
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_font_weight": "600",
+            "second_icon_position": "icon_with_text",
+            "second_icon_width": 24,
+            "second_button_border_radius": 0,
+            "second_button_border_width": 1,
+            "second_button_bg": "#c40f0f",
+            "second_button_text": "#ffffff",
+            "second_button_border": "#c40f0f",
+            "buttons_gap": 0,
+            "padding_top": 0,
+            "padding_bottom": 0
+          }
+        },
+        "chat_button_bjTQJG": {
+          "type": "chat_button",
+          "settings": {
+            "button_text": "LIVE CHAT"
+          }
+        }
+      },
+      "block_order": [
+        "heading_TcYKVq",
+        "text_Lc7Vet",
+        "text_8F7TPW",
+        "buttons_Qkqhdq",
+        "chat_button_bjTQJG"
+      ],
+      "settings": {
+        "page_width": 1400,
+        "show_full_width": false,
+        "spacing_grid_horizontal": 24,
+        "spacing_grid_vertical": 32,
+        "image": "shopify://shop_images/image_from_ios_720.jpg",
+        "enable_video_looping": false,
+        "video_autoplay": "none",
+        "video_url": "",
+        "description": "",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "background_color": "#ffffff",
+        "content_container_bg": "#d8eff9",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_our_mission_83BeWa": {
+      "type": "A-our-mission",
+      "blocks": {
+        "column_CJU7aG": {
+          "type": "column",
+          "settings": {
+            "title": "Our Mission",
+            "text": "<p>At Valyrian Designs, we believe in the power of water and fire to bring tranquility and balance to any environment.</p><p><br/>Our mission is to blend ancient techniques with modern design to create products that not only beautify spaces but also promote a sense of peace and well-being. We are committed to delivering exceptional quality and unmatched elegance in every piece we create.</p>",
+            "margin_checkbox": true,
+            "custom_richtext": "",
+            "link_label": "Explore Our Collection",
+            "link": "shopify://collections/all",
+            "card_background": "#d9eff9"
+          }
+        },
+        "column_A6A7XD": {
+          "type": "column",
+          "settings": {
+            "title": "Our Quality",
+            "text": "<p>Our commitment to using best-in-market materials and components gives us confidence that every Valyrian Designs product will impress and endure for many years.</p>",
+            "margin_checkbox": false,
+            "custom_richtext": "<p>Valyrian Designs takes pride in the artisans that have honed their craft hand forging each of our products into a Zen Infused product of Art.</p>",
+            "custom_image": "shopify://shop_images/AVD_1_933220d6-fe95-4a7b-99f6-cbeca4d8bbb0.png",
+            "link_label": "Explore Our Collection",
+            "link": "shopify://collections/all",
+            "card_background": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "column_CJU7aG",
+        "column_A6A7XD"
+      ],
+      "custom_css": [
+        ".l-our-mission .multicolumn-card__custom-content {margin: 0;}",
+        "@media screen and (min-width: 1300px) {.l-our-mission .multicolumn-card__custom-content-img {width: 179px; }}"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 2,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-645a1c89-a516-4f58-8574-14bfa069928d",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "multicolumn_LWEJLh": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_86q3Gd": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Rectangle_4574.png",
+            "title": "Craftsmanship",
+            "text": "<p>Every piece is handcrafted and authenticated with precision, ensuring the highest quality.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_w9H6Hy": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Tradition.png",
+            "title": "Tradition",
+            "text": "<p>We honor our heritage by incorporating centuries-old techniques into our modern designs.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_ti7TUJ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Innovation.png",
+            "title": "Innovation",
+            "text": "<p>Our designs are modern, blending seamlessly into various settings while maintaining their unique charm.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_xjYe4H": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/Tranquility.png",
+            "title": "Tranquility",
+            "text": "<p>We aim to create products that promote peace and relaxation, transforming any space into a serene sanctuary.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_86q3Gd",
+        "column_w9H6Hy",
+        "column_ti7TUJ",
+        "column_xjYe4H"
+      ],
+      "custom_css": [
+        "@media screen and (min-width: 750px) {.multicolumn-card__image-wrapper {margin-right: 0; margin-left: 0; } .multicolumn-card__info {padding: 30px 0 20px; } h3.inline-richtext {margin-bottom: 20px; font-size: 18px; font-weight: 600; } .rte {font-size: 18px; }}"
+      ],
+      "settings": {
+        "title": "Our Values",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "none",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "a_breadcrumbs_qdGb3C",
+    "a_custom_content_PqqHjg",
+    "a_image_banner_jrKjzd",
+    "a_founder_LrQtEh",
+    "a_founder_awgkKB",
+    "a_our_mission_83BeWa",
+    "multicolumn_LWEJLh"
+  ]
+}

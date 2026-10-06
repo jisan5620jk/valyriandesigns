@@ -1,0 +1,387 @@
+{% comment %}
+  jb-product-gallery-two.liquid
+  Swiper-based gallery. Used by: new-main-product-two.liquid (Barbecue Island, etc.)
+
+  Metaobject system (new):
+    product.metafields.custom.media_mappings → list of metaobject entries
+    Each entry: group_type (finish/landscape/size) + variant_value ("Oak, Natual gas") + image_position
+    Matching rule: ALL values in variant_value must be present in current variant.options
+
+  Alt-text fallback (old) — used when no metafield exists:
+    option_set 1 (Size + Finish):  finish-{finish}, landscape-{finish}, size-{size}-{finish}
+    option_set 2 (Gas + Size + Wood): gas-{gas}, landscape-{gas}, size-{size}-{wood}-{gas}, wood-{wood}-{gas}
+{% endcomment %}
+
+{%- liquid
+  assign current_variant  = product.selected_or_first_available_variant
+  assign media_mappings   = product.metafields.custom.media_mappings.value
+  assign using_metaobject = false
+
+  assign all_mapped_ids      = ''
+  assign finish_ids          = ''
+  assign landscape_ids       = ''
+  assign size_ids            = ''
+  assign media_config_entries = ''
+
+  if media_mappings != blank and media_mappings.size > 0
+    assign using_metaobject = true
+
+    for mapping in media_mappings
+      assign target_pos = mapping.media_position.value
+      if target_pos == blank
+        assign target_pos = mapping.image_position.value
+      endif
+
+      assign mapped_image = nil
+      for img in product.images
+        if forloop.index == target_pos
+          assign mapped_image = img
+          break
+        endif
+      endfor
+      if mapped_image == nil
+        continue
+      endif
+
+      assign group           = mapping.group_type.value | downcase | strip
+      assign variant_val_raw = mapping.variant_value.value
+      assign img_needle      = '|' | append: mapped_image.id
+
+      assign all_mapped_ids = all_mapped_ids | append: img_needle
+
+      if group == 'finish'
+        assign finish_ids = finish_ids | append: img_needle
+      elsif group == 'landscape'
+        assign landscape_ids = landscape_ids | append: img_needle
+      elsif group == 'size'
+        assign size_ids = size_ids | append: img_needle
+      endif
+
+      # Build flat MediaConfig JSON entry
+      assign required_values = variant_val_raw | split: ', '
+      assign values_json = '['
+      for rv in required_values
+        unless forloop.first
+          assign values_json = values_json | append: ','
+        endunless
+        assign values_json = values_json | append: '"' | append: rv | append: '"'
+      endfor
+      assign values_json = values_json | append: ']'
+
+      assign config_entry = '{"g":"' | append: group | append: '","v":' | append: values_json | append: ',"id":' | append: mapped_image.id | append: '}'
+      unless media_config_entries == ''
+        assign media_config_entries = media_config_entries | append: ','
+      endunless
+      assign media_config_entries = media_config_entries | append: config_entry
+    endfor
+  endif
+
+  assign media_config_json = '[' | append: media_config_entries | append: ']'
+-%}
+
+{{- 'jb-product-gallery.css' | asset_url | stylesheet_tag -}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script type="application/json" id="JbMediaConfig-{{ product.id }}-{{ section.id }}">
+  {{ media_config_json }}
+</script>
+
+<div class="product_swiper_wrapper" data-product-id="{{ product.id }}" data-section-id="{{ section.id }}">
+
+  {{- '<!-- ── MAIN SWIPER ── -->' -}}
+  <div class="swiper main_swiper">
+    <div class="swiper-wrapper">
+      {% if using_metaobject %}
+        {% for image in product.images %}
+          {%- assign img_needle = '|' | append: image.id -%}
+          {% if all_mapped_ids contains img_needle %}
+            <div class="swiper-slide" data-media-id="{{ image.id }}">
+              <div class="imgbox_full">
+                <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy">
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% for image in product.images %}
+          {% if image.alt contains 'finish' or image.alt contains 'wood' or image.alt contains 'size' or image.alt contains 'landscape' or image.alt contains 'gas' %}
+            <div class="swiper-slide" data-media-id="{{ image.id }}">
+              <div class="imgbox_full">
+                <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy">
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  {{- '<!-- ── THUMBNAILS ── -->' -}}
+  <ul class="thumbnails">
+    {% if using_metaobject %}
+
+      {% comment %} Metaobject: render thumbs grouped finish → landscape → size {% endcomment %}
+      {% for image in product.images %}
+        {%- assign img_needle = '|' | append: image.id -%}
+        {% if finish_ids contains img_needle %}
+          <li class="thumb finish" data-media-id="{{ image.id }}">
+            <div class="imgbox_full"><img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy"></div>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% for image in product.images %}
+        {%- assign img_needle = '|' | append: image.id -%}
+        {% if landscape_ids contains img_needle %}
+          <li class="thumb landscape" data-media-id="{{ image.id }}">
+            <div class="imgbox_full"><img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy"></div>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% for image in product.images %}
+        {%- assign img_needle = '|' | append: image.id -%}
+        {% if size_ids contains img_needle %}
+          <li class="thumb size" data-media-id="{{ image.id }}">
+            <div class="imgbox_full"><img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy"></div>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+    {% else %}
+
+      {% comment %} Alt-text fallback: original order and class names {% endcomment %}
+      {% for image in product.images %}
+        {% if image.alt contains 'wood-' %}
+          <li class="thumb wood" data-media-id="{{ image.id }}" data-alt="{{ image.alt }}">
+            <div class="imgbox_full"><img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy"></div>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% for image in product.images %}
+        {% if image.alt contains 'gas-' %}
+          <li class="thumb gas" data-media-id="{{ image.id }}" data-alt="{{ image.alt }}">
+            <div class="imgbox_full"><img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy"></div>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% for image in product.images %}
+        {% if image.alt contains 'finish-' %}
+          <li class="thumb finish" data-media-id="{{ image.id }}" data-alt="{{ image.alt }}">
+            <div class="imgbox_full"><img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy"></div>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% for image in product.images %}
+        {% if image.alt contains 'landscape-' %}
+          <li class="thumb landscape" data-media-id="{{ image.id }}" data-alt="{{ image.alt }}">
+            <div class="imgbox_full"><img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy"></div>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+      {% for image in product.images %}
+        {% if image.alt contains 'size-' %}
+          <li class="thumb size" data-media-id="{{ image.id }}" data-alt="{{ image.alt }}">
+            <div class="imgbox_full"><img src="{{ image | img_url: 'master' }}" alt="{{ image.alt }}" loading="lazy"></div>
+          </li>
+        {% endif %}
+      {% endfor %}
+
+    {% endif %}
+  </ul>
+
+</div>
+
+<style>
+  .imgbox_full img {
+    -o-object-fit: contain !important;
+    object-fit: contain !important;
+  }
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Config injected by Liquid ──────────────────────────────────────────
+  var PRODUCT_ID  = {{ product.id | json }};
+  var SECTION_ID  = {{ section.id | json }};
+  var USING_METAOBJECT = {{ using_metaobject | json }};
+
+  // Subset matching: does entry.v ⊆ variantOptions?
+  function entryMatchesVariant(entry, variantOptions) {
+    return entry.v.every(function (required) {
+      return variantOptions.indexOf(required) !== -1;
+    });
+  }
+
+  // Get all matching image IDs for current variant from metaobject config
+  function getMatchingIdsFromConfig(config, variantOptions) {
+    return config
+      .filter(function (entry) { return entryMatchesVariant(entry, variantOptions); })
+      .map(function (entry) { return String(entry.id); });
+  }
+
+  // Alt-text fallback: build expected alt handles for current variant
+  function buildAltHandles(variant) {
+    {% if product.options contains 'Gas' %}
+      var optionSet = 2;
+    {% else %}
+      var optionSet = 1;
+    {% endif %}
+
+    if (optionSet === 1) {
+      var sizeOpt   = (variant.option1 || '').toLowerCase().split(' ').join('-');
+      var finishOpt = (variant.option2 || '').toLowerCase().split(' ').join('-');
+      return [
+        'finish-'    + finishOpt,
+        'landscape-' + finishOpt,
+        'size-'      + sizeOpt + '-' + finishOpt
+      ];
+    } else {
+      // Gas (opt1) + Size (opt2) + Wood (opt3)
+      var gasOpt   = (variant.option1 || '').toLowerCase().split(' ').join('-');
+      var sizeOpt2 = (variant.option2 || '').toLowerCase().split(' ').join('-');
+      var woodOpt  = (variant.option3 || '').toLowerCase().split(' ').join('-');
+      return [
+        'gas-'       + gasOpt,
+        'landscape-' + gasOpt,
+        'size-'      + sizeOpt2 + '-' + woodOpt + '-' + gasOpt,
+        'wood-'      + woodOpt  + '-' + gasOpt
+      ];
+    }
+  }
+
+  // ── Core: activate thumbs matching current variant ────────────────────
+  function activateThumbs(variant, wrapper) {
+    var thumbs = wrapper.querySelectorAll('.thumbnails .thumb');
+    var slider = wrapper._swiperInstance;
+    if (!slider) return;
+
+    var variantObj = typeof variant === 'string' ? JSON.parse(variant) : variant;
+
+    // Get previously active visible thumb index (to preserve position after variant switch)
+    var visibleThumbs = Array.from(thumbs).filter(function (t) { return t.style.display !== 'none'; });
+    var prevActiveIdx = visibleThumbs.findIndex(function (t) { return t.classList.contains('active'); });
+    if (prevActiveIdx < 0) prevActiveIdx = 0;
+
+    var isFirst = true;
+
+    if (USING_METAOBJECT) {
+      // ── Metaobject path ──────────────────────────────────────────────
+      var configEl  = document.getElementById('JbMediaConfig-' + PRODUCT_ID + '-' + SECTION_ID);
+      var config    = [];
+      try { config = JSON.parse(configEl ? configEl.textContent : '[]'); } catch (e) {}
+
+      var variantOptions = [variantObj.option1, variantObj.option2, variantObj.option3].filter(Boolean);
+      var matchingIds = new Set(getMatchingIdsFromConfig(config, variantOptions));
+
+      var visibleCount = -1;
+      thumbs.forEach(function (thumb) {
+        var thumbId = String(thumb.getAttribute('data-media-id'));
+        if (matchingIds.has(thumbId)) {
+          visibleCount++;
+          thumb.style.display = 'block';
+          thumb.classList.remove('active');
+          if (isFirst || visibleCount === prevActiveIdx) {
+            slideToThumb(thumb, thumbs, slider);
+            thumb.classList.add('active');
+            isFirst = false;
+          }
+        } else {
+          thumb.style.display = 'none';
+          thumb.classList.remove('active');
+        }
+      });
+    } else {
+      // ── Alt-text fallback path ───────────────────────────────────────
+      var handles = buildAltHandles(variantObj);
+
+      var visibleCount2 = -1;
+      thumbs.forEach(function (thumb) {
+        var thumbAlt = (thumb.getAttribute('data-alt') || '').trim();
+        if (handles.indexOf(thumbAlt) !== -1) {
+          visibleCount2++;
+          thumb.style.display = 'block';
+          thumb.classList.remove('active');
+          if (isFirst || visibleCount2 === prevActiveIdx) {
+            slideToThumb(thumb, thumbs, slider);
+            thumb.classList.add('active');
+            isFirst = false;
+          }
+        } else {
+          thumb.style.display = 'none';
+          thumb.classList.remove('active');
+        }
+      });
+    }
+  }
+
+  // Slide the main swiper to the image matching this thumb
+  function slideToThumb(thumb, allThumbs, slider) {
+    var targetId = String(thumb.getAttribute('data-media-id'));
+    slider.slides.forEach(function (slide, i) {
+      if (String(slide.getAttribute('data-media-id')) === targetId) {
+        slider.slideTo(i);
+      }
+    });
+  }
+
+  // ── Bind thumb click events ────────────────────────────────────────────
+  function bindThumbClicks(wrapper) {
+    var thumbs = wrapper.querySelectorAll('.thumbnails .thumb');
+    var slider = wrapper._swiperInstance;
+    thumbs.forEach(function (thumb) {
+      thumb.addEventListener('click', function () {
+        thumbs.forEach(function (t) { t.classList.remove('active'); });
+        thumb.classList.add('active');
+        slideToThumb(thumb, thumbs, slider);
+      });
+    });
+  }
+
+  // ── Init ──────────────────────────────────────────────────────────────
+  function init() {
+    var wrapper = document.querySelector('.product_swiper_wrapper[data-product-id="' + PRODUCT_ID + '"][data-section-id="' + SECTION_ID + '"]');
+    if (!wrapper) return;
+
+    var slider = new Swiper(wrapper.querySelector('.main_swiper'), {
+      slidesPerView: 1,
+      adaptiveHeight: true,
+      effect: 'fade'
+    });
+    wrapper._swiperInstance = slider;
+
+    bindThumbClicks(wrapper);
+
+    // Variant change — listen on label clicks
+    var variants = {{ product.variants | json }};
+    var variantLabels = document.querySelectorAll('product-info variant-selects fieldset label');
+    variantLabels.forEach(function (label) {
+      label.addEventListener('click', function () {
+        setTimeout(function () {
+          var variantID = window.location.href.split('?variant=')[1];
+          var active = variants.find(function (v) { return String(v.id) === variantID; });
+          if (active) activateThumbs(active, wrapper);
+        }, 1000);
+      });
+    });
+
+    // Initial state on page load
+    activateThumbs({{ product.selected_or_first_available_variant | json }}, wrapper);
+  }
+
+  if (document.readyState === 'loading') {
+    window.addEventListener('load', init);
+  } else {
+    init();
+  }
+  document.addEventListener('shopify:section:load', init);
+
+})();
+</script>

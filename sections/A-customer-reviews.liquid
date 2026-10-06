@@ -1,0 +1,391 @@
+{{ 'lta-sections-customer-reviews.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'lta-sections-customer-reviews.js' |  asset_url }}" defer="defer"></script>
+
+{%- style -%}
+	#{{ section.id }} {
+	  --l-verify-color: {{ section.settings.verify_color }};
+	  --l-author-thumbnail-width: {{ section.settings.thumbnail_width }}px;
+	  --l-review-card: {{ section.settings.review_card }};
+	  background-color: {{ section.settings.background_color }};
+	}
+
+	.section-{{ section.id }}-padding {
+	  padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+	  padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.75);
+	}
+
+	@media screen and (min-width: 750px) {
+	  .section-{{ section.id }}-padding {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{%- endstyle -%}
+
+{% liquid
+	assign review_blocks = section.blocks | where: 'type', 'review'
+%}
+
+<l-customer-reviews
+	class="l-customer-reviews hidden"
+	id="{{ section.id }}"
+	data-section-id="{{ section.id }}"
+>
+	<div class="section-{{ section.id }}-padding page-width">
+		{%- if section.settings.heading != blank or section.settings.text != blank -%}
+			<div class="l-customer-reviews__header">
+				{%- if section.settings.heading != blank -%}
+					<h2
+						class="l-customer-reviews__heading rich-text__heading rte inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+						{% if settings.animations_reveal_on_scroll %}
+							data-cascade
+							style="--animation-order: 1;"
+						{% endif %}
+					>
+						{{ section.settings.heading }}
+					</h2>
+					{%- if section.blocks.size > 1 -%}
+						<div class="l-customer-reviews__nav flex items-center">
+							<button
+								class="l-customer-reviews__nav-btn l-customer-reviews__nav-btn--prev l-button--reset flex items-center justify-center small-hide"
+								id="NavigationPrev-{{ section.id }}"
+								disabled
+							>
+								<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M41.1665 26H10.8332" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M23.8335 39L10.8335 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M23.8335 13L10.8335 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</button>
+							<button
+								class="l-customer-reviews__nav-btn l-customer-reviews__nav-btn--next l-button--reset flex items-center justify-center small-hide"
+								id="NavigationNext-{{ section.id }}"
+								disabled
+							>
+								<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M10.8333 26H41.1666" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M28.1667 39L41.1667 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M28.1667 13L41.1667 26" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</button>
+						</div>
+					{%- endif -%}
+				{%- endif -%}
+			</div>
+		{%- endif -%}
+
+		{%- if review_blocks.size > 0 -%}
+			<div class="l-customer-reviews__list l-flickity-reset{% if section.settings.enable_carousel %} js-carousel{% else %} grid grid--{{ section.settings.columns_mobile }}-col-tablet-down grid--{{ section.settings.columns_desktop }}-col-desktop{% endif %}">
+				{%- for index in (1..section.settings.loop) -%}
+					{%- for block in review_blocks -%}
+						<div
+							class="l-customer-reviews__item{% if section.settings.enable_carousel %} l-customer-reviews__item--carousel{% else %} grid__item{% endif %}"
+							{{ block.shopify_attributes }}
+						>
+							<div class="l-customer-reviews__item-header flex flex-wrap items-start justify-between">
+								<div class="l-customer-reviews__item-info">
+									{%- if block.settings.author_thumbnail != blank -%}
+										<div class="l-customer-reviews__item-thumbnail">
+											{{
+												block.settings.author_thumbnail
+												| image_url: width: 80
+												| image_tag: sizes: '50, 75, 100, 150, 200'
+											}}
+										</div>
+									{%- endif -%}
+									<span class="l-customer-reviews__item-name">{{ block.settings.name }}</span>
+									{%- if block.settings.position_role != blank -%}
+										<span class="l-customer-reviews__item-position">{{ block.settings.position_role }}</span>
+									{%- endif -%}
+								</div>
+
+								<span class="l-customer-reviews__item-rating">
+									{% for index in (1..5) %}
+										<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<path d="M4.99858 25.7778L7.07497 16.3289L0.111084 9.97368L9.31108 9.13304L12.8889 0.222221L16.4666 9.13304L25.6666 9.97368L18.7027 16.3289L20.7791 25.7778L12.8889 20.7675L4.99858 25.7778Z" fill="url(#paint0_linear_645_2285)"/>
+											<defs>
+											<linearGradient id="paint0_linear_645_2285" x1="0.111084" y1="13" x2="25.6666" y2="13" gradientUnits="userSpaceOnUse">
+											<stop stop-color="#D7A81D"/>
+											<stop offset="1" stop-color="#FFDD7C"/>
+											</linearGradient>
+											</defs>
+										</svg>
+									{% endfor %}
+								</span>
+							</div>
+
+							<div class="l-customer-reviews__item-content rte">
+								{{ block.settings.content }}
+							</div>
+						</div>
+					{%- endfor -%}
+				{%- endfor -%}
+			</div>
+		{%- endif -%}
+	</div>
+</l-customer-reviews>
+
+{% schema %}
+{
+	"name": "LTA - Customer reviews",
+	"tag": "section",
+	"class": "section",
+	"settings": [
+		{
+			"type": "range",
+			"id": "loop",
+			"label": "Loop",
+			"min": 1,
+			"max": 20,
+			"step": 1,
+			"unit": "l",
+			"default": 4
+		},
+		{
+			"type": "header",
+			"content": "Header"
+		},
+		{
+			"type": "inline_richtext",
+			"id": "heading",
+			"default": "WHAT OUR CUSTOMERS SAY ABOUT US",
+			"label": "t:sections.rich-text.blocks.heading.settings.heading.label"
+		},
+		{
+			"type": "select",
+			"id": "heading_size",
+			"options": [
+				{
+					"value": "h2",
+					"label": "t:sections.all.heading_size.options__1.label"
+				},
+				{
+					"value": "h1",
+					"label": "t:sections.all.heading_size.options__2.label"
+				},
+				{
+					"value": "h0",
+					"label": "t:sections.all.heading_size.options__3.label"
+				},
+				{
+					"value": "hxl",
+					"label": "t:sections.all.heading_size.options__4.label"
+				}
+			],
+			"default": "h1",
+			"label": "t:sections.all.heading_size.label"
+		},
+		{
+			"type": "header",
+			"content": "Review card"
+		},
+		{
+			"type": "header",
+			"content": "Layout"
+		},
+		{
+			"type": "checkbox",
+			"id": "enable_carousel",
+			"label": "Enable carousel",
+			"default": true
+		},
+		{
+			"type": "range",
+			"id": "columns_desktop",
+			"min": 1,
+			"max": 4,
+			"step": 1,
+			"default": 3,
+			"label": "t:sections.multicolumn.settings.columns_desktop.label"
+		},
+		{
+			"type": "select",
+			"id": "columns_mobile",
+			"options": [
+				{
+					"value": "1",
+					"label": "t:sections.multicolumn.settings.columns_mobile.options__1.label"
+				},
+				{
+					"value": "2",
+					"label": "t:sections.multicolumn.settings.columns_mobile.options__2.label"
+				}
+			],
+			"default": "1",
+			"label": "t:sections.multicolumn.settings.columns_mobile.label"
+		},
+		{
+			"type": "header",
+			"content": "Colors"
+		},
+		{
+			"type": "color",
+			"id": "background_color",
+			"label": "Background Color",
+			"default": "#D9EFF9"
+		},
+		{
+			"type": "color",
+			"id": "review_card",
+			"label": "Review card",
+			"default": "#f8f8f8"
+		},
+		{
+			"type": "color",
+			"id": "verify_color",
+			"label": "Verify color",
+			"default": "#72bf71"
+		},
+		{
+			"type": "header",
+			"content": "t:sections.all.padding.section_padding_heading"
+		},
+		{
+			"type": "range",
+			"id": "padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_top",
+			"default": 40
+		},
+		{
+			"type": "range",
+			"id": "padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_bottom",
+			"default": 52
+		}
+	],
+	"blocks": [
+		{
+			"type": "top_images",
+			"name": "Header thumbnails",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "image_1",
+					"label": "Thumbnail 1"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_2",
+					"label": "Thumbnail 2"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_3",
+					"label": "Thumbnail 3"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_4",
+					"label": "Thumbnail 4"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_5",
+					"label": "Thumbnail 5"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_6",
+					"label": "Thumbnail 6"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_7",
+					"label": "Thumbnail 7"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_8",
+					"label": "Thumbnail 8"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_9",
+					"label": "Thumbnail 9"
+				},
+				{
+					"type": "image_picker",
+					"id": "image_10",
+					"label": "Thumbnail 10"
+				}
+			]
+		},
+		{
+			"type": "review",
+			"name": "Review",
+			"settings": [
+				{
+					"type": "text",
+					"label": "Name",
+					"id": "name",
+					"default": "John Doe"
+				},
+				{
+					"type": "text",
+					"id": "position_role",
+					"label": "Position / Role",
+					"default": "Landscape Architect"
+				},
+				{
+					"type": "richtext",
+					"label": "Content",
+					"id": "content",
+					"default": "<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta natus illum fuga iure? Tempore dolor autem, nihil aliquam ab corrupti.</p>"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "LTA - Customer reviews",
+			"blocks": [
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				},
+				{
+					"type": "review"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

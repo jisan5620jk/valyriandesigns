@@ -1,0 +1,318 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "a_breadcrumbs_CEBQc8": {
+      "type": "A-breadcrumbs",
+      "settings": {
+        "page_width": 1400,
+        "show_full_width": false,
+        "text_color": "#a8a8a8",
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "a_custom_content_YkwLmK": {
+      "type": "A-custom-content",
+      "blocks": {
+        "heading_qGyyAA": {
+          "type": "heading",
+          "settings": {
+            "heading": "BLOGS",
+            "liquid": "",
+            "heading_size": "h1",
+            "tag": "h1",
+            "text_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "text_Dkpm3g": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Read about the latest Valyrains designs <br/>and outdoor trends and inspirational ideas</p>",
+            "textarea": "",
+            "page": "",
+            "liquid": "",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 0,
+            "padding_bottom": 12
+          }
+        },
+        "heading_4RBCAF": {
+          "type": "heading",
+          "settings": {
+            "heading": "OUR FEATURED BLOGS",
+            "liquid": "",
+            "heading_size": "h2",
+            "tag": "h2",
+            "text_color": "#000000",
+            "text_alignment_desktop": "left",
+            "text_alignment_mobile": "left",
+            "page_width": 1400,
+            "padding_top": 32,
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "heading_qGyyAA",
+        "text_Dkpm3g",
+        "heading_4RBCAF"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "background": "#ffffff",
+        "padding_top": 28,
+        "padding_bottom": 0
+      }
+    },
+    "a_featured_blogs_3bbNX7": {
+      "type": "A-featured-blogs",
+      "blocks": {
+        "article_pkaHfg": {
+          "type": "article",
+          "settings": {
+            "width": "1-3",
+            "article": "blogs/five-best-rain-curtain-fountain-outdoor-ideas"
+          }
+        },
+        "article_zXfUXp": {
+          "type": "article",
+          "settings": {
+            "width": "1-3",
+            "article": "blogs/feng-shui-your-backyard-for-a-stress-free-escape"
+          }
+        },
+        "article_Kd6yWD": {
+          "type": "article",
+          "settings": {
+            "width": "1-3",
+            "article": "blogs/modern-backyard-ideas-create-a-sleek-and-stylish-outdoor-oasis"
+          }
+        },
+        "article_ADCeRf": {
+          "type": "article",
+          "settings": {
+            "width": "1-3",
+            "article": "blogs/the-secret-benefits-of-a-feng-shui-backyard"
+          }
+        },
+        "article_4LhmBz": {
+          "type": "article",
+          "settings": {
+            "width": "1-3",
+            "article": ""
+          }
+        },
+        "article_Fk43iC": {
+          "type": "article",
+          "settings": {
+            "width": "1-3",
+            "article": "blogs/meditation-can-help-you-live-longer"
+          }
+        }
+      },
+      "block_order": [
+        "article_pkaHfg",
+        "article_zXfUXp",
+        "article_Kd6yWD",
+        "article_ADCeRf",
+        "article_4LhmBz",
+        "article_Fk43iC"
+      ],
+      "custom_css": [
+        ".l-pwt__image-url {background: rgba(0, 0, 0, 0.45);}"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "row_gap": 30,
+        "column_gap": 30,
+        "ratio": "56.25%",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_media_with_contents_BqkYCW": {
+      "type": "A-media-with-contents",
+      "blocks": {
+        "heading_cALMRc": {
+          "type": "heading",
+          "settings": {
+            "heading": "Checkout our monthly newsletter",
+            "heading_size": "h2",
+            "text_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 32
+          }
+        },
+        "text_bGM8UJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Get exciting product insights <br/>and offers</p>",
+            "text_style": "body",
+            "text_color": "#000000",
+            "link_color": "#000000",
+            "padding_top": 0,
+            "padding_bottom": 28
+          }
+        },
+        "buttons_Jc9HxP": {
+          "type": "buttons",
+          "settings": {
+            "first_button_label": "Subscribe to our Newsletter",
+            "first_button_link": "shopify://pages/contact",
+            "first_font_weight": "500",
+            "first_icon_position": "text_with_icon",
+            "first_icon": "shopify://shop_images/arrow-right.svg",
+            "first_icon_width": 24,
+            "first_button_border_radius": 10,
+            "first_button_border_width": 1,
+            "first_button_bg": "#d9eff9",
+            "first_button_text": "#000000",
+            "first_button_border": "#000000",
+            "second_button_label": "",
+            "second_button_link": "",
+            "second_font_weight": "500",
+            "second_icon_position": "icon_with_text",
+            "second_icon_width": 24,
+            "second_button_border_radius": 0,
+            "second_button_border_width": 1,
+            "second_button_bg": "#c40f0f",
+            "second_button_text": "#ffffff",
+            "second_button_border": "#c40f0f",
+            "buttons_gap": 12,
+            "padding_top": 24,
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "heading_cALMRc",
+        "text_bGM8UJ",
+        "buttons_Jc9HxP"
+      ],
+      "custom_css": [
+        ".l-mwc__grid {border-radius: 10px; overflow: hidden;}",
+        ".l-mwc__heading {max-width: 342px;}",
+        ".button {padding: 10px;}"
+      ],
+      "settings": {
+        "page_width": 1400,
+        "show_full_width": false,
+        "spacing_grid_horizontal": 0,
+        "spacing_grid_vertical": 0,
+        "image": "shopify://shop_images/Rectangle_4569.png",
+        "enable_video_looping": false,
+        "video_autoplay": "none",
+        "video_url": "",
+        "description": "",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "background_color": "#ffffff",
+        "content_container_bg": "#d9eff9",
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "layout": "collage",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false,
+        "view_more_text": "View More Blogs",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
+    },
+    "a_community_tgPKTF": {
+      "type": "A-community",
+      "blocks": {
+        "image_nERtEa": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2024-06-26_at_9.49.17_AM_2043d822-4622-4cb7-a084-2003dec18106.jpg"
+          }
+        },
+        "image_ycgxL4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2024-06-26_at_9.50.36_AM.jpg"
+          }
+        },
+        "image_ab3mEz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2024-06-26_at_9.50.57_AM.jpg"
+          }
+        },
+        "image_QRUqm7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2024-06-26_at_9.48.14_AM.jpg"
+          }
+        },
+        "image_aeWefE": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2024-06-27_at_9.38.13_AM.jpg"
+          }
+        },
+        "image_rMH6kU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2024-06-26_at_9.53.59_AM.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "image_nERtEa",
+        "image_ycgxL4",
+        "image_ab3mEz",
+        "image_QRUqm7",
+        "image_aeWefE",
+        "image_rMH6kU"
+      ],
+      "settings": {
+        "title": "VALYRIAN DESIGNS COMMUNITY",
+        "x_url": "https://www.facebook.com/profile.php?id=61560025372394",
+        "linkedin_url": "https://www.facebook.com/profile.php?id=61560025372394",
+        "instagram_url": "https://www.instagram.com/valyriandesignsoutdoor?igsh=MzRlODBiNWFlZA==",
+        "facebook_url": "https://www.facebook.com/profile.php?id=61560025372394",
+        "etsy_url": "",
+        "pinterest_url": "https://www.facebook.com/profile.php?id=61560025372394"
+      }
+    }
+  },
+  "order": [
+    "a_breadcrumbs_CEBQc8",
+    "a_custom_content_YkwLmK",
+    "a_featured_blogs_3bbNX7",
+    "a_media_with_contents_BqkYCW",
+    "main",
+    "a_community_tgPKTF"
+  ]
+}

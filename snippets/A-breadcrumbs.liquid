@@ -1,0 +1,336 @@
+{%- comment -%}
+	@params:
+	  - container_class: {String} (optional) the container's class of breadcrumb
+	-------------------------------------------------------------------------------
+	Usage
+	{%- render 'theme_breadcrumb' -%}
+	-------------------------------------------------------------------------------
+
+	Documentation - https://developers.google.com/search/docs/appearance/structured-data/breadcrumb#guidelines
+{%- endcomment -%}
+
+{{ 'lta-components-breadcrumbs.css' | asset_url | stylesheet_tag }}
+
+{%- capture divider_span -%}
+  <span class="l-breadcrumb__divider" aria-hidden="true">
+    {%- render 'icon-chevron-right' -%}
+  </span>
+{%- endcapture -%}
+
+<nav
+	class="l-breadcrumb"
+	role="navigation"
+	aria-label="breadcrumbs"
+	itemscope
+	itemtype="http://schema.org/BreadcrumbList"
+>
+	{%- if container_class -%}
+		<div class="{{ container_class }}">
+	{%- endif -%}
+
+	<ul class="l-breadcrumb__wrapper list-unstyled list-menu list-menu--inline">
+		<li
+			class="l-breadcrumb__item list-menu__item"
+			itemprop="itemListElement"
+			itemscope
+			itemtype="http://schema.org/ListItem"
+		>
+			<meta itemprop="position" content="1">
+			<span itemprop="name">
+				<a
+					class="l-breadcrumb__label"
+					itemprop="item"
+					href="{{ routes.root_url }}"
+					aria-label="{{- 'general.breadcrumbs.home' | t -}}"
+					title="{{- 'general.breadcrumbs.home' | t -}}"
+				>
+					{{- 'general.breadcrumbs.home' | t -}}
+				</a>
+			</span>
+		</li>
+
+		{%- if request.page_type contains 'page' -%}
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{ divider_span }}
+				<meta itemprop="position" content="2">
+				<span
+					class="l-breadcrumb__label"
+					itemprop="item"
+				>
+					{{- page.title -}}
+				</span>
+			</li>
+		{%- elsif request.page_type contains 'product' -%}
+			{%- assign current_collection = collection -%}
+			{%- if current_collection == blank and product.collections.size > 0 -%}
+			    {%- assign current_collection = product.collections.first -%}
+			{%- endif -%}
+
+			{%- if current_collection -%}
+				<li
+					class="l-breadcrumb__item list-menu__item"
+					itemprop="itemListElement"
+					itemscope
+					itemtype="http://schema.org/ListItem"
+				>
+					{{- divider_span -}}
+					<meta itemprop="position" content="2">
+					<span itemprop="name">
+						<a
+							class="l-breadcrumb__label"
+							itemprop="item"
+							href="{{ current_collection.url }}"
+							title="{{ current_collection.title }}"
+							aria-label="{{ current_collection.title }}"
+						>
+							{{- current_collection.title -}}
+						</a>
+					</span>
+				</li>
+
+				<li
+					class="l-breadcrumb__item list-menu__item"
+					itemprop="itemListElement"
+					itemscope
+					itemtype="http://schema.org/ListItem"
+				>
+					{{- divider_span -}}
+					<meta itemprop="position" content="3">
+					<span itemprop="name" class="l-breadcrumb__label">{{- product.title -}}</span>
+				</li>
+			{%- else -%}
+				<li
+					class="l-breadcrumb__item list-menu__item"
+					itemprop="itemListElement"
+					itemscope
+					itemtype="http://schema.org/ListItem"
+				>
+					{{- divider_span -}}
+					<meta itemprop="position" content="2">
+					<span itemprop="name" class="l-breadcrumb__label">{{- product.title -}}</span>
+				</li>
+			{%- endif -%}
+		{%- elsif request.page_type contains 'collection' and collection.handle -%}
+			{%- if current_tags -%}
+				{%- capture url -%}/collections/{{ collection.handle }}{%- endcapture -%}
+
+				<li
+					class="l-breadcrumb__item list-menu__item"
+					itemprop="itemListElement"
+					itemscope
+					itemtype="http://schema.org/ListItem"
+				>
+					{{- divider_span -}}
+					<meta itemprop="position" content="2">
+					<span itemprop="name" class="l-breadcrumb__label">
+						{{- collection.title | link_to: url -}}
+					</span>
+				</li>
+
+				<li
+					class="l-breadcrumb__item list-menu__item"
+					itemprop="itemListElement"
+					itemscope
+					itemtype="http://schema.org/ListItem"
+				>
+					{{- divider_span -}}
+					<meta itemprop="position" content="3">
+					<span itemprop="name" class="l-breadcrumb__label">
+						{%- liquid
+							assign theseTags = ''
+							for tag in current_tags
+								assign cat = tag | split: '_' | last
+
+								capture theseTags
+									echo theseTags | downcase
+									if forloop.first != true
+										echo '+'
+									endif
+									echo cat | downcase
+								endcapture
+							endfor
+						-%}
+
+						{{- theseTags | downcase -}}
+					</span>
+				</li>
+			{%- else -%}
+				<li
+					class="l-breadcrumb__item list-menu__item"
+					itemprop="itemListElement"
+					itemscope
+					itemtype="http://schema.org/ListItem"
+				>
+					{{- divider_span -}}
+					<meta itemprop="position" content="2">
+					<span itemprop="name" class="l-breadcrumb__label">{{- collection.title -}}</span>
+				</li>
+			{%- endif -%}
+		{%- elsif request.page_type contains 'page' -%}
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{- divider_span -}}
+				<meta itemprop="position" content="2">
+				<span itemprop="name" class="l-breadcrumb__label">{{- page.title -}}</span>
+			</li>
+
+		{%- elsif template.suffix == 'help-center' -%}
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{- divider_span -}}
+				<meta itemprop="position" content="3">
+				<span itemprop="name" class="l-breadcrumb__label">
+					{{- blog.title | link_to: blog.url -}}
+				</span>
+			</li>
+
+		{%- elsif request.page_type == 'blog' -%}
+			{%- if current_tags -%}
+				<li
+					class="l-breadcrumb__item list-menu__item"
+					itemprop="itemListElement"
+					itemscope
+					itemtype="http://schema.org/ListItem"
+				>
+					{{- divider_span -}}
+					<meta itemprop="position" content="2">
+					<span itemprop="name" class="l-breadcrumb__label">
+						{{- blog.title | link_to: blog.url -}}
+					</span>
+				</li>
+
+				<li
+					class="l-breadcrumb__item list-menu__item"
+					itemprop="itemListElement"
+					itemscope
+					itemtype="http://schema.org/ListItem"
+				>
+					{{- divider_span -}}
+					<meta itemprop="position" content="3">
+					<span itemprop="name" class="l-breadcrumb__label">
+						{{- current_tags | join: ' + ' | downcase -}}
+					</span>
+				</li>
+			{%- else -%}
+				<li
+					class="l-breadcrumb__item list-menu__item"
+					itemprop="itemListElement"
+					itemscope
+					itemtype="http://schema.org/ListItem"
+				>
+					{{- divider_span -}}
+					<meta itemprop="position" content="2">
+					<span itemprop="name" class="l-breadcrumb__label">
+						{{- blog.title | link_to: blog.url -}}
+					</span>
+				</li>
+			{%- endif -%}
+		{%- elsif request.page_type contains 'article' -%}
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{- divider_span -}}
+				<meta itemprop="position" content="3">
+				<span itemprop="name" class="l-breadcrumb__label">
+					{{- blog.title | link_to: blog.url -}}
+				</span>
+			</li>
+
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{- divider_span -}}
+				<meta itemprop="position" content="4">
+				<span itemprop="name" class="l-breadcrumb__label">{{ article.title }}</span>
+			</li>
+		{%- elsif request.page_type contains 'search' -%}
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{- divider_span -}}
+				<meta itemprop="position" content="2">
+				<span itemprop="name" class="l-breadcrumb__label">{{ page.title | replace: '*', '' }}</span>
+			</li>
+		{%- elsif request.page_type contains 'account' -%}
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{- divider_span -}}
+				<meta itemprop="position" content="2">
+				<span itemprop="name" class="l-breadcrumb__label">
+					{{- 'general.breadcrumbs.account' | t -}}
+				</span>
+			</li>
+		{%- elsif request.page_type contains 'order' -%}
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{- divider_span -}}
+				<meta itemprop="position" content="2">
+				<span itemprop="name" class="l-breadcrumb__label">
+					{{- 'general.breadcrumbs.order' | t -}}
+					&nbsp;:&nbsp;
+					{{ order.name -}}
+				</span>
+			</li>
+		{%- elsif request.page_type contains 'addresses' -%}
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{- divider_span -}}
+				<meta itemprop="position" content="2">
+				<span itemprop="name" class="l-breadcrumb__label">
+					{{- 'general.breadcrumbs.address' | t -}}
+				</span>
+			</li>
+		{%- else -%}
+			<li
+				class="l-breadcrumb__item list-menu__item"
+				itemprop="itemListElement"
+				itemscope
+				itemtype="http://schema.org/ListItem"
+			>
+				{{- divider_span -}}
+				<meta itemprop="position" content="2">
+				<span itemprop="name" class="l-breadcrumb__label">
+					{{- page.title | default: shop.name -}}
+				</span>
+			</li>
+		{%- endif -%}
+	</ul>
+
+	{%- if container_class -%}
+		</div>
+	{%- endif -%}
+</nav>

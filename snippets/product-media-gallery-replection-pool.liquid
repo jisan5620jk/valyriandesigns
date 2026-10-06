@@ -1,0 +1,176 @@
+{% comment %}
+  Renders a product media gallery. Should be used with 'media-gallery.js'
+  Also see 'product-media-modal'
+
+  Accepts:
+  - product: {Object} Product liquid object
+  - variant_images: {Array} Product images associated with a variant
+  - limit: {Number} (optional) When passed, limits the number of media items to render
+
+  Usage:
+  {% render 'product-media-gallery' %}
+{% endcomment %}
+
+{%- liquid
+  # Setup short product variable
+  # ------------------------------------------------------------
+  assign current_variant = product.selected_or_first_available_variant
+  assign finish_option = product.options_with_values | where: 'name', 'Finish' | first
+  assign finish_option_values = finish_option.values | map: 'name'
+
+  assign has_fish_media = false
+  assign has_landscape_media = false
+  assign has_dimensions_media = false
+
+  for media in product.media
+    if media.alt contains 'finish'
+      assign has_fish_media = true
+    endif
+
+    if media.alt contains 'landscape'
+      assign has_landscape_media = true
+    endif
+
+    if media.alt contains 'size'
+      assign has_dimensions_media = true
+    endif
+  endfor
+
+  # Setup media sizes
+  # ------------------------------------------------------------
+  if section.settings.hide_variants and variant_images.size == product.media.size
+    assign single_media_visible = true
+  endif
+
+  if limit == 1
+    assign single_media_visible = true
+  endif
+
+  assign media_count = product.media.size
+  if section.settings.hide_variants and media_count > 1 and variant_images.size > 0
+    assign media_count = media_count | minus: variant_images.size | plus: 1
+  endif
+
+  if media_count == 1 or single_media_visible
+    assign single_media_visible_mobile = true
+  endif
+
+  if media_count == 0 or single_media_visible_mobile or section.settings.mobile_thumbnails == 'show' or section.settings.mobile_thumbnails == 'columns' and media_count < 3
+    assign hide_mobile_slider = true
+  endif
+
+  if section.settings.media_size == 'large'
+    assign media_width = 0.65
+  elsif section.settings.media_size == 'medium'
+    assign media_width = 0.55
+  elsif section.settings.media_size == 'small'
+    assign media_width = 0.45
+  endif
+-%}
+
+<script type="application/json" id="MediaJson-{{ section.id }}">
+  {{ product.media | json }}
+</script>
+
+<l-product-media
+  data-section="{{ section.id }}"
+  role="region"
+  aria-label="{{ 'products.product.media.gallery_viewer' | t }}"
+>
+  <div id="GalleryStatus-{{ section.id }}" class="visually-hidden" role="status"></div>
+
+  {% comment %}
+    ------------------------------------------------------------
+    [START]: MAIN-GALLERY
+    ------------------------------------------------------------
+  {% endcomment %}
+  <div>
+    <a class="skip-to-content-link button visually-hidden quick-add-hidden" href="#ProductInfo-{{ section.id }}">
+      {{ 'accessibility.skip_to_product_info' | t }}
+    </a>
+<div class="product__media-list list-unstyled" role="list">
+  {% assign size_images = product.media | where: "alt", "size" %}
+  {% assign displayed_count = 0 %}
+  {% for media in product.media %}
+    {% if media.alt contains 'size' and displayed_count < 3 %}
+      {% assign class = 'is-active product-media-container--dimensions' %}
+      {% render 'product-thumbnail',
+        media: media,
+        media_count: 3,
+        position: forloop.index,
+        desktop_layout: section.settings.gallery_layout,
+        mobile_layout: section.settings.mobile_thumbnails,
+        loop: section.settings.enable_video_looping,
+        modal_id: section.id,
+        xr_button: true,
+        media_width: 0.55,
+        media_fit: section.settings.media_fit,
+        constrain_to_viewport: section.settings.constrain_to_viewport,
+        lazy_load: false,
+        fetchpriority: 'high',
+        class: class
+      %}
+      {% assign displayed_count = displayed_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+  </div>
+
+  {% comment %}
+    ------------------------------------------------------------
+    [START]: THUMBNAILS GALLERY
+    ------------------------------------------------------------
+  {% endcomment %}
+  {%- if first_3d_model -%}
+    <button
+      class="button button--full-width product__xr-button"
+      type="button"
+      aria-label="{{ 'products.product.xr_button_label' | t }}"
+      data-shopify-xr
+      data-shopify-model3d-id="{{ first_3d_model.id }}"
+      data-shopify-title="{{ product.title | escape }}"
+      data-shopify-xr-hidden
+    >
+      {% render 'icon-3d-model' %}
+      {{ 'products.product.xr_button' | t }}
+    </button>
+  {%- endif -%}
+  {%- liquid
+    assign is_not_limited_to_single_item = false
+    if limit == null or limit > 1
+      assign is_not_limited_to_single_item = true
+    endif
+  -%}
+  {%- if is_not_limited_to_single_item
+    and media_count > 1
+    and section.settings.gallery_layout contains 'thumbnail'
+    or section.settings.mobile_thumbnails == 'show'
+  -%}
+   <div class="thumbnail-list__item is-active" id="{{ section.id }}-dimensions-thumbnail" data-thumbnail-group>
+  {% assign displayed_count = 0 %}
+  {% for media in product.media %}
+    {% if media.alt contains 'size' and displayed_count < 3 %}
+      <button
+        class="thumbnail global-media-settings global-media-settings--no-shadow{% if displayed_count == 0 %} is-active{% endif %}"
+        aria-label="Load size image"
+        aria-controls="GalleryViewer-{{ sectijon.id }}"
+        data-media-id="{{ media.id }}"
+      >
+        {{
+          media
+          | image_url: width: 416
+          | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 104px, (min-width: 750px) 74px, 54px',
+              widths: '54, 74, 104, 162, 208, 324, 416',
+              alt: media.alt
+        }}
+      </button>
+      {% assign displayed_count = displayed_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+</div>
+
+  {%- endif -%}
+</l-product-media>

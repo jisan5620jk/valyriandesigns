@@ -1,0 +1,482 @@
+{{ 'lta-components-tabs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lta-sections-tabs.js' |  asset_url }}" defer="defer"></script>
+
+{% style %}
+	#shopify-section-{{ section.id }} {
+	  --page-width: {% if section.settings.show_full_width %}100%{% else %}{{ section.settings.page_width }}px{% endif %};
+	  --l-container-background: {{ section.settings.container_background }};
+	  --l-tab-name-gap: {{ section.settings.tab_name_gap }}px;
+	  --l-tab-header-content-gap: {{ section.settings.gap_header_content }}px;
+	  --l-tab-radius: {{ section.settings.corder_radius }}px;
+	  --l-tab-border-width: {{ section.settings.border_width }}px;
+	  --l-tab-title-color: {{ section.settings.tab_title_color }};
+	  --l-tab-title-bg: {{ section.settings.tab_title_bg }};
+	  --l-tab-border-color: {{ section.settings.tab_border_color }};
+	  --l-tab-title-active-color: {{ section.settings.tab_title_active_color }};
+	  --l-tab-title-active-bg: {{ section.settings.tab_title_active_bg }};
+	  --l-tab-border-active-color: {{ section.settings.tab_border_active_color }};
+	  --l-tab-content-color: {{ section.settings.tab_content_color }};
+	  --l-tab-content-link-color: {{ section.settings.tab_content_link_color }};
+	  background-color: {{ section.settings.background_color }};
+	  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  #shopify-section-{{ section.id }} {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{% endstyle %}
+
+<div class="l-tabs__container page-width">
+	<l-tabs class="l-tabs l-tabs--{{ section.settings.container_layout }} l-tabs--{{ section.settings.tab_layout }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+		<div class="l-tabs__header l-tabs__header--{{ section.settings.tab_layout }} l-tabs__header--{{ section.settings.tab_name_style }} flex items-center">
+			{%- for block in section.blocks -%}
+				<button
+					class="l-tabs__button l-tabs__button--{{ section.settings.tab_name_style }} {{ section.settings.tab_title_size }} flex items-center{% if section.settings.tab_name_direction == 'vertical' %} flex-col{% endif %}{% if forloop.first %} is-active{% endif %}"
+					data-tab="{{ block.id }}"
+					{{ block.shopify_attributes }}
+				>
+					{% liquid
+						assign icon = block.settings.icon
+						assign svg = block.settings.svg
+						assign icon_width = block.settings.icon_width
+						assign sizes = icon_width | append: 'px'
+						assign icon_height = icon_width | divided_by: icon.aspect_ratio
+					%}
+					{%- if block.settings.icon != blank -%}
+						<span style="--l-icon-width: {{ icon_width }}px;">
+							{{-
+								icon
+								| image_url: width: icon_width
+								| image_tag:
+									loading: 'lazy',
+									alt: icon.alt,
+									sizes: sizes,
+									class: 'motion-reduce',
+									width: icon_width,
+									height: icon_height
+							-}}
+						</span>
+					{%- endif -%}
+					{% if svg != blank %}
+						<span style="--l-icon-width: {{ icon_width }}px;">
+							{{ svg }}
+						</span>
+					{% endif %}
+					{{ block.settings.title }}
+				</button>
+			{%- endfor -%}
+		</div>
+		<div class="l-tabs__contents">
+			{%- for block in section.blocks -%}
+				<div
+					class="l-tabs__content overflow-hidden l-rte--{{ section.settings.tab_content_size }} l-tabs__content--{{ section.settings.anmiation }} rte{%- unless forloop -%} hidden{%- endunless -%}"
+					data-content="{{ block.id }}"
+					{{ block.shopify_attributes }}
+				>
+					{{ block.settings.row_content }}
+					{{ block.settings.textarea }}
+					{{ block.settings.page.content }}
+					{{ block.settings.liquid }}
+				</div>
+			{%- endfor -%}
+		</div>
+	</l-tabs>
+</div>
+
+{% schema %}
+{
+	"name": "LTA - Tabs",
+	"class": "section",
+	"tag": "section",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Layout"
+		},
+		{
+			"type": "range",
+			"id": "page_width",
+			"min": 600,
+			"max": 1600,
+			"step": 100,
+			"default": 1200,
+			"unit": "px",
+			"label": "t:settings_schema.layout.settings.page_width.label"
+		},
+		{
+			"type": "checkbox",
+			"id": "show_full_width",
+			"label": "Show full width",
+			"default": false
+		},
+		{
+			"type": "header",
+			"content": "Appearance"
+		},
+		{
+			"type": "select",
+			"id": "container_layout",
+			"label": "Container layout",
+			"default": "default",
+			"options": [
+				{
+					"value": "default",
+					"label": "Default"
+				},
+				{
+					"value": "container",
+					"label": "Container"
+				}
+			]
+		},
+		{
+			"type": "select",
+			"id": "tab_layout",
+			"label": "Tab Layout",
+			"default": "horizontal",
+			"options": [
+				{
+					"value": "vertical",
+					"label": "Vertical"
+				},
+				{
+					"value": "horizontal",
+					"label": "Horizontal"
+				}
+			]
+		},
+		{
+			"type": "select",
+			"id": "tab_name_direction",
+			"label": "Tab name direction",
+			"default": "horizontal",
+			"options": [
+				{
+					"value": "vertical",
+					"label": "Vertical"
+				},
+				{
+					"value": "horizontal",
+					"label": "Horizontal"
+				}
+			]
+		},
+		{
+			"type": "select",
+			"id": "tab_name_style",
+			"label": "Tab name style",
+			"default": "default",
+			"options": [
+				{
+					"value": "default",
+					"label": "Default"
+				},
+				{
+					"value": "single-button",
+					"label": "Single button"
+				},
+				{
+					"value": "segmented-buttons",
+					"label": "Segmented buttons"
+				}
+			]
+		},
+		{
+			"type": "header",
+			"content": "Tab spacing"
+		},
+		{
+			"type": "range",
+			"id": "tab_name_gap",
+			"min": 0,
+			"max": 30,
+			"step": 2,
+			"default": 10,
+			"unit": "px",
+			"label": "Space between tab name"
+		},
+		{
+			"type": "range",
+			"id": "gap_header_content",
+			"min": 0,
+			"max": 80,
+			"step": 2,
+			"default": 24,
+			"unit": "px",
+			"label": "Spacing between header and content"
+		},
+		{
+			"type": "range",
+			"id": "border_width",
+			"min": 0,
+			"max": 4,
+			"step": 1,
+			"default": 1,
+			"unit": "px",
+			"label": "Border width"
+		},
+		{
+			"type": "range",
+			"id": "corder_radius",
+			"min": 0,
+			"max": 30,
+			"step": 2,
+			"default": 10,
+			"unit": "px",
+			"label": "Tab corner radius"
+		},
+		{
+			"type": "header",
+			"content": "Text size"
+		},
+		{
+			"type": "select",
+			"id": "tab_title_size",
+			"options": [
+				{
+					"value": "h5",
+					"label": "S"
+				},
+				{
+					"value": "h3",
+					"label": "M"
+				},
+				{
+					"value": "h2",
+					"label": "L"
+				}
+			],
+			"default": "h3",
+			"label": "Tab title"
+		},
+		{
+			"type": "select",
+			"id": "tab_content_size",
+			"options": [
+				{
+					"value": "small",
+					"label": "S"
+				},
+				{
+					"value": "medium",
+					"label": "M"
+				},
+				{
+					"value": "large",
+					"label": "L"
+				}
+			],
+			"default": "medium",
+			"label": "Tab content"
+		},
+		{
+			"type": "header",
+			"content": "Colors"
+		},
+		{
+			"type": "color",
+			"id": "background_color",
+			"label": "Background Color",
+			"default": "#fff"
+		},
+		{
+			"type": "color",
+			"id": "container_background",
+			"label": "Container background",
+			"default": "#f8f8f8"
+		},
+		{
+			"type": "paragraph",
+			"content": "Tab normal state"
+		},
+		{
+			"type": "color",
+			"id": "tab_title_color",
+			"label": "Text",
+			"default": "#000"
+		},
+		{
+			"type": "color",
+			"id": "tab_title_bg",
+			"label": "Background",
+			"default": "#fff"
+		},
+		{
+			"type": "color",
+			"id": "tab_border_color",
+			"label": "Border",
+			"default": "#fff"
+		},
+		{
+			"type": "paragraph",
+			"content": "Tab active state"
+		},
+		{
+			"type": "color",
+			"id": "tab_title_active_color",
+			"label": "Text",
+			"default": "#000"
+		},
+		{
+			"type": "color",
+			"id": "tab_title_active_bg",
+			"label": "Background",
+			"default": "#fff"
+		},
+		{
+			"type": "color",
+			"id": "tab_border_active_color",
+			"label": "Border",
+			"default": "#fff"
+		},
+		{
+			"type": "paragraph",
+			"content": "Content"
+		},
+		{
+			"type": "color",
+			"id": "tab_content_color",
+			"label": "Tab content",
+			"default": "#000"
+		},
+		{
+			"type": "color",
+			"id": "tab_content_link_color",
+			"label": "Tab content links",
+			"default": "#000"
+		},
+		{
+			"type": "header",
+			"content": "t:sections.all.padding.section_padding_heading"
+		},
+		{
+			"type": "range",
+			"id": "padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_top",
+			"default": 36
+		},
+		{
+			"type": "range",
+			"id": "padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_bottom",
+			"default": 36
+		}
+	],
+	"blocks": [
+		{
+			"type": "tab",
+			"name": "Tab",
+			"settings": [
+				{
+					"type": "header",
+					"content": "Icon"
+				},
+				{
+					"type": "image_picker",
+					"id": "icon",
+					"label": "Icon"
+				},
+				{
+					"type": "paragraph",
+					"content": "Or"
+				},
+				{
+					"type": "textarea",
+					"id": "svg",
+					"label": "SVG",
+					"info": "View [Lucide](https:\/\/lucide.dev\/icons\/stethoscope) or [Tabler](https:\/\/tabler.io\/icons) to find your desired icon."
+				},
+				{
+					"type": "range",
+					"id": "icon_width",
+					"label": "Icon Width",
+					"min": 14,
+					"max": 60,
+					"step": 2,
+					"unit": "px",
+					"default": 24
+				},
+				{
+					"type": "header",
+					"content": "Content"
+				},
+				{
+					"type": "inline_richtext",
+					"id": "title",
+					"default": "Tab",
+					"label": "Name"
+				},
+				{
+					"type": "header",
+					"content": "Content",
+					"info": "You can use one of them or combine some of the content inputs. We suggest using Row content as a first priority."
+				},
+				{
+					"type": "richtext",
+					"id": "row_content",
+					"label": "t:sections.collapsible_content.blocks.collapsible_row.settings.row_content.label",
+					"default": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae quibusdam incidunt similique cum ut temporibus praesentium sint distinctio atque repudiandae? Dolores debitis, ullam excepturi voluptatem nulla sed molestiae doloremque. Vero, neque fugiat sint omnis nulla veniam quidem repellendus nihil quis?</p>"
+				},
+				{
+					"type": "paragraph",
+					"content": "Or"
+				},
+				{
+					"type": "textarea",
+					"id": "textarea",
+					"label": "Textarea"
+				},
+				{
+					"type": "paragraph",
+					"content": "Or"
+				},
+				{
+					"type": "page",
+					"id": "page",
+					"label": "t:sections.collapsible_content.blocks.collapsible_row.settings.page.label"
+				},
+				{
+					"type": "paragraph",
+					"content": "Or"
+				},
+				{
+					"type": "liquid",
+					"id": "liquid",
+					"label": "Liquid"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "LTA - Tabs",
+			"blocks": [
+				{
+					"type": "tab"
+				},
+				{
+					"type": "tab"
+				},
+				{
+					"type": "tab"
+				},
+				{
+					"type": "tab"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

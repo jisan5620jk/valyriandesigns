@@ -1,0 +1,117 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "a_breadcrumbs_M7YNxg": {
+      "type": "A-breadcrumbs",
+      "settings": {
+        "page_width": 1400,
+        "show_full_width": false,
+        "text_color": "#a8a8a8",
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "image_height": "medium"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "blog_show_date": true,
+            "blog_show_author": false
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {}
+        },
+        "build_product_tkiG7C": {
+          "type": "build_product",
+          "settings": {
+            "product": "{{ article.metafields.custom.build_product.value }}",
+            "product_label": "Build Your [title]",
+            "url": "shopify://collections/all",
+            "url_label": "Explore Products"
+          }
+        }
+      },
+      "block_order": [
+        "featured_image",
+        "title",
+        "content",
+        "build_product_tkiG7C"
+      ],
+      "custom_css": [],
+      "settings": {}
+    },
+    "a_featured_articles_fmhbNX": {
+      "type": "A-featured-articles",
+      "blocks": {
+        "blog_wx9neR": {
+          "type": "blog",
+          "settings": {
+            "width": "2-3",
+            "image": "shopify://shop_images/WhatsApp_Image_2024-06-30_at_12.35.11_AM.jpg",
+            "article": ""
+          }
+        },
+        "blog_f7TzWB": {
+          "type": "blog",
+          "settings": {
+            "width": "1-3",
+            "image": "shopify://shop_images/Industry_and_Office_06cb848b-77ae-4afb-8c46-8a34d704bb24.png",
+            "article": ""
+          }
+        }
+      },
+      "block_order": [
+        "blog_wx9neR",
+        "blog_f7TzWB"
+      ],
+      "custom_css": [
+        "strong {font-weight: 500;}"
+      ],
+      "settings": {
+        "blog": "projects",
+        "image_height": 345,
+        "button_label": "View project",
+        "color_scheme": "",
+        "row_gap": 30,
+        "column_gap": 30,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "a_recent_articles_YhYJrL": {
+      "type": "A-recent-articles",
+      "settings": {
+        "title": "Our Recent Projects",
+        "blog": "projects",
+        "limit_blog": 8,
+        "button_label": "View Project",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "a_breadcrumbs_M7YNxg",
+    "main",
+    "a_featured_articles_fmhbNX",
+    "a_recent_articles_YhYJrL"
+  ]
+}

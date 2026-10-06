@@ -1,0 +1,388 @@
+{{- 'lta-sections-announcement-bar.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'lta-sections-announcement-bar.js' |  asset_url }}" defer="defer"></script>
+<script src="{{ 'lta-components-count-down.js' |  asset_url }}" defer="defer"></script>
+
+{% style %}
+	#shopify-section-{{ section.id }} {
+	  --l-close-color: {{ section.settings.close_color }};
+	  background-color: {{ section.settings.background_color }};
+	  padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+	  padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+	}
+
+	@media screen and (min-width: 750px) {
+	  #shopify-section-{{ section.id }} {
+	    padding-top: {{ section.settings.padding_top }}px;
+	    padding-bottom: {{ section.settings.padding_bottom }}px;
+	  }
+	}
+{% endstyle %}
+
+{% liquid
+	assign default_height = '3rem'
+
+	if section.blocks[0].type == 'count_down'
+		assign default_height = '4rem'
+	endif
+%}
+
+<l-announcement-bar
+	id="AnnouncementBar-{{ section.id }}"
+	class="l-ab text-center relative"
+	data-read-time="{{ section.settings.read_time | times: 1000 }}"
+	style="--l-announcement-bar-height: {{ default_height }};"
+>
+	<div class="page-width relative overflow-hidden">
+		<div class="l-ab__slider" data-slider>
+			{%- for block in section.blocks -%}
+				<div class="l-ab__slide{% if forloop.first %} is-visible{% endif %}" data-slide>
+					{%- case block.type -%}
+						{%- when 'text' -%}
+							{%- if block.settings.title != blank -%}
+								{%- capture styles -%}
+                  --l-font-size-mob: {{ block.settings.font_size_mobile }}px;
+                  --l-font-size-desk: {{ block.settings.font_size_desktop }}px;
+                  --l-body-color: {{ block.settings.body_color }};
+                  --l-link-color: {{ block.settings.link_color }}
+                {%- endcapture -%}
+								<div
+									class="l-ab__text l-my-0"
+									style="{{ styles }}"
+									{{ block.shopify_attributes }}
+								>
+									{{ block.settings.title }}
+								</div>
+							{%- endif -%}
+						{%- when 'count_down' -%}
+							<l-count-down
+								class="l-ab-countdown"
+								role="timer"
+								data-end-date="{{ block.settings.count_down }}"
+								aria-label="{{ block.settings.count_down }}"
+								style="--l-countdown-background: {{ block.settings.count_down_number_bg }};--l-body-color: {{ block.settings.body_color }};--l-link-color: {{ block.settings.link_color }};--l-count-down-number-color: {{ block.settings.count_down_number_color }};--l-count-down-label-color: {{ block.settings.count_down_label_color }};"
+							>
+								<div class="l-ab-countdown__grid">
+									{%- if block.settings.title != blank -%}
+										<div class="l-ab-countdown__text l-ab-countdown__text--before {{ block.settings.font_size }} l-my-0">
+											{{- block.settings.title -}}
+										</div>
+									{%- endif -%}
+									<div class="l-ab-countdown__item text-center">
+										<strong class="l-ab-countdown__number js-days">0</strong>
+										<div class="l-ab-countdown__label">{{ block.settings.days }}</div>
+									</div>
+									:
+									<div class="l-ab-countdown__item text-center">
+										<strong class="l-ab-countdown__number js-hours">0</strong>
+										<div class="l-ab-countdown__label">{{ block.settings.hours }}</div>
+									</div>
+									:
+									<div class="l-ab-countdown__item text-center">
+										<strong class="l-ab-countdown__number js-mins">0</strong>
+										<div class="l-ab-countdown__label">{{ block.settings.minutes }}</div>
+									</div>
+									:
+									<div class="l-ab-countdown__item text-center">
+										<strong class="l-ab-countdown__number js-secs">0</strong>
+										<div class="l-ab-countdown__label">{{ block.settings.seconds }}</div>
+									</div>
+									{%- if block.settings.title_after_countdown != blank -%}
+										<div class="l-ab-countdown__text l-ab-countdown__text--after {{ block.settings.font_size }} l-my-0">
+											{{- block.settings.title_after_countdown -}}
+										</div>
+									{%- endif -%}
+								</div>
+							</l-count-down>
+						{%- else -%}
+					{%- endcase -%}
+				</div>
+			{%- endfor -%}
+		</div>
+
+		{%- if section.blocks.size > 1 and section.settings.show_navigation -%}
+			<button role="button" class="l-button--reset l-ab__nav-btn" data-nav="prev">
+				{% render 'icon-chevron-left' %}
+			</button>
+			<button role="button" class="l-button--reset l-ab__nav-btn" data-nav="next">
+				{% render 'icon-chevron-right' %}
+			</button>
+		{%- endif -%}
+	</div>
+
+	{%- if section.settings.show_close -%}
+		<button role="button" class="l-ab__close l-button--reset" data-close>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+			>
+				<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" />
+			</svg>
+		</button>
+	{%- endif -%}
+</l-announcement-bar>
+
+{% schema %}
+{
+	"name": "LTA - Announcement bar",
+	"limit": 1,
+	"settings": [
+		{
+			"type": "checkbox",
+			"id": "show_close",
+			"label": "Show close button",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "show_navigation",
+			"label": "Show navigation",
+			"default": true
+		},
+		{
+			"type": "range",
+			"id": "read_time",
+			"min": 3,
+			"max": 12,
+			"step": 1,
+			"unit": "s",
+			"label": "Announcement read time",
+			"default": 8
+		},
+		{
+			"type": "header",
+			"content": "Colors"
+		},
+		{
+			"type": "color",
+			"id": "background_color",
+			"label": "Background Color",
+			"default": "#000000"
+		},
+		{
+			"type": "color",
+			"id": "close_color",
+			"label": "Close icon",
+			"default": "#ffffff"
+		},
+		{
+			"type": "header",
+			"content": "t:sections.all.padding.section_padding_heading"
+		},
+		{
+			"type": "range",
+			"id": "padding_top",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_top",
+			"default": 4
+		},
+		{
+			"type": "range",
+			"id": "padding_bottom",
+			"min": 0,
+			"max": 100,
+			"step": 4,
+			"unit": "px",
+			"label": "t:sections.all.padding.padding_bottom",
+			"default": 4
+		}
+	],
+	"blocks": [
+		{
+			"type": "text",
+			"name": "Text",
+			"settings": [
+				{
+					"type": "richtext",
+					"id": "title",
+					"label": "Text",
+					"default": "<p>Welcome to our store <a href='/collection/all'>Learn more</a></p>"
+				},
+				{
+					"type": "header",
+					"content": "Styles"
+				},
+				{
+					"type": "range",
+					"id": "font_size_mobile",
+					"label": "Font size mobile",
+					"min": 10,
+					"max": 20,
+					"step": 1,
+					"unit": "px",
+					"default": 12
+				},
+				{
+					"type": "range",
+					"id": "font_size_desktop",
+					"label": "Font size desktop",
+					"min": 10,
+					"max": 30,
+					"step": 1,
+					"unit": "px",
+					"default": 16
+				},
+				{
+					"type": "color",
+					"id": "body_color",
+					"label": "Text",
+					"default": "#ffffff"
+				},
+				{
+					"type": "color",
+					"id": "link_color",
+					"label": "Link",
+					"default": "#1A66D2"
+				}
+			]
+		},
+		{
+			"type": "count_down",
+			"name": "Countdown",
+			"settings": [
+				{
+					"type": "header",
+					"content": "Count douwn time"
+				},
+				{
+					"type": "text",
+					"id": "count_down",
+					"label": "Due date",
+					"default": "2025-02-18T18:59-0500",
+					"info": "Use ISO 8601 formart"
+				},
+				{
+					"type": "text",
+					"id": "days",
+					"label": "Days",
+					"default": "DAYS"
+				},
+				{
+					"type": "text",
+					"id": "hours",
+					"label": "Hours",
+					"default": "HRS"
+				},
+				{
+					"type": "text",
+					"id": "minutes",
+					"label": "Minutes",
+					"default": "MINS"
+				},
+				{
+					"type": "text",
+					"id": "seconds",
+					"label": "Seconds",
+					"default": "SECS"
+				},
+				{
+					"type": "header",
+					"content": "Text"
+				},
+				{
+					"type": "richtext",
+					"id": "title",
+					"label": "Text before countdown",
+					"default": "<p>Welcome to our store <a href='/collection/all'>Learn more</a></p>"
+				},
+				{
+					"type": "richtext",
+					"id": "title_after_countdown",
+					"label": "Text after countdown"
+				},
+				{
+					"type": "select",
+					"id": "font_size",
+					"label": "Text size",
+					"options": [
+						{
+							"value": "h1",
+							"label": "H1"
+						},
+						{
+							"value": "h2",
+							"label": "H2"
+						},
+						{
+							"value": "h3",
+							"label": "H3"
+						},
+						{
+							"value": "h4",
+							"label": "H4"
+						},
+						{
+							"value": "h5",
+							"label": "H5"
+						},
+						{
+							"value": "h6",
+							"label": "H6"
+						}
+					],
+					"default": "h6"
+				},
+				{
+					"type": "header",
+					"content": "Colors"
+				},
+				{
+					"type": "color",
+					"id": "body_color",
+					"label": "Text",
+					"default": "#fbfbfb"
+				},
+				{
+					"type": "color",
+					"id": "link_color",
+					"label": "Link",
+					"default": "#1A66D2"
+				},
+				{
+					"type": "color",
+					"id": "count_down_number_bg",
+					"label": "Countdown background",
+					"default": "#ffffff"
+				},
+				{
+					"type": "color",
+					"id": "count_down_number_color",
+					"label": "Countdown number",
+					"default": "#850808"
+				},
+				{
+					"type": "color",
+					"id": "count_down_label_color",
+					"label": "Countdown label",
+					"default": "#000000"
+				}
+			]
+		}
+	],
+	"enabled_on": {
+		"groups": ["header"]
+	},
+	"presets": [
+		{
+			"name": "LTA - Announcement bar",
+			"blocks": [
+				{
+					"type": "text"
+				},
+				{
+					"type": "count_down"
+				}
+			]
+		}
+	]
+}
+{% endschema %}

@@ -1,0 +1,59 @@
+<style>
+    .chat-button {
+      background: rgb(0 0 0);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border: 2px solid #383838;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+  }
+    button.chat-button svg {
+      {% comment %} transform: rotate(-90deg); {% endcomment %}
+    }
+    .chat-button img {
+      width: 24px;
+      height: 24px;
+      margin: 5px 0;
+    }
+</style>
+{% comment %}
+  Accepts:
+  - block: optional
+  - section: optional,
+  - class (optional string for dynamic class names)
+{% endcomment %}
+
+{% if block.settings.button_text %}
+  {% assign button_text = block.settings.button_text %}
+{% elsif section.settings.button_text %}
+  {% assign button_text = section.settings.button_text %}
+{% else %}
+  {% assign button_text = 'LIVE CHAT' %}
+{% endif %}
+
+{% assign dynamic_class = class | default: '' %}
+
+<button class="chat-button {{ dynamic_class | escape  }}" {{ block.shopify_attributes }}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    fill="currentColor"
+    class="bi bi-chat-dots-fill"
+    viewBox="0 0 16 16"
+  >
+    <path
+      d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+    />
+  </svg>
+  <span>{{ button_text }}</span>
+</button>
